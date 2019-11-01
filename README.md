@@ -8,10 +8,11 @@ Project layout based on this [link](https://github.com/golang-standards/project-
 From the main directory, run `ln -s $(pwd)/githooks/pre-commit .git/hooks/pre-commit`
 
 ## Build and Run
+```
+go get -v ./...
 
-> go get -v ./...
+go build
 
-> go build
-
-> ./gotemplate-microservice
+./gotemplate-microservice
+```
 

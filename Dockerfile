@@ -10,11 +10,11 @@ RUN apt-get update && \
         g++ \
         supervisor
 
-COPY . /go/src/sqbu-github.cisco.com/Nyota/gotemplate
+COPY . /go/
 
-WORKDIR /go/src/sqbu-github.cisco.com/Nyota/gotemplate
+WORKDIR /go/src/gotemplate
 
-RUN sh githooks/gofmt_check
+RUN sh /go/githooks/gofmt_check
 
 RUN go build && \
     go test

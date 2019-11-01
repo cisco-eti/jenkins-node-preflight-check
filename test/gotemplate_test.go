@@ -11,7 +11,7 @@ func TestGETdeviceZone(t *testing.T) {
 		request, _ := http.NewRequest(http.MethodGet, "/deviceZone/A", nil)
 		response := httptest.NewRecorder()
 
-		DeviceZoneServer(response, request)
+		getDeviceZone(response, request)
 
 		got := response.Body.String()
 		want := "Plumbing"
@@ -25,7 +25,7 @@ func TestGETdeviceZone(t *testing.T) {
 		request, _ := http.NewRequest(http.MethodGet, "/deviceZone/B", nil)
 		response := httptest.NewRecorder()
 
-		DeviceZoneServer(response, request)
+		getDeviceZone(response, request)
 
 		got := response.Body.String()
 		want := "Gardening"
