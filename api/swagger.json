@@ -1,0 +1,28 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "Go Template",
+    "description" : "Go Template for Nyota developement"
+  },
+  "paths" : {
+    "/devizeZone" : {
+      "get" : {
+        "summary" : "Get Device Zone",
+        "parameters" : [ {
+          "name" : "deviceId",
+          "in" : "query",
+          "type" : "integer",
+          "required" : true,
+          "description" : "Device ID of the client"
+        } ],
+        "description" : "This is get the device zone.",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    }
+  }
+}

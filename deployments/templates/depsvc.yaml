@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.dimage }}
+spec:
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.dimage }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+      - name: {{ .Values.dimage }}
+        image: "{{ .Values.nyota.GeneralFullImagePreamble }}{{ .Values.dimage }}:{{ .Values.tagversion }}"
+        ports:
+        - containerPort: 4000
+        command:
+          - "./bin/config-server"
+        args:
+          - "-default_database_url={{ .Values.nyota.ConfigServer.databaseUrl }}"
+          - "-default_message_service_url={{ .Values.nyota.ConfigServer.messageService }}"
+          - "-default_events_service_url={{ .Values.nyota.ConfigServer.eventsService }}"
+          - "-default_location_service_url={{ .Values.nyota.ConfigServer.locationService }}"
+          - "-default_actions_server_url={{ .Values.nyota.ConfigServer.actionsServer }}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.dimage }}
+  labels:
+    app: {{ .Values.dimage }}
+    tier: backend
+spec:
+  ports:
+  - protocol: TCP
+    port: 4000
+    targetPort: 4000
+  type: LoadBalancer
+  selector:
+    app: {{ .Values.dimage }}
