@@ -12,6 +12,6 @@
 
 # local variables for this deployment can go here
 
-appname: configserver
+appname: go-template
 replicas: 3
-dimage: nyota-config-server
+dimage: nyota-go-template

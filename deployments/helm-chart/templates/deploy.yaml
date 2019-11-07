@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: go-template-configmap
+  namespace: default
+data:
+  BACKEND_TYPE: "local_something"
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.dimage }}
+spec:
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.dimage }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+      - name: {{ .Values.dimage }}
+        image: "{{ .Values.nyota.GeneralFullImagePreamble }}{{ .Values.dimage }}:{{ .Values.tagversion }}"
+        ports:
+        - containerPort: 5000
+        envFrom:
+          - configMapRef:
+              name: go-template-configmap
