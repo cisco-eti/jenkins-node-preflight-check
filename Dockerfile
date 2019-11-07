@@ -17,6 +17,20 @@ WORKDIR $SRC_DIR
 
 RUN sh $SRC_DIR/githooks/gofmt_check
 
+RUN latest=$(curl -s https://api.github.com/repos/dominikh/go-tools/releases/latest) && \
+tagname=$(echo "$latest" | grep "tag_name" | cut -d':' -f2 | cut -d'"' -f2) && \
+[ "$(uname)" = Darwin ] && system=darwin || system=linux; \
+echo tagname == $tagname system == $system && \
+curl -L https://github.com/dominikh/go-tools/releases/download/${tagname}/staticcheck_${system}_amd64.tar.gz > /tmp/staticcheck_${system}_amd64.tar.gz && \
+ls -l /tmp/staticcheck_${system}_amd64.tar.gz && \
+tar xzf /tmp/staticcheck_${system}_amd64.tar.gz && \
+cd staticcheck && \
+cp staticcheck /usr/local/bin/ && \
+chmod +x /usr/local/bin/staticcheck && \
+rm -rf /tmp/staticcheck_*
+
+RUN sh $SRC_DIR/githooks/staticcheck_gotemplate
+
 RUN go build && \
     go test
 
