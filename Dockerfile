@@ -1,6 +1,7 @@
 FROM golang:latest
 
-ARG BINARY_NAME=gotemplate
+ARG BINARY_NAME=go-template
+ARG SRC_DIR=$GOPATH/src/sqbu-github.cisco.com/Nyota/$BINARY_NAME
 
 RUN apt-get update && \
     apt-get install -y \
@@ -10,17 +11,17 @@ RUN apt-get update && \
         g++ \
         supervisor
 
-COPY . /go/
+COPY . $SRC_DIR
 
-WORKDIR /go/src/gotemplate
+WORKDIR $SRC_DIR
 
-RUN sh /go/githooks/gofmt_check
+RUN sh $SRC_DIR/githooks/gofmt_check
 
 RUN go build && \
     go test
 
-RUN rm -rf /go/src/sqbu-github.cisco.com
+#RUN rm -rf /go/src/sqbu-github.cisco.com
 
 EXPOSE 5000
 
-ENTRYPOINT ["/go/bin/gotemplate"]
+ENTRYPOINT ["./go-template"]

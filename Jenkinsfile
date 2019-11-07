@@ -7,12 +7,13 @@
 
 def mysettings = [
   deploy: [
-    [name: "nyota-gotemplate" ]
+    [name: "nyota-go-template" ]
   ],
   tagversion: "${env.BUILD_ID}",
-  chart: "deployments",
-  kubeyaml: "staging/go-deploythis.yaml",
-  kubeverify: "gotemplate",
+  chart: "deployments/helm-chart",
+  kubeyaml: "deployments/staging/helm-chart.yaml",
+  kubeverify: "go-template",
+  noCleanWs: 1,
 ]
 
 nyotaPipeline( mysettings )

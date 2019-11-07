@@ -16,3 +16,6 @@ go build
 ./gotemplate-microservice
 ```
 
+## Run tests
+
+go test -v ./...
