@@ -24,6 +24,12 @@ func DeviceZoneHandler(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-Length", string(len(zoneB)))
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte(zoneB))
+		} else if deviceId == "C" {
+			zoneC := "Lighting"
+			w.Header().Set("Content-Type", "text/plain")
+			w.Header().Set("Content-Length", string(len(zoneC)))
+			w.WriteHeader(http.StatusOK)
+			w.Write([]byte(zoneC))
 		} else {
 			notFound := "Unknown Device Specified"
 			w.Header().Set("Content-Type", "text/plain")
