@@ -22,5 +22,10 @@ do
     esac
 done
 
-echo BUILDING DOCKER $DOCKER_IMAGE
-docker build -t $DOCKER_IMAGE .
+if [ -z "$DOCKER_BLD_ARGS" ]; then
+    echo BUILDING DOCKER $DOCKER_IMAGE
+    docker build -t $DOCKER_IMAGE .
+else
+    echo BUILDING DOCKER $DOCKER_IMAGE with --build-arg $DOCKER_BLD_ARGS
+    docker build --build-arg $DOCKER_BLD_ARGS -t $DOCKER_IMAGE .
+fi

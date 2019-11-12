@@ -34,11 +34,13 @@ rm -rf /tmp/staticcheck_*
 RUN sh $SRC_DIR/githooks/staticcheck_gotemplate
 
 
-RUN go build && \
+RUN go install && \
     go test ./...
 
-#RUN rm -rf /go/src/sqbu-github.cisco.com
+WORKDIR $GOPATH
+
+RUN rm -rf /go/src/sqbu-github.cisco.com
 
 EXPOSE 5000
 
-ENTRYPOINT ["./go-template"]
+ENTRYPOINT ["./bin/go-template"]

@@ -7,6 +7,12 @@ for go microservice is a simple http server app.
 # Jenkins Pipeline
 [Jenkins](https://engci-private-rcdn.cisco.com/jenkins/bsft-jenkins1/job/FlowerBed/job/WFL/job/go-template/)
 
+# Additional Setup Instructions for Lab VM before build
+
+Skip this step if is not building on Lab VM (i.e. rcdn6-vmXX-YYY).
+
+export DOCKER_BLD_ARGS="https_proxy=http://proxy.esl.cisco.com:80"
+
 # Build and Run Docker
 
 ./build-docker.sh
