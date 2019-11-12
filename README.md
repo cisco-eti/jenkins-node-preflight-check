@@ -5,20 +5,23 @@ This repository provides a project structure for restful go based microservice. 
 for go microservice is a simple http server app.
 
 # Different directories
-## /pkg
-  This will contain the libraries that will be used by external applications.
-  If the packages are meant to be private(not to be imported by other projects),
-  place them under “/internal” and not under /pkg.
+## /src/pkg
+  This will contain the libraries internal to the app
+
 ## /api
   This contains the rest api specifications in JSON/ yaml. This specifications
   would be used for api documentation.
+
 ## /test
   This contains all the tests and dependent mock functions.
+
 ## /deployments
   This contains system and container orchestration, deployment configurations and templates.
+
 ## /githooks
   This will have git hooks e.g. go_fmt, staticcheck etc.
-## app.go
+
+## main.go
   This is the main package for the microservice.
 
 # Instructions for Developers
@@ -33,7 +36,7 @@ go get -v ./...
 
 go build
 
-./gotemplate-microservice
+./go-template
 ```
 
 ## Run tests

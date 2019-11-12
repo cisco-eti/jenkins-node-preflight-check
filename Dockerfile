@@ -15,6 +15,8 @@ COPY . $SRC_DIR
 
 WORKDIR $SRC_DIR
 
+RUN go get -v -u github.com/gorilla/mux
+
 RUN sh $SRC_DIR/githooks/gofmt_check
 
 RUN latest=$(curl -s https://api.github.com/repos/dominikh/go-tools/releases/latest) && \
@@ -30,6 +32,7 @@ chmod +x /usr/local/bin/staticcheck && \
 rm -rf /tmp/staticcheck_*
 
 RUN sh $SRC_DIR/githooks/staticcheck_gotemplate
+
 
 RUN go build && \
     go test

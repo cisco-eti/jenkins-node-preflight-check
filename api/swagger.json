@@ -6,7 +6,7 @@
     "description" : "Go Template for Nyota developement"
   },
   "paths" : {
-    "/devizeZone" : {
+    "/devizeZone/{deviceId}" : {
       "get" : {
         "summary" : "Get Device Zone",
         "parameters" : [ {
