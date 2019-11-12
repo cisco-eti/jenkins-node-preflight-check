@@ -35,7 +35,7 @@ RUN sh $SRC_DIR/githooks/staticcheck_gotemplate
 
 
 RUN go build && \
-    go test
+    go test ./...
 
 #RUN rm -rf /go/src/sqbu-github.cisco.com
 
