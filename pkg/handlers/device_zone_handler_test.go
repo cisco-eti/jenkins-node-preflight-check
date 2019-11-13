@@ -36,18 +36,4 @@ func TestGETdeviceZone(t *testing.T) {
 			t.Errorf("got %q, want %q", got, want)
 		}
 	})
-        t.Run("returns Device_D zone", func(t *testing.T) {
-                request, _ := http.NewRequest(http.MethodGet, "/v1/deviceZone/D", nil)
-                response := httptest.NewRecorder()
-
-                request.Header.Set("Authorization", "Bearer 123456")
-                Router().ServeHTTP(response, request)
-                got := response.Body.String()
-                want := "Petting"
-
-                if got != want {
-                        t.Errorf("got %q, want %q", got, want)
-                }
-        })
-
 }
