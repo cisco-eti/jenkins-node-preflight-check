@@ -6,18 +6,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gorilla/mux"
-	"sqbu-github.cisco.com/Nyota/go-template/src/pkg/middleware"
-	"sqbu-github.cisco.com/Nyota/go-template/src/pkg/handlers"
+	"sqbu-github.cisco.com/Nyota/go-template/pkg/handlers"
 )
 
 func main() {
 	fmt.Println("Starting go-template API Server!")
-	router := mux.NewRouter()
-	router.HandleFunc("/", handlers.HomeHandler).Methods("GET")
-	router.HandleFunc("/v1/deviceZone/{deviceId}", handlers.DeviceZoneHandler).Methods("GET")
+        router  := handlers.Router()
 	http.Handle("/", router)
-	router.Use(middleware.OAuthMiddleware)
 
 	srv := &http.Server{
 		Handler: router,

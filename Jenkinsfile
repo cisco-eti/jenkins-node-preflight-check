@@ -7,12 +7,12 @@
 
 def mysettings = [
   deploy: [
-    [name: "nyota-go-template" ]
+    [name: "nyota-rest-go-template" ]
   ],
   tagversion: "${env.BUILD_ID}",
   chart: "deployments/helm-chart",
   kubeyaml: "deployments/staging/helm-chart.yaml",
-  kubeverify: "go-template",
+  kubeverify: "rest-go-template",
   noCleanWs: 1,
 ]
 

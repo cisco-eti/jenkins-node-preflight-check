@@ -1,11 +1,10 @@
-package main
+package handlers
 
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"sqbu-github.cisco.com/Nyota/go-template/src/pkg/handlers"
 )
 
 func TestGETdeviceZone(t *testing.T) {
@@ -13,13 +12,14 @@ func TestGETdeviceZone(t *testing.T) {
 		request, _ := http.NewRequest(http.MethodGet, "/v1/deviceZone/A", nil)
 		response := httptest.NewRecorder()
 
-		handlers.DeviceZoneHandler(response, request)
+                request.Header.Set("Authorization", "Bearer 123456")
+                Router().ServeHTTP(response, request)
 
 		got := response.Body.String()
 		want := "Plumbing"
 
 		if got != want {
-			//t.Errorf("got %q, want %q", got, want)
+			t.Errorf("got %q, want %q", got, want)
 		}
 	})
 
@@ -27,13 +27,13 @@ func TestGETdeviceZone(t *testing.T) {
 		request, _ := http.NewRequest(http.MethodGet, "/v1/deviceZone/B", nil)
 		response := httptest.NewRecorder()
 
-		handlers.DeviceZoneHandler(response, request)
-
+                request.Header.Set("Authorization", "Bearer 123456")
+                Router().ServeHTTP(response, request)
 		got := response.Body.String()
 		want := "Gardening"
 
 		if got != want {
-			//t.Errorf("got %q, want %q", got, want)
+			t.Errorf("got %q, want %q", got, want)
 		}
 	})
 }
