@@ -29,3 +29,9 @@ spec:
         envFrom:
           - configMapRef:
               name: go-template-configmap
+      nodeSelector:
+        {{- if .Values.nyota.NodePools.gotemplate }}
+        agentpool: {{ .Values.nyota.NodePools.gotemplate }}
+        {{- else }}
+        agentpool: "default"
+        {{- end }}
