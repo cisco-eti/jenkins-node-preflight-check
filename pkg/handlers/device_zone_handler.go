@@ -12,6 +12,8 @@ func DeviceZoneHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		deviceId := vars["deviceId"]
 		log.Println("DeviceZoneHandler deviceId:" + deviceId)
+		// this is to add counter for every deviceZone called collected using prometheus endpoint
+		Counter.WithLabelValues(deviceId).Add(1)
 		if deviceId == "A" {
 			zoneA := "Plumbing"
 			w.Header().Set("Content-Type", "text/plain")

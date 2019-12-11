@@ -15,7 +15,7 @@ COPY . $SRC_DIR
 
 WORKDIR $SRC_DIR
 
-RUN go get -v -u github.com/gorilla/mux
+RUN go get ./...
 
 RUN sh $SRC_DIR/githooks/gofmt_check
 

@@ -2,6 +2,9 @@ package handlers
 
 import (
 	"net/http"
+
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 // API Home path handler
@@ -13,4 +16,21 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(retStr))
 	}
+}
+
+var (
+	Counter = prometheus.NewCounterVec(
+		prometheus.CounterOpts{
+			Name: "deviceZoneReq",
+			Help: "This is my counter",
+		},
+		[]string{"device"},
+	)
+)
+
+// Handler for prometheus (/metrics endpoint)
+func PromMetrics(w http.ResponseWriter, r *http.Request) {
+
+	promhttp.Handler().ServeHTTP(w, r)
+	prometheus.Register(Counter)
 }
