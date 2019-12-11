@@ -28,9 +28,12 @@ var (
 	)
 )
 
+func init() {
+	prometheus.Register(Counter)
+}
+
 // Handler for prometheus (/metrics endpoint)
 func PromMetrics(w http.ResponseWriter, r *http.Request) {
 
 	promhttp.Handler().ServeHTTP(w, r)
-	prometheus.Register(Counter)
 }
