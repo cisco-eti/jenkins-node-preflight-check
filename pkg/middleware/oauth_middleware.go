@@ -9,7 +9,7 @@ func OAuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		token := r.Header.Get("Authorization")
 		log.Println(r.RequestURI + token)
-		if(token != "Bearer 123456") {
+		if token != "Bearer 123456" && r.RequestURI != "/metrics" {
 			// Validate authorization token here
 			unauthorized := "401 Unauthorized request"
 			log.Println("Unauthorized request for " + r.RequestURI)
