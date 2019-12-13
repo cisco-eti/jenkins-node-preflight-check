@@ -16,6 +16,7 @@ spec:
     metadata:
       labels:
         app: {{ .Values.dimage }}
+        prometheus.io/scrape: 'true'
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
