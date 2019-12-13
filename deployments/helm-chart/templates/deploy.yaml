@@ -16,7 +16,10 @@ spec:
     metadata:
       labels:
         app: {{ .Values.dimage }}
-        prometheus.io/scrape: 'true'
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5000"
+        prometheus.io/path: /metrics
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
