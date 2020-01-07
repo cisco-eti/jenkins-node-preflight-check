@@ -2,16 +2,17 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+	log "sqbu-github.cisco.com/Nyota/go-template/common/utils/fllogger"
 	"time"
 
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/handlers"
 )
 
 func main() {
-	fmt.Println("Starting go-template API Server!")
-        router  := handlers.Router()
+        log.Init("GoTemplate")
+	log.Info("Starting go-template API Server!")
+	router := handlers.Router()
 	http.Handle("/", router)
 
 	srv := &http.Server{
@@ -22,5 +23,5 @@ func main() {
 		ReadTimeout:  15 * time.Second,
 	}
 
-	log.Fatal(srv.ListenAndServe())
+	fmt.Println(srv.ListenAndServe())
 }

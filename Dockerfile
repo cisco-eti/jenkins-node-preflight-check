@@ -15,6 +15,10 @@ COPY . $SRC_DIR
 
 WORKDIR $SRC_DIR
 
+RUN go get github.com/sirupsen/logrus
+RUN go get github.com/joonix/log
+RUN go get github.com/whuang8/redactrus
+
 RUN go get ./...
 
 RUN sh $SRC_DIR/githooks/gofmt_check
