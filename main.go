@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
-	log "sqbu-github.cisco.com/Nyota/go-template/common/utils/fllogger"
+	log "sqbu-github.cisco.com/Nyota/go-template/frontline-common/goutils/fllogger"
 	"time"
 
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/handlers"
