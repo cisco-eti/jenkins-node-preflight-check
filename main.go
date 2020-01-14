@@ -3,14 +3,14 @@ package main
 import (
 	"fmt"
 	"net/http"
-	log "sqbu-github.cisco.com/Nyota/go-template/frontline-common/goutils/fllogger"
 	"time"
 
+	log "sqbu-github.cisco.com/Nyota/go-template/frontline-common/goutils/fllogger"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/handlers"
 )
 
 func main() {
-        log.Init("GoTemplate")
+	log.Init("GoTemplate")
 	log.Info("Starting go-template API Server!")
 	router := handlers.Router()
 	http.Handle("/", router)
