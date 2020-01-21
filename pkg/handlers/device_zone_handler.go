@@ -3,7 +3,7 @@ package handlers
 import (
 	"github.com/gorilla/mux"
 	"net/http"
-	log "sqbu-github.cisco.com/Nyota/go-template/frontline-common/goutils/fllogger"
+	log "frontline-common/goutils/fllogger"
 )
 
 func DeviceZoneHandler(w http.ResponseWriter, r *http.Request) {

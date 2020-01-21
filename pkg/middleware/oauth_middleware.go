@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"net/http"
-	log "sqbu-github.cisco.com/Nyota/go-template/frontline-common/goutils/fllogger"
+	log "frontline-common/goutils/fllogger"
 )
 
 func OAuthMiddleware(next http.Handler) http.Handler {

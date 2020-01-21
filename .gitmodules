@@ -1,4 +1,3 @@
-[submodule "frontline-common"]
-	path = frontline-common
-	url = https://sqbu-github.cisco.com/Nyota/frontline-common.git
-	branch = master
+[submodule "vendor/frontline-common"]
+	path = vendor/frontline-common
+	url = git@sqbu-github.cisco.com:Nyota/frontline-common.git

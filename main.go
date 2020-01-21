@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	log "sqbu-github.cisco.com/Nyota/go-template/frontline-common/goutils/fllogger"
+	log "frontline-common/goutils/fllogger"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/handlers"
 )
 
