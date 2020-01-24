@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: nyota-rest-go-template
-        image: "frontlinedev.azurecr.io/microservices/nyota-rest-go-template:38"
+        image: "frontlinedev.azurecr.io/microservices/nyota-rest-go-template:45"
         ports:
         - containerPort: 5000
         envFrom:
