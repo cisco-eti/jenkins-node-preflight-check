@@ -14,6 +14,7 @@ def mysettings = [
   kubeyaml: "deployments/staging/helm-chart.yaml",
   kubeverify: "rest-go-template",
   noCleanWs: 1,
+  experimental: 1,
 ]
 
 nyotaPipeline( mysettings )
