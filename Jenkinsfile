@@ -15,6 +15,7 @@ def mysettings = [
   kubeverify: "rest-go-template",
   noCleanWs: 1,
   experimental: 1,
+  goldenPromote: 1,
 ]
 
 nyotaPipeline( mysettings )
