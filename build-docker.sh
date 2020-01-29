@@ -16,6 +16,10 @@ do
         less README.md
         exit 0
         ;;
+    -c|--code-coverage)
+        CODE_COVERAGE=cc
+        shift
+        ;;
     *) # unknown
         echo Unknown Parameter $1
         exit 4

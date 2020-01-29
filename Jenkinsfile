@@ -16,6 +16,10 @@ def mysettings = [
   noCleanWs: 1,
   experimental: 1,
   goldenPromote: 1,
+  sa: [
+    [lang: "go", find: "*.go"]
+  ],
+  //executeCC: 1,
 ]
 
 nyotaPipeline( mysettings )
