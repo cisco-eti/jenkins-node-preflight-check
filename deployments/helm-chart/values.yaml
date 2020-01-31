@@ -13,5 +13,5 @@
 # local variables for this deployment can go here
 
 appname: rest-go-template
-replicas: 3
+replicas: 1
 dimage: nyota-rest-go-template
