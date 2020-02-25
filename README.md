@@ -30,9 +30,12 @@ From the main directory, run `ln -s $(pwd)/githooks/pre-commit .git/hooks/pre-co
 ## /src/pkg
   This will contain the libraries internal to the app
 
-## /api
+## /docs
   This contains the rest api specifications in JSON/ yaml. This specifications
-  would be used for api documentation.
+  would be used for api documentation. Generated from handler comments using command:
+```bash 
+swag init
+```
 
 ## /test
   This contains all the tests and dependent mock functions.

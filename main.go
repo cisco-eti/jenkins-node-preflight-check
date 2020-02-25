@@ -2,19 +2,23 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"time"
-
 	log "frontline-common/goutils/fllogger"
-	"sqbu-github.cisco.com/Nyota/go-template/pkg/handlers"
+	"github.com/gorilla/mux"
+	"net/http"
+	"sqbu-github.cisco.com/Nyota/go-template/pkg/v1"
+	"time"
 )
 
+// @title Template API
+// @version 1.0
+// @termsOfService http://swagger.io/terms/
+// @license.name Apache 2.0
+// @BasePath /v1
 func main() {
 	log.Init("GoTemplate")
 	log.Info("Starting go-template API Server!")
-	router := handlers.Router()
-	http.Handle("/", router)
-
+	router := mux.NewRouter()
+	v1.AddRoutes(router)
 	srv := &http.Server{
 		Handler: router,
 		Addr:    ":5000",

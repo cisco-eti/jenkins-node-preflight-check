@@ -17,7 +17,7 @@ WORKDIR $SRC_DIR
 
 RUN go get github.com/sirupsen/logrus
 RUN go get github.com/whuang8/redactrus
-
+RUN go get github.com/stretchr/testify
 RUN go get -v ./...
 
 RUN sh $SRC_DIR/githooks/gofmt_check

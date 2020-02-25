@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Template API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0"
+    },
+    "version": "1.0"
+  },
+  "basePath": "/v1",
+  "paths": {
+    "/": {
+      "get": {
+        "description": "get a response from home endpoint",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Home"
+        ],
+        "summary": "Get Home",
+        "operationId": "get-home",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/deviceZone/{deviceId}": {
+      "get": {
+        "description": "get device zone by device Id",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DeviceZone"
+        ],
+        "summary": "Get Device Zone",
+        "operationId": "get-device-zone",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Device ID",
+            "name": "deviceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "models.APIResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "data": {
+          "type": "object"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/models.Error"
+          }
+        },
+        "links": {
+          "type": "object",
+          "$ref": "#/definitions/models.Links"
+        }
+      }
+    },
+    "models.Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "error": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        }
+      }
+    },
+    "models.Links": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "next": {
+          "type": "string"
+        },
+        "prev": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

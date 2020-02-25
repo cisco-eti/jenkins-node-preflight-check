@@ -1,21 +1,19 @@
 package middleware
 
 import (
-	"net/http"
 	log "frontline-common/goutils/fllogger"
+	"net/http"
+	"sqbu-github.cisco.com/Nyota/go-template/pkg/utils"
 )
 
+// OAuthMiddleware adds Mux middleware operations to authenticate requests
 func OAuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		res := utils.HTTPResponse{ResponseWriter: w}
 		token := r.Header.Get("Authorization")
 		log.Info(r.RequestURI + token)
 		if token != "Bearer 123456" && r.RequestURI != "/metrics" {
-			// Validate authorization token here
-			unauthorized := "401 Unauthorized request"
-			log.Info("Unauthorized request for " + r.RequestURI)
-			w.Header().Set("Content-Type", "text/plain")
-			w.Write([]byte(unauthorized))
-			w.WriteHeader(http.StatusUnauthorized)
+			res.UnauthorizedResponse()
 			return
 		}
 		log.Info("Authorized request for " + r.RequestURI)
