@@ -12,6 +12,7 @@
 
 # local variables for this deployment can go here
 
-appname: rest-go-template
+dimage: go-template
+microk8s: false
 replicas: 1
-dimage: nyota-rest-go-template
+servicename: nyota-go-template

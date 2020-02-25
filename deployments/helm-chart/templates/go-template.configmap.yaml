@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: go-template-configmap
+  namespace: default
+data:
+  BACKEND_TYPE: "local_something"

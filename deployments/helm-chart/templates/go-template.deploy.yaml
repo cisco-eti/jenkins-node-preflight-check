@@ -1,41 +1,38 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: go-template-configmap
-  namespace: default
-data:
-  BACKEND_TYPE: "local_something"
----
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.dimage }}
+  name: {{ .Values.servicename }}
 spec:
   replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.servicename }}
   template:
     metadata:
       labels:
-        app: {{ .Values.dimage }}
+        app: {{ .Values.servicename }}
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "5000"
         prometheus.io/path: /metrics
     spec:
-    {{- with .Values.imagePullSecrets }}
+      {{- if .Values.microk8s }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+      - name: acr-secret
+      {{- end }}
       containers:
-      - name: {{ .Values.dimage }}
+      - name: {{ .Values.servicename }}
         image: "{{ .Values.nyota.GeneralFullImagePreamble }}{{ .Values.dimage }}:{{ .Values.tagversion }}"
         ports:
         - containerPort: 5000
         envFrom:
           - configMapRef:
               name: go-template-configmap
+      {{- if not .Values.microk8s }}              
       nodeSelector:
         {{- if .Values.nyota.NodePools.gotemplate }}
         agentpool: {{ .Values.nyota.NodePools.gotemplate }}
         {{- else }}
         agentpool: "default"
         {{- end }}
+      {{- end }}
