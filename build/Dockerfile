@@ -36,7 +36,6 @@ rm -rf /tmp/staticcheck_*
 
 RUN sh $SRC_DIR/githooks/staticcheck_gotemplate
 
-
 RUN go install && \
     go test ./...
 
