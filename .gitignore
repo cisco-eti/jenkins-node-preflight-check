@@ -18,3 +18,6 @@ gotemplate
 
 .idea/
 go-template
+
+# emacs buffer files
+*~
