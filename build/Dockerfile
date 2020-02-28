@@ -16,7 +16,7 @@ COPY . $SRC_DIR
 WORKDIR $SRC_DIR
 
 RUN go get github.com/stretchr/testify
-RUN go get -v ./...
+RUN go mod download
 
 RUN sh $SRC_DIR/githooks/gofmt_check
 
