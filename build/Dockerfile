@@ -1,21 +1,12 @@
-FROM golang:latest
+FROM containers.cisco.com/nyota/frontline-base-golang-docker:latest
 
 ARG BINARY_NAME=go-template
 ARG SRC_DIR=$GOPATH/src/sqbu-github.cisco.com/Nyota/$BINARY_NAME
-
-RUN apt-get update && \
-    apt-get install -y \
-        git \
-        openssh-server \
-        gcc \
-        g++ \
-        supervisor
 
 COPY . $SRC_DIR
 
 WORKDIR $SRC_DIR
 
-RUN go get github.com/stretchr/testify
 RUN go mod tidy
 
 RUN sh $SRC_DIR/githooks/gofmt_check
