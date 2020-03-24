@@ -8,4 +8,4 @@ require (
 	github.com/stretchr/testify v1.5.1
 )
 
-replace frontline-common/goutils/fllogger => ./vendor/frontline-common/goutils/fllogger
+replace sqbu-github.cisco.com/Nyota/frontline-common/goutils/fllogger => ./vendor/frontline-common/goutils/fllogger

@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	log "frontline-common/goutils/fllogger"
 	"github.com/gorilla/mux"
 	"net/http"
+	log "sqbu-github.cisco.com/Nyota/frontline-common/goutils/fllogger"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/v1"
 	"time"
 )

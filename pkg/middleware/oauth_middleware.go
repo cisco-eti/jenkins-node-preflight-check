@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	log "frontline-common/goutils/fllogger"
 	"net/http"
+	log "sqbu-github.cisco.com/Nyota/frontline-common/goutils/fllogger"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/utils"
 )
 

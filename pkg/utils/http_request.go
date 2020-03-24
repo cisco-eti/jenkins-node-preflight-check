@@ -1,9 +1,9 @@
 package utils
 
 import (
-	log "frontline-common/goutils/fllogger"
 	"net/http"
 	"net/url"
+	log "sqbu-github.cisco.com/Nyota/frontline-common/goutils/fllogger"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/models"
 	"strconv"
 )

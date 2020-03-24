@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	log "frontline-common/goutils/fllogger"
 	"github.com/gorilla/mux"
 	"net/http"
+	log "sqbu-github.cisco.com/Nyota/frontline-common/goutils/fllogger"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/services"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/utils"
 )
