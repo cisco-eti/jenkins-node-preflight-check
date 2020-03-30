@@ -10,8 +10,8 @@ def mysettings = [
     [name: "go-template" ]
   ],
   tagversion: "${env.BUILD_ID}",
-  chart: "deployments/helm-chart",
-  kubeyaml: "deployments/staging/helm-chart.yaml",
+  chart: "deployment/helm-chart",
+  kubeyaml: "deployment/staging/go-template-deploy.yaml",
   kubeverify: "go-template",
   noCleanWs: 1,
   experimental: 1,
