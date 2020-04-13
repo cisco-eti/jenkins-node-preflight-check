@@ -14,7 +14,7 @@ def mysettings = [
   kubeyaml: "deployment/staging/go-template-deploy.yaml",
   kubeverify: "go-template",
   noCleanWs: 1,
-  experimental: 1,
+  // not yet experimental: 1,
   goldenPromote: 1,
   sa: [
     [lang: "go", find: "*.go"]
