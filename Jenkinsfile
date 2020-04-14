@@ -19,7 +19,8 @@ def mysettings = [
   sa: [
     [lang: "go", find: "*.go"]
   ],
-  //executeCC: 1,
+  executeCC: 1,
+  stricterCCThreshold: 90.0,
 ]
 
 nyotaPipeline( mysettings )

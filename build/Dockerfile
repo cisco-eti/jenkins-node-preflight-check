@@ -2,6 +2,11 @@ FROM containers.cisco.com/nyota/frontline-base-golang-docker:latest
 
 ARG BINARY_NAME=go-template
 ARG SRC_DIR=$GOPATH/src/sqbu-github.cisco.com/Nyota/$BINARY_NAME
+ARG CODE_COVERAGE
+ARG COVER_OUT=c.out
+ARG HTML_OUT=coverage.html
+ARG STATIC_ANALYSIS
+ARG SA_OUT=staticanalysis.txt
 
 COPY . $SRC_DIR
 
@@ -9,29 +14,30 @@ WORKDIR $SRC_DIR
 
 RUN go mod tidy
 
-RUN sh $SRC_DIR/githooks/gofmt_check
+RUN if [ "${CODE_COVERAGE}" = "cc" ] ; \
+    then go test -v ./... -coverprofile=${COVER_OUT} && \
+        go tool cover -html=${COVER_OUT} -o ${HTML_OUT} ; \
+    else go test -v ./... ; fi
 
-RUN latest=$(curl -s https://api.github.com/repos/dominikh/go-tools/releases/latest) && \
-tagname=$(echo "$latest" | grep "tag_name" | cut -d':' -f2 | cut -d'"' -f2) && \
-[ "$(uname)" = Darwin ] && system=darwin || system=linux; \
-echo tagname == $tagname system == $system && \
-curl -L https://github.com/dominikh/go-tools/releases/download/${tagname}/staticcheck_${system}_amd64.tar.gz > /tmp/staticcheck_${system}_amd64.tar.gz && \
-ls -l /tmp/staticcheck_${system}_amd64.tar.gz && \
-tar xzf /tmp/staticcheck_${system}_amd64.tar.gz && \
-cd staticcheck && \
-cp staticcheck /usr/local/bin/ && \
-chmod +x /usr/local/bin/staticcheck && \
-rm -rf /tmp/staticcheck_*
+# Run gofmt checks in case the developer missed installing the hook
+RUN sh $SRC_DIR/githooks/gofmt_checks
 
-RUN sh $SRC_DIR/githooks/staticcheck_gotemplate
+# Find out what type of system this Docker contains.  Pull down the correct
+# static analysis tool.  Unzip it.
+RUN if [ "${STATIC_ANALYSIS}" = "sa" ] ; then \
+      latest=$(curl -s https://api.github.com/repos/dominikh/go-tools/releases/latest) && \
+      tagname=$(echo "$latest" | grep "tag_name" | cut -d':' -f2 | cut -d'"' -f2) && \
+      [ "$(uname)" = Darwin ] && system=darwin || system=linux && \
+      echo "tagname == $tagname system == $system" && \
+      curl -L https://github.com/dominikh/go-tools/releases/download/${tagname}/staticcheck_${system}_amd64.tar.gz > /tmp/staticcheck_${system}_amd64.tar.gz && \
+      tar xzf /tmp/staticcheck_${system}_amd64.tar.gz && \
+      find . -name "*.go" -exec staticcheck/staticcheck -checks=inherit,-U1000,-U1001 --debug.no-compile-errors '{}' ';' > ${SRC_DIR}/${SA_OUT} && \
+      rm -rf /tmp/staticcheck_* ; \
+    fi
 
-RUN go install && \
-    go test ./...
-
-WORKDIR $GOPATH
-
-RUN rm -rf /go/src/sqbu-github.cisco.com
+# Everything looks good so far, build the code
+RUN go build
 
 EXPOSE 5000
 
-ENTRYPOINT ["./bin/go-template"]
+ENTRYPOINT ["./go-template"]
