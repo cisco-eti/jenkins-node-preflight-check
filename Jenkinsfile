@@ -11,6 +11,7 @@ def mysettings = [
   ],
   tagversion: "${env.BUILD_ID}",
   chart: "deployment/helm-chart",
+  pipelineLibraryBranch: 'master',
   kubeyaml: "deployment/staging/go-template-deploy.yaml",
   kubeverify: "go-template",
   noCleanWs: 1,
