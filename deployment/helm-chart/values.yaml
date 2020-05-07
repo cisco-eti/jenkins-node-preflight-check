@@ -12,6 +12,12 @@
 
 # local variables for this deployment can go here
 
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    cert-manager.io/cluster-issuer: letsencrypt
+
 dimage: go-template
 microk8s: false
 replicas: 1
