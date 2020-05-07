@@ -18,5 +18,5 @@ spec:
         paths:
         - backend:
             serviceName: "nyota-go-template"
-            servicePort: 5000
+            servicePort: {{ .Values.servicePort }}
           path: /template(/|$)(.*)

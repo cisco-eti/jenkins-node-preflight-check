@@ -8,8 +8,8 @@ metadata:
 spec:
   ports:
   - protocol: TCP
-    port: 5000
-    targetPort: 5000
+    port: {{ .Values.servicePort }}
+    targetPort: {{ .Values.servicePort }}
   type: ClusterIP
   selector:
     app: {{ .Values.servicename }}

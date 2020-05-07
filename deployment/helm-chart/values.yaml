@@ -16,3 +16,4 @@ dimage: go-template
 microk8s: false
 replicas: 1
 servicename: nyota-go-template
+servicePort: 5000
