@@ -22,6 +22,7 @@ def mysettings = [
   ],
   executeCC: 1,
   stricterCCThreshold: 90.0,
+  runPreE2EonMaster: 1
 ]
 
 nyotaPipeline( mysettings )
