@@ -12,6 +12,8 @@
 *.out
 gotemplate
 
+index.html
+staticanalysis.txt
 
 *.DS_Store
 *._DS_Store

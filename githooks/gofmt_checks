@@ -1,13 +1,16 @@
 #!/bin/sh
 
-unformatted=$(gofmt -s -w .)
+base_dir=$(git rev-parse --show-toplevel)
+cd ${base_dir}
+unformatted=$(find . -name "*.go" | xargs gofmt -l)
 [ -z "$unformatted" ] && exit 0
 
 # Some files are not gofmt'd. Print message and fail.
 
 echo >&2 "Go files must be formatted with gofmt. Please run:"
 for fn in $unformatted; do
-    echo >&2 "  gofmt -w $PWD/$fn"
+    echo >&2 "  gofmt -w -s $fn"
 done
 
+echo >&2 "Please make sure you have installed the git hook. See README.md for more instructions."
 exit 1
