@@ -37,7 +37,3 @@ RUN if [ "${STATIC_ANALYSIS}" = "sa" ] ; then \
 
 # Everything looks good so far, build the code
 RUN go build
-
-EXPOSE 5000
-
-ENTRYPOINT ["./go-template"]

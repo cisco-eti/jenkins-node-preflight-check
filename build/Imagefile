@@ -1,0 +1,13 @@
+FROM nyota-gotemplate-base:latest as base-build
+
+FROM ubuntu:20.04
+# Install public root certificates for Ubuntu Core
+RUN apt update -y && apt install ca-certificates -y
+COPY --from=base-build \
+    /go/src/sqbu-github.cisco.com/Nyota/go-template/go-template \
+    /usr/bin/go-template
+
+
+EXPOSE 5000
+
+ENTRYPOINT ["/usr/bin/go-template"]
