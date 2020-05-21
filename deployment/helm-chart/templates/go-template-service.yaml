@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ .Values.servicename }}
   labels:
-    app: {{ .Values.servicename }}
+    app.kubernetes.io/name: {{ .Values.servicename }}
     tier: backend
 spec:
   ports:
