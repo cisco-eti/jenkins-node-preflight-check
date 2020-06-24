@@ -7,6 +7,14 @@ ARG COVER_OUT=c.out
 ARG HTML_OUT=coverage.html
 ARG STATIC_ANALYSIS
 ARG SA_OUT=staticanalysis.txt
+ARG ARTIFACTORY_USER
+ARG ARTIFACTORY_PASSWORD
+ARG ARTIFACTORY_URL=https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-maven-master.cisco.com/artifactory/api/go/nyota-go
+
+ENV GO111MODULE=on
+ENV GOPRIVATE="sqbu-github.cisco.com"
+ENV GONOPROXY="github.com,gopkg.in,go.uber.org"
+ENV GOPROXY="${ARTIFACTORY_URL}"
 
 COPY . $SRC_DIR
 

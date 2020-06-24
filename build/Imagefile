@@ -1,4 +1,4 @@
-FROM nyota-gotemplate-base:latest as base-build
+FROM nyota-go-template:base as base-build
 
 FROM ubuntu:20.04
 # Install public root certificates for Ubuntu Core
