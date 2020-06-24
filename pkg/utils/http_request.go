@@ -3,7 +3,6 @@ package utils
 import (
 	"net/http"
 	"net/url"
-	log "sqbu-github.cisco.com/Nyota/frontline-common/goutils/fllogger"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/models"
 	"strconv"
 )
@@ -11,24 +10,6 @@ import (
 //HTTPRequest struct
 type HTTPRequest struct {
 	*http.Request
-}
-
-//LogError log error level messages
-func (req *HTTPRequest) LogError(err error) {
-	if req == nil || err == nil {
-		return
-	}
-	ctx := req.Context()
-	log.WithContext(ctx).AddDepth().Error(err.Error())
-}
-
-//LogInfo log information level messages
-func (req *HTTPRequest) LogInfo(message string) {
-	if req == nil || message == "" {
-		return
-	}
-	ctx := req.Context()
-	log.WithContext(ctx).AddDepth().Info(message)
 }
 
 //GetPaginationLinks is a utility that helps paginated apis to return next page, previous page and last page links

@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"net/http"
-	log "sqbu-github.cisco.com/Nyota/frontline-common/goutils/fllogger"
+	log "sqbu-github.cisco.com/Nyota/frontline-go-logger"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/utils"
 )
 
@@ -11,12 +11,12 @@ func OAuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		res := utils.HTTPResponse{ResponseWriter: w}
 		token := r.Header.Get("Authorization")
-		log.Info(r.RequestURI + token)
+		log.Tracer.Info(r.RequestURI + token)
 		if token != "Bearer 123456" && r.RequestURI != "/metrics" {
 			res.UnauthorizedResponse()
 			return
 		}
-		log.Info("Authorized request for " + r.RequestURI)
+		log.Tracer.Info("Authorized request for " + r.RequestURI)
 		// Call the next handler, which can be another middleware in the chain, or the final handler.
 		next.ServeHTTP(w, r)
 	})

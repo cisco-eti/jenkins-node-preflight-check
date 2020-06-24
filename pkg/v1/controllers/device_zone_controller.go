@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/gorilla/mux"
 	"net/http"
-	log "sqbu-github.cisco.com/Nyota/frontline-common/goutils/fllogger"
+	log "sqbu-github.cisco.com/Nyota/frontline-go-logger"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/services"
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/utils"
 )
@@ -33,7 +33,7 @@ func (controller *DeviceZoneController) Get(w http.ResponseWriter, r *http.Reque
 	res := utils.HTTPResponse{ResponseWriter: w}
 	vars := mux.Vars(r)
 	deviceID := vars["deviceID"]
-	log.Info("DeviceZoneHandler deviceId:" + deviceID)
+	log.Tracer.Info("DeviceZoneHandler deviceId:" + deviceID)
 	services.Counter.WithLabelValues(deviceID).Add(1)
 	switch deviceID {
 	case "A":
