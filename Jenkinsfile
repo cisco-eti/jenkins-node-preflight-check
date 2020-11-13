@@ -15,6 +15,7 @@ def mysettings = [
   microK8sDeploymentsBranch: 'master',
   kubeyaml: "deployment/staging/go-template-deploy.yaml",
   kubeverify: "go-template",
+  artifactory: 1,
   noCleanWs: 1,
   // not yet experimental: 1,
   goldenPromote: 1,
