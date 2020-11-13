@@ -26,4 +26,4 @@ def mysettings = [
   runPreE2EonMaster: 1
 ]
 
-nyotaPipeline( mysettings )
+srePipeline( mysettings )
