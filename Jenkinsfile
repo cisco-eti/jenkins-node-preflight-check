@@ -7,14 +7,14 @@
 
 def mysettings = [
   deploy: [
-    [name: "go-template" ]
+    [name: "sre-go-helloworld" ]
   ],
   tagversion: "${env.BUILD_ID}",
   chart: "deployment/helm-chart",
   pipelineLibraryBranch: 'master',
   microK8sDeploymentsBranch: 'master',
   kubeyaml: "deployment/staging/go-template-deploy.yaml",
-  kubeverify: "go-template",
+  kubeverify: "sre-go-helloworld",
   artifactory: 1,
   noCleanWs: 1,
   // not yet experimental: 1,
