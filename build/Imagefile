@@ -1,10 +1,10 @@
-FROM nyota-go-template:base as base-build
+FROM sre-go-helloworld:base as base-build
 
 FROM ubuntu:20.04
 # Install public root certificates for Ubuntu Core
 RUN apt update -y && apt install ca-certificates -y
 COPY --from=base-build \
-    /go/src/wwwin-github.cisco.com/eti/sre-go-helloworld/sre-go-helloworld \
+    /go/src/wwwin-github.cisco.com/eti/sre-go-helloworld/go-template \
     /usr/bin/sre-go-helloworld
 
 

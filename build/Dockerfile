@@ -1,7 +1,7 @@
 FROM containers.cisco.com/nyota/frontline-base-golang-docker:latest
 
 ARG BINARY_NAME=sre-go-helloworld
-ARG SRC_DIR=$GOPATH/src/sqbu-github.cisco.com/Nyota/$BINARY_NAME
+ARG SRC_DIR=$GOPATH/src/wwwin-github.cisco.com/eti/$BINARY_NAME
 ARG CODE_COVERAGE
 ARG COVER_OUT=c.out
 ARG HTML_OUT=coverage.html

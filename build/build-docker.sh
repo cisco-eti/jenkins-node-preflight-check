@@ -2,8 +2,8 @@
 # Syntax build-docker.sh [-i|--image imagename]
 
 PROJECT=sre-go-helloworld
-DOCKER_IMAGE=nyota-${PROJECT}:latest
-BASE_DOCKER_IMAGE=nyota-${PROJECT}:base
+DOCKER_IMAGE=${PROJECT}:latest
+BASE_DOCKER_IMAGE=${PROJECT}:base
 H_OUT=index.html
 S_OUT=staticanalysis.txt
 
@@ -45,7 +45,7 @@ get_artifactory_credentials() {
 code_coverage() {
     # extract the H_OUT file from the docker image just created
     id=$(docker create ${BASE_DOCKER_IMAGE})
-    docker cp ${id}:/go/src/sqbu-github.cisco.com/Nyota/${PROJECT}/${H_OUT} .
+    docker cp ${id}:/go/src/wwwin-github.cisco.com/eti/${PROJECT}/${H_OUT} .
     docker rm -v ${id}
     if [[ ! -d "pipeline/lib" ]] ; then
         echo "Your coverage HTML report is in $H_OUT"
@@ -55,7 +55,7 @@ code_coverage() {
 static_analysis() {
     # extract the S_OUT file from the docker image just created
     id=$(docker create ${BASE_DOCKER_IMAGE})
-    docker cp ${id}:/go/src/sqbu-github.cisco.com/Nyota/${PROJECT}/${S_OUT} .
+    docker cp ${id}:/go/src/wwwin-github.cisco.com/eti/${PROJECT}/${S_OUT} .
     docker rm -v ${id}
 
     if [[ ! -d "pipeline/lib" ]] ; then
