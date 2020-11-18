@@ -17,6 +17,8 @@ def mysettings = [
   kubeverify: "sre-go-helloworld",
   artifactory: 1,
   noCleanWs: 1,
+  noPreE2E: 1,
+  noPII: 1,
   // not yet experimental: 1,
   goldenPromote: 1,
   sa: [
