@@ -1,5 +1,5 @@
 apiVersion: v1
-appVersion: "0.1"
-description: go-template for Frontline
-name: go-template
-version: 0.1.0
+appVersion: "1.0"
+description: ETI SRE go hello-world
+name: sre-go-helloworld
+version: 1.0
