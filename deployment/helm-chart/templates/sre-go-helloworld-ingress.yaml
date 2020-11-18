@@ -1,8 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    name: go-template-ingress
-    namespace: default
+
+    name: sre-go-helloworld-ingress
+    namespace: apps
     {{- if .Values.ingress.annotations }}
     annotations:
       {{- range $key, $value := .Values.ingress.annotations }}
@@ -12,13 +13,14 @@ metadata:
 spec:
     tls:
     - hosts:
-        - {{ .Values.cluster.apiDomainName }}
-      secretName: "tls-secret"
+      - "helloworld.{{ .Values.cluster.apiDomainName }}"
+      secretName: "sre-go-helloworld-ingress-tls"
+      
     rules:
-    - host: {{ .Values.cluster.apiDomainName }}
+    - host: "helloworld.{{ .Values.cluster.apiDomainName }}"
       http:
         paths:
         - backend:
-            serviceName: "nyota-go-template"
+            serviceName: "sre-go-helloworld"
             servicePort: {{ .Values.servicePort }}
-          path: /template(/|$)(.*)
+          path: /
