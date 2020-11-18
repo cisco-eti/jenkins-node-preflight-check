@@ -23,7 +23,7 @@ func setupContext() log.TraceContext {
 }
 
 func TestMain(m *testing.M) {
-	log.LogInitTest("go-template")
+	log.LogInitTest("sre-go-helloworld")
 	testCtx = setupContext()
 	code := m.Run()
 	os.Exit(code)

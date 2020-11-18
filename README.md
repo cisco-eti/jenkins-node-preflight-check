@@ -1,11 +1,11 @@
-# go-template for Nyota microservices
+# ETI sre-go-helloworld
 Project layout based on this [link](https://github.com/golang-standards/project-layout)
 
 This repository provides a project structure for restful go based microservice. Example used
 for go microservice is a simple http server app.
 
 # Jenkins Pipeline
-[Jenkins](https://engci-private-rcdn.cisco.com/jenkins/bsft-jenkins1/job/FlowerBed/job/WFL/job/go-template/)
+[Jenkins](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/pipeline/job/sre-go-helloworld/)
 
 # Additional Setup Instructions for Lab VM before build
 
@@ -17,7 +17,7 @@ export DOCKER_BLD_ARGS="https_proxy=http://proxy.esl.cisco.com:80"
 
 ./build-docker.sh
 
-docker run -it -p 5000:5000 nyota-gotemplate
+docker run -it -p 5000:5000 sre-go-helloworld
 
 # Instructions for Developers
 

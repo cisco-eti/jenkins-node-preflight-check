@@ -13,7 +13,7 @@ def mysettings = [
   chart: "deployment/helm-chart",
   pipelineLibraryBranch: 'master',
   microK8sDeploymentsBranch: 'master',
-  kubeyaml: "deployment/staging/go-template-deploy.yaml",
+  kubeyaml: "deployment/staging/sre-go-helloworld-deploy.yaml",
   kubeverify: "sre-go-helloworld",
   artifactory: 1,
   noCleanWs: 1,

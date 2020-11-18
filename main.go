@@ -14,8 +14,8 @@ import (
 // @license.name Apache 2.0
 // @BasePath /v1
 func main() {
-	log.LogInitGlobal("nyota-go-template", log.DefaultProdConfig)
-	log.Tracer.Infof("Starting go-template API Server!")
+	log.LogInitGlobal("sre-go-helloworld", log.DefaultProdConfig)
+	log.Tracer.Infof("Starting sre-go-helloworld API Server!")
 	router := mux.NewRouter()
 	v1.AddRoutes(router)
 	srv := &http.Server{

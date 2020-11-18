@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # Syntax build-docker.sh [-i|--image imagename]
 
-PROJECT=go-template
+PROJECT=sre-go-helloworld
 DOCKER_IMAGE=nyota-${PROJECT}:latest
 BASE_DOCKER_IMAGE=nyota-${PROJECT}:base
 H_OUT=index.html

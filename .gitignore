@@ -19,7 +19,7 @@ staticanalysis.txt
 *._DS_Store
 
 .idea/
-go-template
+sre-go-helloworld
 
 # emacs buffer files
 *~

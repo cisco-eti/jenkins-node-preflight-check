@@ -1,6 +1,6 @@
 FROM containers.cisco.com/nyota/frontline-base-golang-docker:latest
 
-ARG BINARY_NAME=go-template
+ARG BINARY_NAME=sre-go-helloworld
 ARG SRC_DIR=$GOPATH/src/sqbu-github.cisco.com/Nyota/$BINARY_NAME
 ARG CODE_COVERAGE
 ARG COVER_OUT=c.out
