@@ -18,8 +18,8 @@ ingress:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     cert-manager.io/cluster-issuer: letsencrypt
 
-dimage: go-template
+dimage: sre-go-helloworld
 microk8s: false
 replicas: 1
-servicename: nyota-go-template
+servicename: sre-go-helloworld
 servicePort: 5000
