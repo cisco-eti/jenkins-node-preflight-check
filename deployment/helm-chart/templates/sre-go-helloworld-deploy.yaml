@@ -13,7 +13,7 @@ spec:
         app: {{ .Values.servicename }}
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "5000"
+        prometheus.io/port: {{ .Values.servicePort }}
         prometheus.io/path: /metrics
     spec:
       {{- if .Values.microk8s }}
@@ -24,15 +24,7 @@ spec:
       - name: {{ .Values.servicename }}
         image: "{{ .Values.docker.GeneralFullImagePreamble }}{{ .Values.dimage }}:{{ .Values.tagversion }}"
         ports:
-        - containerPort: 5000
+        - containerPort: {{ .Values.servicePort }}
         envFrom:
           - configMapRef:
               name: sre-go-helloworld-configmap
-      {{- if not .Values.microk8s }}              
-      nodeSelector:
-        {{- if .Values.nyota.NodePools.gotemplate }}
-        agentpool: {{ .Values.nyota.NodePools.gotemplate }}
-        {{- else }}
-        agentpool: "default"
-        {{- end }}
-      {{- end }}
