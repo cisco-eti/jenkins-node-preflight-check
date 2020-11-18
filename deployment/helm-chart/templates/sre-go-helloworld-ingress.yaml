@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
 
     name: sre-go-helloworld-ingress
-    namespace: apps
+    namespace: default
     {{- if .Values.ingress.annotations }}
     annotations:
       {{- range $key, $value := .Values.ingress.annotations }}

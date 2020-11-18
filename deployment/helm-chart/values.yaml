@@ -23,3 +23,5 @@ microk8s: false
 replicas: 1
 servicename: sre-go-helloworld
 servicePort: "5000"
+cluster:
+  apiDomainName: int.dev-aws-useast1d.prod.eticloud.io
