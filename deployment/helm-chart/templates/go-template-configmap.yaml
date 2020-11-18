@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: go-template-configmap
+  name: sre-go-helloworld-configmap
   namespace: default
 data:
   BACKEND_TYPE: "local_something"
