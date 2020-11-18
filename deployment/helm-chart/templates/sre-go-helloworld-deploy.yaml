@@ -22,12 +22,12 @@ spec:
       {{- end }}
       containers:
       - name: {{ .Values.servicename }}
-        image: "{{ .Values.nyota.GeneralFullImagePreamble }}{{ .Values.dimage }}:{{ .Values.tagversion }}"
+        image: "{{ .Values.docker.GeneralFullImagePreamble }}{{ .Values.dimage }}:{{ .Values.tagversion }}"
         ports:
         - containerPort: 5000
         envFrom:
           - configMapRef:
-              name: go-template-configmap
+              name: sre-go-helloworld-configmap
       {{- if not .Values.microk8s }}              
       nodeSelector:
         {{- if .Values.nyota.NodePools.gotemplate }}
