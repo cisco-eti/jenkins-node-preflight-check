@@ -19,8 +19,11 @@ def mysettings = [
   noCleanWs: 1,
   noPreE2E: 1,
   noPII: 1,
+  noE2E: 1,
+
   // not yet experimental: 1,
-  goldenPromote: 1,
+  //goldenPromote: 1,
+
   sa: [
     [lang: "go", find: "*.go"]
   ],
