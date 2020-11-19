@@ -1,7 +1,6 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-
     name: sre-go-helloworld-ingress
     namespace: default
     {{- if .Values.ingress.annotations }}

@@ -15,8 +15,8 @@
 ingress:
   annotations:
     kubernetes.io/ingress.class: ingress-internal
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.k8s.io/cluster-issuer: letsencrypt-prod
 
 dimage: sre-go-helloworld
 microk8s: false
