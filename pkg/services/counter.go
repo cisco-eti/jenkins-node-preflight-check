@@ -6,7 +6,7 @@ var (
 	// Counter counts operations of a specified type
 	Counter = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Name: "deviceZoneReq",
+			Name: "eti_apps_helloworld_api_counter",
 			Help: "This is my counter",
 		},
 		[]string{"device"},

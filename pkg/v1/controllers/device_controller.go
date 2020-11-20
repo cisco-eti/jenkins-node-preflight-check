@@ -8,13 +8,13 @@ import (
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/utils"
 )
 
-// DeviceZoneController struct
-type DeviceZoneController struct {
+// DeviceController struct
+type DeviceController struct {
 }
 
 // AddRoutes add device zone routes to the Mux router
-func (controller *DeviceZoneController) AddRoutes(router *mux.Router) *mux.Router {
-	router.HandleFunc("/deviceZone/{deviceID}", controller.Get).Methods("GET")
+func (controller *DeviceController) AddRoutes(router *mux.Router) *mux.Router {
+	router.HandleFunc("/device/{deviceID}", controller.Get).Methods("GET")
 	return router
 }
 
@@ -29,7 +29,7 @@ func (controller *DeviceZoneController) AddRoutes(router *mux.Router) *mux.Route
 // @Success 200 {object} models.APIResponse
 // @Failure 404 {object} models.APIResponse
 // @Router /deviceZone/{deviceId} [get]
-func (controller *DeviceZoneController) Get(w http.ResponseWriter, r *http.Request) {
+func (controller *DeviceController) Get(w http.ResponseWriter, r *http.Request) {
 	res := utils.HTTPResponse{ResponseWriter: w}
 	vars := mux.Vars(r)
 	deviceID := vars["deviceID"]

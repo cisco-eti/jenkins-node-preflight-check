@@ -35,7 +35,7 @@
         }
       }
     },
-    "/deviceZone/{deviceId}": {
+    "/device/{deviceId}": {
       "get": {
         "description": "get device zone by device Id",
         "consumes": [
@@ -45,10 +45,10 @@
           "application/json"
         ],
         "tags": [
-          "DeviceZone"
+          "Device"
         ],
-        "summary": "Get Device Zone",
-        "operationId": "get-device-zone",
+        "summary": "Get Device",
+        "operationId": "get-device",
         "parameters": [
           {
             "type": "string",

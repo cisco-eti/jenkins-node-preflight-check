@@ -60,12 +60,12 @@ paths:
       summary: Get Home
       tags:
         - Home
-  /deviceZone/{deviceId}:
+  /device/{deviceId}:
     get:
       consumes:
         - application/json
-      description: get device zone by device Id
-      operationId: get-device-zone
+      description: get device by device Id
+      operationId: get-device
       parameters:
         - description: Device ID
           in: path
@@ -83,7 +83,7 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/models.APIResponse'
-      summary: Get Device Zone
+      summary: Get Device
       tags:
-        - DeviceZone
+        - Device
 swagger: "2.0"
