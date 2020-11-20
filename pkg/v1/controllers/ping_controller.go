@@ -9,7 +9,6 @@ import (
 )
 
 type PingController struct {
-	serviceName string
 }
 
 // AddRoutes add home routes to the Mux router
