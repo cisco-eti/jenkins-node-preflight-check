@@ -27,5 +27,5 @@ func (controller *HomeController) AddRoutes(router *mux.Router) *mux.Router {
 // @Router / [get]
 func (controller *HomeController) Get(w http.ResponseWriter, _ *http.Request) {
 	res := utils.HTTPResponse{ResponseWriter: w}
-	res.OKResponse("Demo Home")
+	res.OKResponse("FrontDesk")
 }
