@@ -8,12 +8,6 @@ import (
 	"sqbu-github.cisco.com/Nyota/go-template/pkg/utils"
 )
 
-type ServiceInstance struct {
-	instanceId string
-	host       string
-	port       int
-}
-
 type PingController struct {
 	serviceName string
 }
