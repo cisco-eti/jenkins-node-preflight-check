@@ -4,6 +4,7 @@ import (
 	//"encoding/json"
 	"github.com/gorilla/mux"
 	"net/http"
+	"os"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
@@ -29,6 +30,6 @@ func (controller *PingController) Get(w http.ResponseWriter, r *http.Request) {
 
 	res := utils.HTTPResponse{ResponseWriter: w}
 
-	res.OKResponse("Hello-world")
+	res.OKResponse(os.Getenv("HOSTNAME"))
 
 }
