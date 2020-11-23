@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"sqbu-github.cisco.com/Nyota/go-template/pkg/models"
 	"strconv"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 )
 
 //InternalServerError constant

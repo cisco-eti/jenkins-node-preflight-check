@@ -2,8 +2,8 @@ package v1
 
 import (
 	"github.com/gorilla/mux"
-	//"sqbu-github.cisco.com/Nyota/go-template/pkg/middleware"
-	"sqbu-github.cisco.com/Nyota/go-template/pkg/v1/controllers"
+	//"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/middleware"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/v1/controllers"
 )
 
 // AddRoutes add version 1 routes to the Mux router

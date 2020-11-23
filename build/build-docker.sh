@@ -93,7 +93,7 @@ done
 get_artifactory_credentials
 echo BUILDING DOCKER ${BASE_DOCKER_IMAGE}
 
-docker pull containers.cisco.com/nyota/frontline-base-golang-docker:latest
+docker pull dockerhub.cisco.com/eti-sre-docker/sre-golang-docker:latest
 docker build --no-cache \
     -t ${BASE_DOCKER_IMAGE} \
     -f build/Dockerfile \

@@ -1,5 +1,5 @@
-FROM containers.cisco.com/nyota/frontline-base-golang-docker:latest
-
+FROM dockerhub.cisco.com/eti-sre-docker/sre-golang-docker:latest
+ARG GOPATH=/go
 ARG BINARY_NAME=sre-go-helloworld
 ARG SRC_DIR=$GOPATH/src/wwwin-github.cisco.com/eti/$BINARY_NAME
 ARG CODE_COVERAGE
@@ -12,7 +12,7 @@ ARG ARTIFACTORY_PASSWORD
 ARG ARTIFACTORY_URL=https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-maven-master.cisco.com/artifactory/api/go/nyota-go
 
 ENV GO111MODULE=on
-ENV GOPRIVATE="sqbu-github.cisco.com"
+ENV GOPRIVATE="wwwin-github.cisco.com"
 ENV GONOPROXY="github.com,gopkg.in,go.uber.org"
 ENV GOPROXY="${ARTIFACTORY_URL}"
 

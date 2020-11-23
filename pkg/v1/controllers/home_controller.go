@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/gorilla/mux"
 	"net/http"
-	"sqbu-github.cisco.com/Nyota/go-template/pkg/utils"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
 // HomeController struct

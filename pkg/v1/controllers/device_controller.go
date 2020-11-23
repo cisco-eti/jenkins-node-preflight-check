@@ -3,10 +3,12 @@ package controllers
 import (
 	"github.com/gorilla/mux"
 	"net/http"
-	log "sqbu-github.cisco.com/Nyota/frontline-go-logger"
-	"sqbu-github.cisco.com/Nyota/go-template/pkg/services"
-	"sqbu-github.cisco.com/Nyota/go-template/pkg/utils"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/services"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
+	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
+
+var logger *etilog.Logger
 
 // DeviceController struct
 type DeviceController struct {
@@ -30,10 +32,14 @@ func (controller *DeviceController) AddRoutes(router *mux.Router) *mux.Router {
 // @Failure 404 {object} models.APIResponse
 // @Router /deviceZone/{deviceId} [get]
 func (controller *DeviceController) Get(w http.ResponseWriter, r *http.Request) {
+	logger = utils.Loginit()
+
 	res := utils.HTTPResponse{ResponseWriter: w}
 	vars := mux.Vars(r)
 	deviceID := vars["deviceID"]
-	log.Tracer.Info("DeviceZoneHandler deviceId:" + deviceID)
+
+	logger.Info("DeviceZoneHandler deviceId:" + deviceID)
+
 	services.Counter.WithLabelValues(deviceID).Add(1)
 	switch deviceID {
 	case "A":

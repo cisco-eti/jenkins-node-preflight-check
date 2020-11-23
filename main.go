@@ -3,10 +3,13 @@ package main
 import (
 	"github.com/gorilla/mux"
 	"net/http"
-	log "sqbu-github.cisco.com/Nyota/frontline-go-logger"
-	"sqbu-github.cisco.com/Nyota/go-template/pkg/v1"
 	"time"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
+	v1 "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/v1"
+	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
+
+var logger *etilog.Logger
 
 // @title Template API
 // @version 1.0
@@ -14,8 +17,8 @@ import (
 // @license.name Apache 2.0
 // @BasePath /v1
 func main() {
-	log.LogInitGlobal("sre-go-helloworld", log.DefaultProdConfig)
-	log.Tracer.Infof("Starting sre-go-helloworld API Server!")
+	logger = utils.Loginit()
+	logger.Info("Initializing Hello-world Service")
 	router := mux.NewRouter()
 	v1.AddRoutes(router)
 	srv := &http.Server{
@@ -26,5 +29,5 @@ func main() {
 		ReadTimeout:  15 * time.Second,
 	}
 
-	log.Tracer.Infof("%v", srv.ListenAndServe())
+	logger.Info("%v", srv.ListenAndServe())
 }

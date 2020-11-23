@@ -5,7 +5,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
-	"sqbu-github.cisco.com/Nyota/go-template/pkg/services"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/services"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
 func init() {
@@ -24,5 +25,9 @@ func (metricCtrl *MetricsController) AddRoutes(router *mux.Router) *mux.Router {
 
 // Get Handler for prometheus (/metrics endpoint)
 func (metricCtrl *MetricsController) Get(w http.ResponseWriter, r *http.Request) {
+	logger = utils.Loginit()
+
+	logger.Info("/metrics request received")
+
 	promhttp.Handler().ServeHTTP(w, r)
 }
