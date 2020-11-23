@@ -4,9 +4,9 @@ import (
 	//"encoding/json"
 	"github.com/gorilla/mux"
 	"net/http"
-	//log "wwwin-github.cisco.com/eti/sre-go-logger"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
+
 
 type PingController struct {
 }
@@ -24,7 +24,7 @@ func (controller *PingController) AddRoutes(router *mux.Router) *mux.Router {
 // @Success 200 {object} models.PingResponse
 // @Router /ping [get]
 func (controller *PingController) Get(w http.ResponseWriter, r *http.Request) {
-	logger = utils.Loginit()
+	logger = utils.LogInit()
 
 	logger.Info("/ping request received")
 

@@ -26,6 +26,8 @@ func (controller *HomeController) AddRoutes(router *mux.Router) *mux.Router {
 // @Success 200 {object} models.APIResponse
 // @Router / [get]
 func (controller *HomeController) Get(w http.ResponseWriter, _ *http.Request) {
+	logger = utils.LogInit()
+	logger.Info("home / request received")
 	res := utils.HTTPResponse{ResponseWriter: w}
 	res.OKResponse("FrontDesk")
 }

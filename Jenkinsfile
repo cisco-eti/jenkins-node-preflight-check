@@ -20,13 +20,12 @@ def mysettings = [
   noPreE2E: 1,
   noPII: 1,
   noE2E: 1,
-
   // not yet experimental: 1,
   //goldenPromote: 1,
 
-  sa: [
-    [lang: "go", find: "*.go"]
-  ],
+  //   sa: [
+  //     [lang: "go", find: "*.go"]
+  //   ],
   // executeCC: 1,
   stricterCCThreshold: 90.0,
   runPreE2EonMaster: 1

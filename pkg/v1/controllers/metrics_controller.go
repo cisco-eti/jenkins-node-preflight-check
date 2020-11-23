@@ -25,7 +25,7 @@ func (metricCtrl *MetricsController) AddRoutes(router *mux.Router) *mux.Router {
 
 // Get Handler for prometheus (/metrics endpoint)
 func (metricCtrl *MetricsController) Get(w http.ResponseWriter, r *http.Request) {
-	logger = utils.Loginit()
+	logger = utils.LogInit()
 
 	logger.Info("/metrics request received")
 

@@ -32,7 +32,7 @@ func (controller *DeviceController) AddRoutes(router *mux.Router) *mux.Router {
 // @Failure 404 {object} models.APIResponse
 // @Router /deviceZone/{deviceId} [get]
 func (controller *DeviceController) Get(w http.ResponseWriter, r *http.Request) {
-	logger = utils.Loginit()
+	logger = utils.LogInit()
 
 	res := utils.HTTPResponse{ResponseWriter: w}
 	vars := mux.Vars(r)

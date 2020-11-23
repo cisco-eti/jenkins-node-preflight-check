@@ -4,7 +4,8 @@ import (
 	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
 
-func Loginit() *etilog.Logger {
+// LogInit for logging
+func LogInit() *etilog.Logger {
 	//Fetch service config
 	appName := ApplicationNameKey
 

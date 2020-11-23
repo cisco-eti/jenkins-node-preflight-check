@@ -17,7 +17,7 @@ var logger *etilog.Logger
 // @license.name Apache 2.0
 // @BasePath /v1
 func main() {
-	logger = utils.Loginit()
+	logger = utils.LogInit()
 	logger.Info("Initializing Hello-world Service")
 	router := mux.NewRouter()
 	v1.AddRoutes(router)
