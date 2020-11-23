@@ -7,7 +7,6 @@ import (
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
-
 type PingController struct {
 }
 
