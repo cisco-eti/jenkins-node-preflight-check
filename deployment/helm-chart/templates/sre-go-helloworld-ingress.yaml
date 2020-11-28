@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
     name: sre-go-helloworld-ingress
-    namespace: default
+    namespace: { { .Release.Namespace } }
     {{- if .Values.ingress.annotations }}
     annotations:
       {{- range $key, $value := .Values.ingress.annotations }}
