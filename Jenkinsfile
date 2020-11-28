@@ -27,6 +27,7 @@ def mysettings = [
   //     [lang: "go", find: "*.go"]
   //   ],
   // executeCC: 1,
+  namespace: 'monitoring',
   stricterCCThreshold: 90.0,
   runPreE2EonMaster: 1
 ]
