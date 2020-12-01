@@ -8,7 +8,7 @@ import (
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 )
 
-func DbConn() (db *gorm.DB, err error)  {
+func DbConn() (db *gorm.DB, err error) {
 	dsn := config.ReadDBconfig()
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 

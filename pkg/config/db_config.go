@@ -18,6 +18,7 @@ type DBConfig struct {
 	Sslmode  string `json:"sslmode"`
 	Timezone string `json:"timezone"`
 }
+
 func check(e error) {
 	if e != nil {
 		panic(e)

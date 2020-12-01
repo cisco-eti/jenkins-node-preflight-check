@@ -9,4 +9,3 @@ type Pet struct {
 	Type   string
 	Family string
 }
-
