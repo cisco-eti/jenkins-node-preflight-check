@@ -1,4 +1,4 @@
-package controllers
+package v1controllers
 
 import (
 	"github.com/gorilla/mux"
@@ -6,12 +6,12 @@ import (
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
-// HomeController struct
-type HomeController struct {
+// V1RootController struct
+type V1RootController struct {
 }
 
 // AddRoutes add home routes to the Mux router
-func (controller *HomeController) AddRoutes(router *mux.Router) *mux.Router {
+func (controller *V1RootController) AddRoutes(router *mux.Router) *mux.Router {
 	router.HandleFunc("/", controller.Get).Methods("GET")
 	return router
 }
@@ -21,13 +21,11 @@ func (controller *HomeController) AddRoutes(router *mux.Router) *mux.Router {
 // @Description get a response from home endpoint
 // @ID get-home
 // @Tags Home
-// @Accept json
-// @Produce json
-// @Success 200 {object} models.APIResponse
+// @Error 401
 // @Router / [get]
-func (controller *HomeController) Get(w http.ResponseWriter, _ *http.Request) {
-	logger = utils.LogInit()
-	logger.Info("home / request received")
+func (controller *V1RootController) Get(w http.ResponseWriter, _ *http.Request) {
+	logger := utils.LogInit()
+	logger.Info("Home / request received")
 	res := utils.HTTPResponse{ResponseWriter: w}
-	res.OKResponse("FrontDesk")
+	res.UnauthorizedResponse()
 }

@@ -4,6 +4,8 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 	"time"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 	v1 "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/v1"
 	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
@@ -21,6 +23,8 @@ func main() {
 	logger.Info("Initializing Hello-world Service")
 	router := mux.NewRouter()
 	v1.AddRoutes(router)
+	root.AddRoutes(router)
+	datastore.MigrateDB()
 	srv := &http.Server{
 		Handler: router,
 		Addr:    ":5000",

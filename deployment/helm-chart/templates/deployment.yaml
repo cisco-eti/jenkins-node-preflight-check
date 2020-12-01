@@ -14,8 +14,8 @@ spec:
         app: {{ .Values.servicename }}
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: {{ .Values.servicePort }}
-        prometheus.io/path: /metrics
+        prometheus.io/port: "{{ .Values.servicePort }}"
+        prometheus.io/path: "/metrics"
     spec:
       {{- if .Values.microk8s }}
       imagePullSecrets:
@@ -28,4 +28,12 @@ spec:
         - containerPort: {{ .Values.servicePort }}
         envFrom:
           - configMapRef:
-              name: sre-go-helloworld-configmap
+              name: {{ .Release.Name }}-configmap
+        volumeMounts:
+            - name: {{ .Release.Name }}-db-info
+              readOnly: true
+              mountPath: "/etc/dbinfo"
+      volumes:
+        - name: {{ .Release.Name }}-db-info
+          secret:
+            secretName: {{ .Release.Name }}-db-info

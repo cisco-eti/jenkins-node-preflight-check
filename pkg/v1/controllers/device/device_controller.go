@@ -1,9 +1,9 @@
-package controllers
+package device
 
 import (
 	"github.com/gorilla/mux"
 	"net/http"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/services"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/metrics"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
@@ -40,7 +40,7 @@ func (controller *DeviceController) Get(w http.ResponseWriter, r *http.Request) 
 
 	logger.Info("DeviceZoneHandler deviceId:" + deviceID)
 
-	services.Counter.WithLabelValues(deviceID).Add(1)
+	metrics.DeviceCounter.WithLabelValues(deviceID).Add(1)
 	switch deviceID {
 	case "A":
 		res.OKResponse("Plumbing")

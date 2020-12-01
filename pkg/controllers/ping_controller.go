@@ -24,12 +24,8 @@ func (controller *PingController) AddRoutes(router *mux.Router) *mux.Router {
 // @Success 200 {object} models.PingResponse
 // @Router /ping [get]
 func (controller *PingController) Get(w http.ResponseWriter, r *http.Request) {
-	logger = utils.LogInit()
-
+	logger := utils.LogInit()
 	logger.Info("/ping request received")
-
 	res := utils.HTTPResponse{ResponseWriter: w}
-
 	res.OKResponse(os.Getenv("HOSTNAME"))
-
 }

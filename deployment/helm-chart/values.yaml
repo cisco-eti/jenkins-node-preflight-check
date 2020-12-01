@@ -19,13 +19,15 @@ ingress:
     cert-manager.k8s.io/cluster-issuer: letsencrypt-prod
 
 dimage: sre-go-helloworld
-tagversion: 2020.11.18-master-8b9bc17-88
+tagversion: 2020.11.28-master-60f03d4-120
 microk8s: false
 replicas: 1
 servicename: sre-go-helloworld
 servicePort: "5000"
+domainPrefix: hellworld
+dbinfo: /etc/dbinfo/db.json
 cluster:
   apiDomainName: int.dev-aws-useast1d.prod.eticloud.io
 docker:
-  GeneralFullImagePreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/webexkubed-docker/
+  GeneralFullImagePreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/apps/
   HelmRegistryPreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/helm/

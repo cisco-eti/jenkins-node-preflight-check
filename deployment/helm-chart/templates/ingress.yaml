@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    name: sre-go-helloworld-ingress
+    name: '{{ .Release.Name }}'
     namespace: '{{ .Release.Namespace }}'
     {{- if .Values.ingress.annotations }}
     annotations:
@@ -12,14 +12,14 @@ metadata:
 spec:
     tls:
     - hosts:
-      - "helloworld.{{ .Values.cluster.apiDomainName }}"
-      secretName: "sre-go-helloworld-ingress-tls"
+      - "{{ .Values.domainPrefix }}.{{ .Values.cluster.apiDomainName }}"
+      secretName: "{{ .Release.Name }}-tls"
       
     rules:
-    - host: "helloworld.{{ .Values.cluster.apiDomainName }}"
+    - host: "{{ .Values.domainPrefix }}.{{ .Values.cluster.apiDomainName }}"
       http:
         paths:
         - backend:
-            serviceName: "sre-go-helloworld"
+            serviceName: '{{ .Release.Name }}'
             servicePort: {{ .Values.servicePort }}
           path: /
