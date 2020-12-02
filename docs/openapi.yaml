@@ -17,14 +17,14 @@ tags:
     description: Everything about your Pets
     externalDocs:
       description: Find out more
-      url: 'http://wwwin-github.ciscom/pages/eti/sre-go-helloworld'
+      url: 'http://wwwin-github.cisco.com/pages/eti/sre-go-helloworld'
   - name: store
     description: Operations about user
   - name: user
     description: Access to Petstore orders
     externalDocs:
       description: Find out more about our store
-      url: 'http://wwwin-github.ciscom/pages/eti/sre-go-helloworld'
+      url: 'http://wwwin-github.cisco.com/pages/eti/sre-go-helloworld'
 paths:
   /pet:
     post:
@@ -170,7 +170,7 @@ paths:
             - 'read:pets'
 externalDocs:
   description: ETI Hello-world API docs
-  url: 'http://wwwin-github.ciscom/pages/eti/sre-go-helloworld'
+  url: 'https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld'
 components:
   schemas:
     Order:
