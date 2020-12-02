@@ -18,6 +18,7 @@ const (
 	EntityNameKey              = "entityName"
 	TrackingIDPrefix           = "HELLOWORLD"
 	ApplicationNameKey         = "Hello-world"
+	DatabaseName               = "helloworld"
 
 	DefaultAppName     = "sre-go-helloworld"
 	DefaultHTTPPort    = "8080"

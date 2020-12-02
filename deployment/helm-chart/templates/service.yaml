@@ -8,9 +8,14 @@ metadata:
     tier: backend
 spec:
   ports:
-  - protocol: TCP
+  - name: http
+    protocol: TCP
     port: {{ .Values.servicePort }}
     targetPort: {{ .Values.servicePort }}
+  - name: metrics
+    protocol: TCP
+    port: {{ .Values.metricsPort }}
+    targetPort: {{ .Values.metricsPort }}
   type: ClusterIP
   selector:
     app: {{ .Values.servicename }}

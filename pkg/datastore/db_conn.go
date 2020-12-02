@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/plugin/prometheus"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/config"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
 func DbConn() (db *gorm.DB, err error) {
@@ -16,6 +18,13 @@ func DbConn() (db *gorm.DB, err error) {
 		fmt.Println(err.Error())
 		panic("failed to connect database")
 	}
+
+	db.Use(prometheus.New(prometheus.Config{
+		DBName:          utils.DatabaseName,
+		RefreshInterval: 15,
+		StartServer:     false,
+	}))
+
 	return db, err
 }
 
@@ -25,3 +34,4 @@ func MigratePet() {
 	// Migrate the schema
 	db.AutoMigrate(&models.Pet{})
 }
+

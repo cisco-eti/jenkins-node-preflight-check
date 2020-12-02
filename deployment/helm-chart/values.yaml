@@ -19,11 +19,12 @@ ingress:
     cert-manager.k8s.io/cluster-issuer: letsencrypt-prod
 
 dimage: sre-go-helloworld
-tagversion: 2020.11.28-master-60f03d4-120
+tagversion: 2020.12.01-master-817b0fb-128
 microk8s: false
 replicas: 1
 servicename: sre-go-helloworld
 servicePort: "5000"
+metricsPort: "5001"
 domainPrefix: hellworld
 dbinfo: /etc/dbinfo/db.json
 cluster:

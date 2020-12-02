@@ -14,7 +14,7 @@ spec:
         app: {{ .Values.servicename }}
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "{{ .Values.servicePort }}"
+        prometheus.io/port: "{{ .Values.metricsPort }}"
         prometheus.io/path: "/metrics"
     spec:
       {{- if .Values.microk8s }}
