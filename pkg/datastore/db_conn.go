@@ -34,4 +34,3 @@ func MigratePet() {
 	// Migrate the schema
 	db.AutoMigrate(&models.Pet{})
 }
-
