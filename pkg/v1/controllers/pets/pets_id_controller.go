@@ -18,6 +18,7 @@ type PetIDController struct {
 func (controller *PetIDController) AddRoutes(router *mux.Router) *mux.Router {
 	router.HandleFunc("/pet/{petID}", controller.GetPetByID).Methods("GET")
 	router.HandleFunc("/pet/{petID}", controller.PostPetByID).Methods("POST")
+	router.HandleFunc("/pet/{petID}", controller.DeletePetByID).Methods("DELETE")
 	return router
 }
 
@@ -51,6 +52,7 @@ func (controller *PetIDController) GetPetByID(w http.ResponseWriter, r *http.Req
 func (controller *PetIDController) PostPetByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	petID := vars["petID"]
+	logger = utils.LogInit()
 	logger.Info("PostPetByID PetID:" + petID)
 
 	// Declare a new Pet struct.
@@ -71,4 +73,27 @@ func (controller *PetIDController) PostPetByID(w http.ResponseWriter, r *http.Re
 	PetFamilyCounter(p.Family)
 	PetTypeCounter(p.Type)
 	fmt.Fprintf(w, "Pet %s successfully updated", p.Name)
+}
+
+// Get godoc
+// @Summary Delete Pet by ID
+// @Description Delete Pet by ID
+// @Tags deletepetid
+// @Success 200 {object}
+// @Failure 404 {object} models.Error
+// @Router /pet [delete]
+func (controller *PetIDController) DeletePetByID(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	petID := vars["petID"]
+	logger = utils.LogInit()
+	logger.Info("DeletePetByID PetID:" + petID)
+
+	// Do something with the Person struct...
+	db, _ := datastore.DbConn()
+	fmt.Printf("Delete petID %s\n", petID)
+
+	var pet models.Pet
+	db.Delete(&pet, petID)
+
+	fmt.Fprintf(w, "Pet %s successfully updated", petID)
 }
