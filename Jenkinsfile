@@ -16,7 +16,6 @@ def mysettings = [
   kubeyaml: "deployment/staging/sre-go-helloworld-deploy.yaml",
   kubeverify: "sre-go-helloworld",
   artifactory: 1,
-  noCleanWs: 1,
   noPreE2E: 1,
   noPII: 1,
   noE2E: 1,

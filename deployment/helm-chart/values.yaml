@@ -16,7 +16,7 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: ingress-internal
     nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.k8s.io/cluster-issuer: letsencrypt-prod
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
 
 dimage: sre-go-helloworld
 tagversion: 2020.12.01-master-817b0fb-128
