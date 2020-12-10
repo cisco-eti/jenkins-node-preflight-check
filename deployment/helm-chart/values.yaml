@@ -25,7 +25,7 @@ replicas: 1
 servicename: sre-go-helloworld
 servicePort: "5000"
 metricsPort: "5001"
-domainPrefix: hellworld
+domainPrefix: helloworld
 dbinfo: /etc/dbinfo/db.json
 cluster:
   apiDomainName: int.dev-aws-useast1d.prod.eticloud.io
