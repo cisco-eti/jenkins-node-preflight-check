@@ -64,6 +64,15 @@ ln -s $(pwd)/githooks/pre-commit .git/hooks/pre-commit`
 swag init
 ```
 
+  Then, if you want to play with the API, run the swagger docker container using:
+
+```bash
+docker run -p 8080:8080 -v swaggerapi/swagger-ui
+```
+
+Open a browser to the swagger UI [http://localhost:8080/](http://localhost:8080/), put http://localhost:5000/docs in the input
+field and click on explore button.
+
 ### /test
 
   This contains all the tests and dependent mock functions.

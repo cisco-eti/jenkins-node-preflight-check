@@ -10,9 +10,11 @@ func AddRoutes(router *mux.Router) *mux.Router {
 	rootCtrl := controllers.RootController{}
 	metricCtrl := controllers.MetricsController{}
 	pingCtrl := controllers.PingController{}
+	docsCtrl := controllers.DocsController{}
 	Router := router.PathPrefix("/").Subrouter()
 	rootCtrl.AddRoutes(Router)
 	metricCtrl.AddRoutes(Router)
 	pingCtrl.AddRoutes(Router)
+	docsCtrl.AddRoutes(Router)
 	return router
 }
