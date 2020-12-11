@@ -1,5 +1,5 @@
 openapi: 3.0.2
-host: hellworld.int.scratch-aws-1.prod.eticloud.io
+host: helloworld.int.scratch-aws-1.prod.eticloud.io
 basePath: /
 servers:
   - url: /v1
