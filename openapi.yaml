@@ -1,13 +1,15 @@
 openapi: 3.0.2
+host: hellworld.int.scratch-aws-1.prod.eticloud.io
+basePath: /
 servers:
   - url: /v1
 info:
   description: |-
-    ETI Helloworld Petstore - OpenAPI 3.0.
+    ETI Go Helloworld Petstore - OpenAPI 3.0.
 
     Some useful links:
-    - [ETI Helloworld Repo](https://wwwin-github.cisco.com/eti/sre-go-helloworld)
-    - [Helloworld API docs](https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld)
+    - [Repo](https://wwwin-github.cisco.com/eti/sre-go-helloworld)
+    - [API docs](https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld)
   version: 1.0
   title: ETI Helloworld Petstore - OpenAPI 3.0.
   contact:
