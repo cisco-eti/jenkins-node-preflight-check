@@ -1,5 +1,7 @@
 # ETI sre-go-helloworld
 
+[API Try-out Swagger UI Docs][https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld]
+
 Project layout based on this [link](https://github.com/golang-standards/project-layout)
 
 This repository provides a project structure for restful go based microservice. Example used
