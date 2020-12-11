@@ -93,6 +93,11 @@ done
 get_artifactory_credentials
 echo BUILDING DOCKER ${BASE_DOCKER_IMAGE}
 
+export GO111MODULE=on
+export GOPRIVATE="wwwin-github.cisco.com"
+export GONOPROXY="github.com,gopkg.in,go.uber.org"
+export GOPROXY=https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-maven-master.cisco.com/artifactory/api/go/nyota-go
+
 docker pull dockerhub.cisco.com/eti-sre-docker/sre-golang-docker:latest
 docker build --no-cache \
     -t ${BASE_DOCKER_IMAGE} \
