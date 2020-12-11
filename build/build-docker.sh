@@ -7,6 +7,41 @@ BASE_DOCKER_IMAGE=${PROJECT}:base
 H_OUT=index.html
 S_OUT=staticanalysis.txt
 
+get_artifactory_credentials() {
+  if [[ "${ARTIFACTORY_USER}" != "" ]] && [[ "${ARTIFACTORY_PASSWORD}" != "" ]]; then
+    return
+  fi
+
+  if [[ "${NYOTA_CREDENTIALS_FILE}" = "" ]]; then
+    NYOTA_CREDENTIALS_FILE=~/.nyota/credentials
+    echo "Using DEFAULT Artifactory credentials file: $NYOTA_CREDENTIALS_FILE"
+  else
+    echo "Using Artifactory credentials file: $NYOTA_CREDENTIALS_FILE"
+  fi
+
+  [[ "$(uname)" = Darwin ]] && NYOTA_CREDENTIALS_FILE_MOD=$(stat -f "%p" "${NYOTA_CREDENTIALS_FILE}" | cut -c4-) || NYOTA_CREDENTIALS_FILE_MOD=$(stat -c "%a" "${NYOTA_CREDENTIALS_FILE}")
+  if [[ ${NYOTA_CREDENTIALS_FILE_MOD} != "400" ]]; then
+    echo "File ${NYOTA_CREDENTIALS_FILE} must have 400 mod permission"
+    exit 1
+  fi
+
+  if [[ "$NYOTA_CREDENTIALS_SECTION" == "" ]]; then
+    NYOTA_CREDENTIALS_SECTION=default
+  fi
+
+  while IFS=' = ' read key value; do
+    if [[ ${key} == \[*] ]]; then
+      section=${key}
+    elif [[ ${value} ]] && [[ ${section} == "[${NYOTA_CREDENTIALS_SECTION}]" ]]; then
+      if [[ ${key} == 'artifactory_user' ]]; then
+        ARTIFACTORY_USER=${value}
+      elif [[ ${key} == 'artifactory_password' ]]; then
+        ARTIFACTORY_PASSWORD=${value}
+      fi
+    fi
+  done <${NYOTA_CREDENTIALS_FILE}
+}
+
 code_coverage() {
     # extract the H_OUT file from the docker image just created
     id=$(docker create ${BASE_DOCKER_IMAGE})
@@ -55,7 +90,13 @@ do
     esac
 done
 
+get_artifactory_credentials
 echo BUILDING DOCKER ${BASE_DOCKER_IMAGE}
+
+export GO111MODULE=on
+export GOPRIVATE="wwwin-github.cisco.com"
+export GONOPROXY="github.com,gopkg.in,go.uber.org"
+export GOPROXY=https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-maven-master.cisco.com/artifactory/api/go/nyota-go
 
 docker pull dockerhub.cisco.com/eti-sre-docker/sre-golang-docker:latest
 docker build --no-cache \

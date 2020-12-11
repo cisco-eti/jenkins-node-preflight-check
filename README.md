@@ -15,6 +15,19 @@ Skip this step if is not building on Lab VM (i.e. rcdn6-vmXX-YYY).
 
 export DOCKER_BLD_ARGS="https_proxy=http://proxy.esl.cisco.com:80"
 
+Create a credentials file for artifactory in ~/.nyota/credentials with content:
+
+```bash
+artifactory_user=yourCECID
+artifactory_password=yourPASSWORD
+```
+
+and run after:
+
+```bash
+chmod 400 /Users/jegarnie/.nyota/credentials
+```
+
 ## Build and Run Docker
 
 ```bash
