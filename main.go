@@ -1,12 +1,12 @@
 package main
 
 import (
+	cors "github.com/go-chi/cors"
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	metrics "github.com/slok/go-http-metrics/metrics/prometheus"
 	"github.com/slok/go-http-metrics/middleware"
 	"github.com/slok/go-http-metrics/middleware/std"
-	cors "github.com/go-chi/cors"
 
 	"log"
 	"net/http"
@@ -17,8 +17,8 @@ import (
 
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 	etimiddleware "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/middleware"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 	v1 "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/v1"
 	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
