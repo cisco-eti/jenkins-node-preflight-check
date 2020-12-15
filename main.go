@@ -1,11 +1,13 @@
 package main
 
 import (
+	cors "github.com/go-chi/cors"
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	metrics "github.com/slok/go-http-metrics/metrics/prometheus"
 	"github.com/slok/go-http-metrics/middleware"
 	"github.com/slok/go-http-metrics/middleware/std"
+
 	"log"
 	"net/http"
 	"os"
@@ -15,6 +17,7 @@ import (
 
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
+	etimiddleware "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/middleware"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 	v1 "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/v1"
 	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
@@ -40,8 +43,17 @@ func main() {
 	mdlw := middleware.New(middleware.Config{
 		Recorder: metrics.NewRecorder(metrics.Config{}),
 	})
-
 	router := mux.NewRouter()
+	router.Use(cors.Handler(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders: []string{"Accept", "Authorization", "Content-Type",
+			"Content-Length", "Accept-Encoding", "X-CSRF-Token",
+			etimiddleware.SharedAccessKeyHeader},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: true,
+		MaxAge:           300, // Maximum value not ignored by any major browsers
+	}))
 	router.Use(std.HandlerProvider("", mdlw))
 	v1.AddRoutes(router)
 	root.AddRoutes(router)
