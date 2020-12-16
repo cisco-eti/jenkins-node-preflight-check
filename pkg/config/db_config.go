@@ -10,7 +10,6 @@ import (
 
 //DBConfig struct holds database connection attributes
 type DBConfig struct {
-	Dbname   string `json:"dbname"`
 	User     string `json:"user"`
 	Password string `json:"password"`
 	Host     string `json:"host"`
@@ -32,6 +31,11 @@ func ReadDBconfig() string {
 	}
 	file, err := ioutil.ReadFile(filename)
 
+	dbname, exits := os.LookupEnv("DB_NAME")
+	if ((exits != true) || (len(dbname) == 0)) {
+		panic(errors.New("Environment variable DB_NAME is not set"))
+	}
+
 	// we initialize our Users array
 	var dbConfig DBConfig
 
@@ -40,7 +44,7 @@ func ReadDBconfig() string {
 	err = json.Unmarshal(file, &dbConfig)
 	check(err)
 	connString := fmt.Sprintf("dbname=%s user=%s password=%s host=%s port=%s sslmode=%s TimeZone=%s",
-		dbConfig.Dbname,
+		dbname,
 		dbConfig.User,
 		dbConfig.Password,
 		dbConfig.Host,

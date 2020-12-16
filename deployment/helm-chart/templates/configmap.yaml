@@ -5,3 +5,4 @@ metadata:
   namespace: '{{ .Release.Namespace }}'
 data:
   DB_CONNECTION_INFO: {{ .Values.dbinfo }}
+  DB_NAME: {{ .Values.dbname }}
