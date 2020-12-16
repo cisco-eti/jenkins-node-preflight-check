@@ -3,11 +3,11 @@ servers:
   - url: /v1
 info:
   description: |-
-    ETI Helloworld Petstore - OpenAPI 3.0.
+    ETI helloworld Petstore - OpenAPI 3.0.
 
     Some useful links:
-    - [ETI Helloworld Repo](https://wwwin-github.cisco.com/eti/sre-go-helloworld)
-    - [Helloworld API docs](https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld)
+    - [ETI helloworld Repo](https://wwwin-github.cisco.com/eti/sre-go-helloworld)
+    - [helloworld API docs](https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld)
   version: 1.0
   title: ETI Helloworld Petstore - OpenAPI 3.0.
   contact:
@@ -169,7 +169,7 @@ paths:
             - 'write:pets'
             - 'read:pets'
 externalDocs:
-  description: ETI Hello-world API docs
+  description: ETI hellworld API docs
   url: 'https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld'
 components:
   schemas:

@@ -15,7 +15,7 @@ import (
 	"syscall"
 	"time"
 
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg"
+	root "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
 	etimiddleware "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/middleware"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
@@ -37,7 +37,7 @@ const (
 // @BasePath /v1
 func main() {
 	logger = utils.LogInit()
-	logger.Info("Initializing Hello-world Service")
+	logger.Info("Initializing helloworld Service")
 
 	// Create http metrics middleware.
 	mdlw := middleware.New(middleware.Config{

@@ -2,9 +2,10 @@ package controllers
 
 import (
 	//"encoding/json"
-	"github.com/gorilla/mux"
 	"net/http"
 	"os"
+
+	"github.com/gorilla/mux"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
@@ -19,7 +20,7 @@ func (controller *PingController) AddRoutes(router *mux.Router) *mux.Router {
 
 // Get godoc
 // @Summary Get Ping
-// @Description get hello-world status
+// @Description get helloworld status
 // @Produce json
 // @Success 200 {object} models.PingResponse
 // @Router /ping [get]

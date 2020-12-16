@@ -16,8 +16,8 @@ const (
 	IdentityUserPathKey        = "identityUserID"
 	MachineAccountIDPathPrefix = "machineAccountID"
 	EntityNameKey              = "entityName"
-	TrackingIDPrefix           = "HELLOWORLD"
-	ApplicationNameKey         = "Hello-world"
+	TrackingIDPrefix           = "helloworld"
+	ApplicationNameKey         = "helloworld"
 	DatabaseName               = "helloworld"
 
 	DefaultAppName     = "sre-go-helloworld"
