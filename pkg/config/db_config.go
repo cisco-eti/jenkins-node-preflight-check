@@ -32,7 +32,7 @@ func ReadDBconfig() string {
 	file, err := ioutil.ReadFile(filename)
 
 	dbname, exits := os.LookupEnv("DB_NAME")
-	if ((exits != true) || (len(dbname) == 0)) {
+	if (exits != true) || (len(dbname) == 0) {
 		panic(errors.New("Environment variable DB_NAME is not set"))
 	}
 
