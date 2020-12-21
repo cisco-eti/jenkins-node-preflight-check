@@ -26,6 +26,7 @@ func (controller *RootController) AddRoutes(router *mux.Router) *mux.Router {
 func (controller *RootController) Get(w http.ResponseWriter, _ *http.Request) {
 	logger := utils.LogInit()
 	logger.Info("Home / request received")
-	res := utils.HTTPResponse{ResponseWriter: w}
-	res.UnauthorizedResponse()
+
+	_ = utils.UnauthorizedResponse(w)
+	return
 }

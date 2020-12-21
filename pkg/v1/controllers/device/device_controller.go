@@ -1,8 +1,10 @@
 package device
 
 import (
-	"github.com/gorilla/mux"
 	"net/http"
+
+	"github.com/gorilla/mux"
+
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/metrics"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
@@ -34,23 +36,27 @@ func (controller *DeviceController) AddRoutes(router *mux.Router) *mux.Router {
 func (controller *DeviceController) Get(w http.ResponseWriter, r *http.Request) {
 	logger = utils.LogInit()
 
-	res := utils.HTTPResponse{ResponseWriter: w}
 	vars := mux.Vars(r)
 	deviceID := vars["deviceID"]
 
 	logger.Info("DeviceZoneHandler deviceId:" + deviceID)
-
 	metrics.DeviceCounter.WithLabelValues(deviceID).Add(1)
+
+	var err error
 	switch deviceID {
 	case "A":
-		res.OKResponse("Plumbing")
+		err = utils.OKResponse(w, "Plumbing")
 	case "B":
-		res.OKResponse("Gardening")
+		err = utils.OKResponse(w, "Gardening")
 	case "C":
-		res.OKResponse("Lighting")
+		err = utils.OKResponse(w, "Lighting")
 	case "D":
-		res.OKResponse("FrontDesk")
+		err = utils.OKResponse(w, "FrontDesk")
 	default:
-		res.NotFoundResponse("Unknown Device Specified")
+		err = utils.NotFoundResponse(w, "Unknown Device Specified")
+	}
+
+	if err != nil {
+		logger.Warn("error: %s", err)
 	}
 }

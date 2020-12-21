@@ -1,105 +1,101 @@
 package utils
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
+
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 )
 
-//InternalServerError constant
-const (
-	InternalServerError = "Internal Server Error"
-)
-
-var responses = map[int]models.APIResponse{
-	http.StatusOK:                  {StatusCode: http.StatusOK, Description: "OK"},
-	http.StatusCreated:             {StatusCode: http.StatusCreated, Description: "Created"},
-	http.StatusConflict:            {StatusCode: http.StatusConflict, Description: "Conflict"},
-	http.StatusNotFound:            {StatusCode: http.StatusNotFound, Description: "Not Found"},
-	http.StatusUnauthorized:        {StatusCode: http.StatusUnauthorized, Description: "Unauthorized Request"},
-	http.StatusBadRequest:          {StatusCode: http.StatusBadRequest, Description: "Request has some field errors"},
-	http.StatusInternalServerError: {StatusCode: http.StatusInternalServerError, Description: "Internal Server Error"},
-	http.StatusUnprocessableEntity: {StatusCode: http.StatusUnprocessableEntity, Description: "Unprocessable Request"},
-}
-
-//HTTPResponse type
-type HTTPResponse struct {
-	http.ResponseWriter
-	ctx context.Context
-}
-
-//WriteResponse outputs response
-func (res *HTTPResponse) WriteResponse(status int, data interface{}) (int, error) {
-	output, err := json.Marshal(data)
-	if err != nil {
-		status = http.StatusInternalServerError
-		output = []byte(InternalServerError)
+// OKResponse writes back data as json with a status of 200
+func OKResponse(w http.ResponseWriter, data interface{}) error {
+	resp := models.APIResponse{
+		StatusCode: http.StatusOK,
+		Data:       data,
 	}
-	return writeResponse(res, "application/json", status, output)
+	return writeResponse(w, resp)
 }
 
-//UnauthorizedResponse returns response with http status 401
-func (res *HTTPResponse) UnauthorizedResponse() {
-	_, _ = res.WriteResponse(http.StatusUnauthorized, responses[http.StatusUnauthorized])
+// CreatedResponse writes back data as json with a status of 201
+func CreatedResponse(w http.ResponseWriter, data interface{}) error {
+	resp := models.APIResponse{
+		StatusCode: http.StatusCreated,
+		Data:       data,
+	}
+	return writeResponse(w, resp)
 }
 
-//OKResponse returns response with http status 200
-func (res *HTTPResponse) OKResponse(data interface{}) {
-	apiRes := responses[http.StatusOK]
-	apiRes.Data = data
-	_, _ = res.WriteResponse(http.StatusOK, apiRes)
+// BadRequestResponse writes back errors as json with a status of 400
+func BadRequestResponse(w http.ResponseWriter, errMsgs ...string) error {
+	resp := models.APIResponse{
+		StatusCode: http.StatusBadRequest,
+	}
+	for _, errMsg := range errMsgs {
+		resp.Errors = append(resp.Errors, models.Error{Error: errMsg})
+	}
+	return writeResponse(w, resp)
 }
 
-//CreatedResponse returns response with http status 201
-func (res *HTTPResponse) CreatedResponse(data interface{}) {
-	apiRes := responses[http.StatusCreated]
-	apiRes.Data = data
-	_, _ = res.WriteResponse(http.StatusCreated, apiRes)
+// UnauthorizedResponse writes back errors as json with a status of 401
+func UnauthorizedResponse(w http.ResponseWriter, errMsgs ...string) error {
+	resp := models.APIResponse{
+		StatusCode: http.StatusUnauthorized,
+	}
+	for _, errMsg := range errMsgs {
+		resp.Errors = append(resp.Errors, models.Error{Error: errMsg})
+	}
+	return writeResponse(w, resp)
 }
 
-//NotFoundResponse returns response with http status 404
-func (res *HTTPResponse) NotFoundResponse(data interface{}) {
-	apiRes := responses[http.StatusNotFound]
-	apiRes.Data = data
-	_, _ = res.WriteResponse(http.StatusNotFound, apiRes)
+// NotFoundResponse writes back errors as json with a status of 404
+func NotFoundResponse(w http.ResponseWriter, errMsgs ...string) error {
+	resp := models.APIResponse{
+		StatusCode: http.StatusNotFound,
+	}
+	for _, errMsg := range errMsgs {
+		resp.Errors = append(resp.Errors, models.Error{Error: errMsg})
+	}
+	return writeResponse(w, resp)
 }
 
-//UnprocessableResponse returns response with http status 422
-func (res *HTTPResponse) UnprocessableResponse() {
-	apiRes := responses[http.StatusUnprocessableEntity]
-	apiRes.Errors = []models.Error{{
-		Code:  http.StatusUnprocessableEntity,
-		Error: "Json parse error",
-	}}
-	_, _ = res.WriteResponse(http.StatusUnprocessableEntity, apiRes)
+// ServerErrorResponse writes back errors as json with a status of 500
+func ServerErrorResponse(w http.ResponseWriter, errMsgs ...string) error {
+	resp := models.APIResponse{
+		StatusCode: http.StatusInternalServerError,
+	}
+	for _, errMsg := range errMsgs {
+		resp.Errors = append(resp.Errors, models.Error{Error: errMsg})
+	}
+	return writeResponse(w, resp)
 }
 
-//ServerErrorResponse returns response with http status 500
-func (res *HTTPResponse) ServerErrorResponse(errors []models.Error) {
-	apiRes := responses[http.StatusInternalServerError]
-	apiRes.Errors = errors
-	_, _ = res.WriteResponse(http.StatusInternalServerError, apiRes)
+func writeResponse(w http.ResponseWriter, data models.APIResponse) error {
+	if data.StatusCode == 0 {
+		if len(data.Errors) == 0 {
+			data.StatusCode = http.StatusOK
+		} else {
+			data.StatusCode = http.StatusInternalServerError
+		}
+	}
+	if data.Description == "" {
+		data.Description = http.StatusText(data.StatusCode)
+	}
+
+	j, err := json.Marshal(data)
+	if err != nil {
+		//log.Warning("marshaling response to json: %s", err)
+		return writeRawResponse(w, http.StatusInternalServerError,
+			[]byte(`{"message":"unexpected server error"}`))
+	}
+
+	return writeRawResponse(w, data.StatusCode, j)
 }
 
-//BadRequestResponse returns response with http status 400
-func (res *HTTPResponse) BadRequestResponse(errors []models.Error) {
-	apiRes := responses[http.StatusBadRequest]
-	apiRes.Errors = errors
-	_, _ = res.WriteResponse(http.StatusBadRequest, apiRes)
-}
-
-//ConflictResponse returns response with http status 409
-func (res *HTTPResponse) ConflictResponse(errors []models.Error) {
-	apiRes := responses[http.StatusConflict]
-	apiRes.Errors = errors
-	_, _ = res.WriteResponse(http.StatusConflict, apiRes)
-}
-
-func writeResponse(res *HTTPResponse, contentType string, status int, data []byte) (int, error) {
-	res.Header().Set("Content-Type", contentType)
-	res.Header().Set("Content-Length", strconv.Itoa(len(data)))
-	res.WriteHeader(status)
-	return res.Write(data)
+func writeRawResponse(w http.ResponseWriter, status int, data []byte) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Length", strconv.Itoa(len(data)))
+	w.WriteHeader(status)
+	_, err := w.Write(data)
+	return err
 }
