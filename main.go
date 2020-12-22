@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -13,10 +12,7 @@ import (
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
-	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
-
-var logger *etilog.Logger
 
 const (
 	srvAddr     = ":5000"
@@ -29,14 +25,32 @@ const (
 // @license.name Apache 2.0
 // @BasePath /
 func main() {
-	logger = utils.LogInit()
-	logger.Info("Initializing helloworld Service")
+	log, flushLog, err := utils.LogInit()
+	if err != nil {
+		return
+	}
+	defer flushLog()
 
-	router := server.Router(
+	log.Info("opening connection to datastore")
+	db, err := datastore.OpenDB()
+	if err != nil {
+		log.Fatal("OpenDB: %s", err)
+		return
+	}
+
+	log.Info("migrating datastore")
+	err = datastore.Migrate(db)
+	if err != nil {
+		log.Fatal("Migrate DB: %s", err)
+		return
+	}
+
+	log.Info("initializing helloworld Service")
+	appServer := server.New(log, db)
+	router := appServer.Router(
 		server.MetricMiddleware(),
 	)
 
-	datastore.MigrateDB()
 	srv := &http.Server{
 		Handler: router,
 		Addr:    srvAddr,
@@ -47,17 +61,17 @@ func main() {
 
 	// Serve our handler.
 	go func() {
-		logger.Info("server listening at %s", srvAddr)
+		log.Info("server listening at %s", srvAddr)
 		if err := srv.ListenAndServe(); err != nil {
-			log.Panicf("error while serving: %s", err)
+			log.Fatal("error while serving: %s", err)
 		}
 	}()
 
 	// Serve our metrics.
 	go func() {
-		logger.Info("metrics listening at %s", metricsAddr)
+		log.Info("metrics listening at %s", metricsAddr)
 		if err := http.ListenAndServe(metricsAddr, promhttp.Handler()); err != nil {
-			log.Panicf("error while serving metrics: %s", err)
+			log.Fatal("error while serving metrics: %s", err)
 		}
 	}()
 

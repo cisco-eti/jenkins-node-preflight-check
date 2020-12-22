@@ -10,6 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
+	etilogger "wwwin-github.cisco.com/eti/sre-go-logger"
 )
 
 func TestRoutes_GetDeviceZones(t *testing.T) {
@@ -20,7 +21,8 @@ func TestRoutes_GetDeviceZones(t *testing.T) {
 		response := httptest.NewRecorder()
 		request.Header.Set("Authorization", "Bearer 123456")
 
-		router := Router()
+		s := New(etilogger.NewNop(), nil)
+		router := s.Router()
 		router.ServeHTTP(response, request)
 
 		apiRes := models.APIResponse{}
@@ -38,7 +40,8 @@ func TestRoutes_GetDeviceZones(t *testing.T) {
 		response := httptest.NewRecorder()
 		request.Header.Set("Authorization", "Bearer 123456")
 
-		router := Router()
+		s := New(etilogger.NewNop(), nil)
+		router := s.Router()
 		router.ServeHTTP(response, request)
 
 		apiRes := models.APIResponse{}

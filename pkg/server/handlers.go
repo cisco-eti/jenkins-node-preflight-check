@@ -16,9 +16,8 @@ import (
 // @Tags Home
 // @Error 401
 // @Router / [get]
-func RootHandler(w http.ResponseWriter, _ *http.Request) {
-	logger := utils.LogInit()
-	logger.Info("Home / request received")
+func (s *Server) RootHandler(w http.ResponseWriter, _ *http.Request) {
+	s.log.Info("/ request received")
 
 	_ = utils.OKResponse(w, "root")
 	return
@@ -30,9 +29,8 @@ func RootHandler(w http.ResponseWriter, _ *http.Request) {
 // @Produce json
 // @Success 200 {object} models.PingResponse
 // @Router /ping [get]
-func PingHandler(w http.ResponseWriter, r *http.Request) {
-	logger := utils.LogInit()
-	logger.Info("/ping request received")
+func (s *Server) PingHandler(w http.ResponseWriter, r *http.Request) {
+	s.log.Info("/ping request received")
 
 	pong := os.Getenv("HOSTNAME")
 	if pong == "" {
@@ -49,9 +47,8 @@ func PingHandler(w http.ResponseWriter, r *http.Request) {
 // @Produce Yaml
 // @Success 200
 // @Router /docs [get]
-func DocsHandler(w http.ResponseWriter, r *http.Request) {
-	logger := utils.LogInit()
-	logger.Info("/docs request received")
+func (s *Server) DocsHandler(w http.ResponseWriter, r *http.Request) {
+	s.log.Info("/docs request received")
 
 	filePath, err := filepath.Abs("./docs/openapi.yaml")
 	if err != nil {
@@ -59,7 +56,7 @@ func DocsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	logger.Info("filePath: %s", filePath)
+	s.log.Info("filePath: %s", filePath)
 	http.ServeFile(w, r, filePath)
 }
 
@@ -69,9 +66,8 @@ func DocsHandler(w http.ResponseWriter, r *http.Request) {
 // @Produce Yaml
 // @Success 200
 // @Router /metrics [get]
-func MetricsHandler(w http.ResponseWriter, r *http.Request) {
-	logger := utils.LogInit()
-	logger.Info("/metrics request received")
+func (s *Server) MetricsHandler(w http.ResponseWriter, r *http.Request) {
+	s.log.Info("/metrics request received")
 
 	promhttp.Handler().ServeHTTP(w, r)
 }

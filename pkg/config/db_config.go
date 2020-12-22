@@ -8,7 +8,17 @@ import (
 	"os"
 )
 
-//DBConfig struct holds database connection attributes
+const (
+	// DB_CONFIG_FILEPATH_ENV is an environment variable whose value is a
+	// filepath to a json file that contains the attributes described by DBConfig
+	DB_CONFIG_FILEPATH_ENV = "DB_CONNECTION_INFO"
+
+	// DB_NAME_ENV is an environment variable whose value is the name of the
+	// database to connect to
+	DB_NAME_ENV = "DB_NAME"
+)
+
+// DBConfig holds database connection attributes
 type DBConfig struct {
 	User     string `json:"user"`
 	Password string `json:"password"`
@@ -18,31 +28,28 @@ type DBConfig struct {
 	Timezone string `json:"timezone"`
 }
 
-func check(e error) {
-	if e != nil {
-		panic(e)
+func ReadDBconfig() (string, error) {
+	filename, exist := os.LookupEnv(DB_CONFIG_FILEPATH_ENV)
+	if !exist || filename == "" {
+		return "", missingEnvError(DB_CONFIG_FILEPATH_ENV)
 	}
-}
 
-func ReadDBconfig() string {
-	filename, exits := os.LookupEnv("DB_CONNECTION_INFO")
-	if exits != true {
-		panic(errors.New("Environment variable DB_CONNECTION_INFO is not set"))
-	}
 	file, err := ioutil.ReadFile(filename)
-
-	dbname, exits := os.LookupEnv("DB_NAME")
-	if (exits != true) || (len(dbname) == 0) {
-		panic(errors.New("Environment variable DB_NAME is not set"))
+	if err != nil {
+		return "", err
 	}
 
-	// we initialize our Users array
-	var dbConfig DBConfig
+	dbname, exist := os.LookupEnv(DB_NAME_ENV)
+	if !exist || dbname == "" {
+		return "", missingEnvError(DB_NAME_ENV)
+	}
 
-	// we unmarshal our byteArray which contains our
-	// file content into 'dbConfig' which we defined above
+	var dbConfig DBConfig
 	err = json.Unmarshal(file, &dbConfig)
-	check(err)
+	if err != nil {
+		return "", err
+	}
+
 	connString := fmt.Sprintf("dbname=%s user=%s password=%s host=%s port=%s sslmode=%s TimeZone=%s",
 		dbname,
 		dbConfig.User,
@@ -52,5 +59,9 @@ func ReadDBconfig() string {
 		dbConfig.Sslmode,
 		dbConfig.Timezone)
 
-	return connString
+	return connString, nil
+}
+
+func missingEnvError(envVar string) error {
+	return errors.New(fmt.Sprintf("environment variable %s is not set", envVar))
 }

@@ -1,24 +1,23 @@
 package utils
 
 import (
-	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
+	etilogger "wwwin-github.cisco.com/eti/sre-go-logger"
 )
 
 // LogInit for logging
-func LogInit() *etilog.Logger {
-	//Fetch service config
+func LogInit() (*etilogger.Logger, func(), error) {
 	appName := ApplicationNameKey
 
-	//Initialize Logger
-	logConfig := etilog.DefaultProdConfig
+	// Initialize Logger
+	logConfig := etilogger.DefaultProdConfig
 	logConfig.DisableStacktrace = true
-	logger, stop, err := etilog.New(appName, logConfig)
+	logger, flush, err := etilogger.New(appName, logConfig)
 	if err != nil {
-		logger, stop = etilog.Default(appName)
-		logger.Error("*** FAILED TO CREATE ETI LOGGER %+v", err)
+		flush()
+		return nil, nil, err
 	}
-	defer stop()
-	//Set Logging Prefix for Data Service
+
+	// Set Logging Prefix for Data Service
 	logger.SetTrackingIDPrefix(TrackingIDPrefix)
-	return logger
+	return logger, flush, nil
 }
