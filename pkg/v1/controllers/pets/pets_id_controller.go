@@ -3,24 +3,14 @@ package pets
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
 	"net/http"
+
+	"github.com/go-chi/chi"
+
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
-
-// DeviceController struct
-type PetIDController struct {
-}
-
-// AddRoutes
-func (controller *PetIDController) AddRoutes(router *mux.Router) *mux.Router {
-	router.HandleFunc("/pet/{petID}", controller.GetPetByID).Methods("GET")
-	router.HandleFunc("/pet/{petID}", controller.PostPetByID).Methods("POST")
-	router.HandleFunc("/pet/{petID}", controller.DeletePetByID).Methods("DELETE")
-	return router
-}
 
 // Get godoc
 // @Summary Get Pet by ID
@@ -30,10 +20,9 @@ func (controller *PetIDController) AddRoutes(router *mux.Router) *mux.Router {
 // @Success 200 {object} models.Pet
 // @Failure 404 {object} models.Error
 // @Router /pet [get]
-func (controller *PetIDController) GetPetByID(w http.ResponseWriter, r *http.Request) {
-	logger = utils.LogInit()
-	vars := mux.Vars(r)
-	petID := vars["petID"]
+func GetPetByID(w http.ResponseWriter, r *http.Request) {
+	logger := utils.LogInit()
+	petID := chi.URLParam(r, "petID")
 	logger.Info("GetPetByID PetID:" + petID)
 
 	db, _ := datastore.DbConn()
@@ -49,10 +38,9 @@ func (controller *PetIDController) GetPetByID(w http.ResponseWriter, r *http.Req
 // @Success 200 {object}
 // @Failure 404 {object} models.Error
 // @Router /pet [get]
-func (controller *PetIDController) PostPetByID(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	petID := vars["petID"]
-	logger = utils.LogInit()
+func PostPetByID(w http.ResponseWriter, r *http.Request) {
+	petID := chi.URLParam(r, "petID")
+	logger := utils.LogInit()
 	logger.Info("PostPetByID PetID:" + petID)
 
 	// Declare a new Pet struct.
@@ -82,10 +70,9 @@ func (controller *PetIDController) PostPetByID(w http.ResponseWriter, r *http.Re
 // @Success 200 {object}
 // @Failure 404 {object} models.Error
 // @Router /pet [delete]
-func (controller *PetIDController) DeletePetByID(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	petID := vars["petID"]
-	logger = utils.LogInit()
+func DeletePetByID(w http.ResponseWriter, r *http.Request) {
+	petID := chi.URLParam(r, "petID")
+	logger := utils.LogInit()
 	logger.Info("DeletePetByID PetID:" + petID)
 
 	// Do something with the Person struct...

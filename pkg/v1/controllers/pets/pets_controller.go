@@ -3,24 +3,24 @@ package pets
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
 	"net/http"
+
+	"github.com/go-chi/chi"
+
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
-	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
 
-var logger *etilog.Logger
+func Router() *chi.Mux {
+	r := chi.NewRouter()
 
-// DeviceController struct
-type PetController struct {
-}
+	r.Method("GET", "/", http.HandlerFunc(GetAllPets))
+	r.Method("POST", "/", http.HandlerFunc(PostAllPets))
+	r.Method("GET", "/{petID}", http.HandlerFunc(GetPetByID))
+	r.Method("POST", "/{petID}", http.HandlerFunc(PostPetByID))
+	r.Method("DELETE", "/{petID}", http.HandlerFunc(DeletePetByID))
 
-// AddRoutes
-func (controller *PetController) AddRoutes(router *mux.Router) *mux.Router {
-	router.HandleFunc("/pet", controller.GetAllPets).Methods("GET")
-	router.HandleFunc("/pet", controller.PostAllPets).Methods("POST")
-	return router
+	return r
 }
 
 // Get godoc
@@ -31,7 +31,7 @@ func (controller *PetController) AddRoutes(router *mux.Router) *mux.Router {
 // @Success 200 {object} models.Pets
 // @Failure 404 {object} models.Error
 // @Router /pet [get]
-func (controller *PetController) GetAllPets(w http.ResponseWriter, r *http.Request) {
+func GetAllPets(w http.ResponseWriter, r *http.Request) {
 	db, _ := datastore.DbConn()
 	var pets []models.Pet
 	db.Find(&pets)
@@ -39,7 +39,7 @@ func (controller *PetController) GetAllPets(w http.ResponseWriter, r *http.Reque
 	json.NewEncoder(w).Encode(pets)
 }
 
-func (controller *PetController) PostAllPets(w http.ResponseWriter, r *http.Request) {
+func PostAllPets(w http.ResponseWriter, r *http.Request) {
 	// Declare a new Pet struct.
 	var p models.Pet
 
