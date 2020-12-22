@@ -1,4 +1,4 @@
-package pets
+package pet
 
 import "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/metrics"
 

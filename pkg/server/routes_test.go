@@ -1,4 +1,4 @@
-package v1
+package server
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ import (
 
 func TestRoutes_GetDeviceZones(t *testing.T) {
 	t.Run("returns Device_A zone", func(t *testing.T) {
-		request, err := http.NewRequest(http.MethodGet, "/device/A", nil)
+		request, err := http.NewRequest(http.MethodGet, "/v1/device/A", nil)
 		require.NoError(t, err)
 
 		response := httptest.NewRecorder()
@@ -32,7 +32,7 @@ func TestRoutes_GetDeviceZones(t *testing.T) {
 	})
 
 	t.Run("returns Device_B zone", func(t *testing.T) {
-		request, err := http.NewRequest(http.MethodGet, "/device/B", nil)
+		request, err := http.NewRequest(http.MethodGet, "/v1/device/B", nil)
 		require.NoError(t, err)
 
 		response := httptest.NewRecorder()

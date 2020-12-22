@@ -6,7 +6,7 @@ type APIResponse struct {
 	StatusCode  int         `json:"code"`
 	Description string      `json:"desc,omitempty"`
 	Data        interface{} `json:"data,omitempty"`
-	Links       Links       `json:"links,omitempty"`
+	Links       *Links      `json:"links,omitempty"`
 	Errors      []Error     `json:"errors,omitempty"`
 }
 
