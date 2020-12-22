@@ -9,6 +9,9 @@ def mysettings = [
   deploy: [
     [name: "sre-go-helloworld" ]
   ],
+  sonar: [
+    [ name: "sonar-sjc" ]
+  ],
   tagversion: "${env.BUILD_ID}",
   chart: "deployment/helm-chart",
   pipelineLibraryBranch: 'master',
