@@ -9,7 +9,7 @@ def mysettings = [
   deploy: [
     [name: "sre-go-helloworld" ]
   ],
-  sonar: [
+  sonarQube: [
     [ name: "sonar-sjc" ]
   ],
   tagversion: "${env.BUILD_ID}",
