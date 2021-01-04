@@ -3,24 +3,11 @@ package device
 import (
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/go-chi/chi"
 
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/metrics"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
-	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
-
-var logger *etilog.Logger
-
-// DeviceController struct
-type DeviceController struct {
-}
-
-// AddRoutes add device zone routes to the Mux router
-func (controller *DeviceController) AddRoutes(router *mux.Router) *mux.Router {
-	router.HandleFunc("/device/{deviceID}", controller.Get).Methods("GET")
-	return router
-}
 
 // Get godoc
 // @Summary Get Device Zone
@@ -33,11 +20,10 @@ func (controller *DeviceController) AddRoutes(router *mux.Router) *mux.Router {
 // @Success 200 {object} models.APIResponse
 // @Failure 404 {object} models.APIResponse
 // @Router /deviceZone/{deviceId} [get]
-func (controller *DeviceController) Get(w http.ResponseWriter, r *http.Request) {
-	logger = utils.LogInit()
+func GetDeviceHandler(w http.ResponseWriter, r *http.Request) {
+	logger := utils.LogInit()
 
-	vars := mux.Vars(r)
-	deviceID := vars["deviceID"]
+	deviceID := chi.URLParam(r, "deviceID")
 
 	logger.Info("DeviceZoneHandler deviceId:" + deviceID)
 	metrics.DeviceCounter.WithLabelValues(deviceID).Add(1)
