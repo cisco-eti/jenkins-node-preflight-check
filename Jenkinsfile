@@ -1,7 +1,7 @@
 @Library(['srePipeline']) _
 
 // --------------------------------------------
-// see Nyota/pipeline/README.md file for all 
+// see Nyota/pipeline/README.md file for all
 // options used in mysettings
 // --------------------------------------------
 
@@ -23,6 +23,7 @@ def mysettings = [
   noPreE2E: 1,
   noPII: 1,
   noE2E: 1,
+  unittest: 1,
   // not yet experimental: 1,
   //goldenPromote: 1,
 
