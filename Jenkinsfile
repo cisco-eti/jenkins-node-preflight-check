@@ -1,4 +1,4 @@
-@Library(['srePipeline@master']) _
+@Library(['srePipeline']) _
 
 // --------------------------------------------
 // see Nyota/pipeline/README.md file for all
