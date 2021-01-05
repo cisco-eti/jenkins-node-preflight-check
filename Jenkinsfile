@@ -23,6 +23,7 @@ def mysettings = [
   noPreE2E: 1,
   noPII: 1,
   noE2E: 1,
+  unittest: 1,
   // not yet experimental: 1,
   //goldenPromote: 1,
 
