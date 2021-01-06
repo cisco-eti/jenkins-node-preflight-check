@@ -36,7 +36,7 @@ chmod 400 /Users/jegarnie/.nyota/credentials
 ./build-docker.sh
 
 docker run --name postgres -e POSTGRES_DB=helloworld -e POSTGRES_PASSWORD=strongpassword -d postgres
-docker run -it -p 5000:5000 -e DB_CONNECTION_INFO=/tmp/dbconfig.json -v $PWD/build/:/tmp/  --link postgres:postgre sre-go-helloworld
+docker run -it -p 5000:5000 -e DB_CONNECTION_INFO=/tmp/dbconfig.json -e DB_NAME=helloworld -v $PWD/build/:/tmp/  --link postgres:postgre sre-go-helloworld
 ```
 
 ## Instructions for Developers
@@ -57,17 +57,23 @@ ln -s $(pwd)/githooks/pre-commit .git/hooks/pre-commit`
 
 ### /docs
 
+  If you need the swag tool, install it using command:
+
+```bash
+   go get -u github.com/swaggo/swag/cmd/swag
+```
+
   This contains the rest api specifications in JSON/ yaml. This specifications
   would be used for api documentation. Generated from handler comments using command:
 
 ```bash
-swag init
+swag init --parseDependency --parseInternal
 ```
 
   Then, if you want to play with the API, run the swagger docker container using:
 
 ```bash
-docker run -p 8080:8080 -v swaggerapi/swagger-ui
+docker run --name swagger_ui -p 8080:8080 -d swaggerapi/swagger-ui
 ```
 
 Open a browser to the swagger UI [http://localhost:8080/](http://localhost:8080/), put http://localhost:5000/docs in the input
