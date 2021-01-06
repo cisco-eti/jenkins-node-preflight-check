@@ -24,3 +24,30 @@ type Links struct {
 	Next  string `json:"next,omitempty"`
 	Last  string `json:"last,omitempty"`
 }
+
+// ServiceInstance type
+type ServiceInstance struct {
+	InstanceID string `json:"instanceId"`
+	Host       string `json:"host"`
+	Port       int    `json:"port"`
+}
+
+// Service type
+type Service struct {
+	ServiceName      string          `json:"serviceName"`
+	ServiceType      string          `json:"serviceType"`
+	ServiceState     string          `json:"serviceState"`
+	Message          string          `json:"message"`
+	LastUpdated      string          `json:"lastUpdated"`
+	ServiceInstance  ServiceInstance `json:"serviceInstance"`
+	UpstreamServices []Service       `json:"upstreamServices"`
+	BaseURL          string          `json:"baseUrl,omitempty"`
+	DurationPretty   string          `json:"durationPretty,omitempty"`
+	Duration         int             `json:"duration,omitempty"`
+	DefaultCharset   string          `json:"defaultCharset,omitempty"`
+}
+
+// PingResponse type
+type PingResponse struct {
+	Service Service
+}

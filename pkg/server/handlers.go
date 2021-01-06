@@ -37,7 +37,42 @@ func (s *Server) PingHandler(w http.ResponseWriter, r *http.Request) {
 		pong = "HOSTNAME env missing... pong!"
 	}
 
-	_ = utils.OKResponse(w, pong)
+	// Pure sample data, value need to be changed
+	myService := models.Service{
+		ServiceName:  "HelloWorld",
+		ServiceType:  "OPTIONAL",
+		ServiceState: "online",
+		Message:      "Healthy",
+		ServiceInstance: models.ServiceInstance{
+			InstanceID: "725c367b-5ff1-436a-0b74-ba3108c52c4c[3]",
+			Host:       "172.18.231.5",
+			Port:       21455,
+		},
+		LastUpdated:    "2020-10-20T08:42:07.290Z",
+		BaseURL:        "https://helloworld.com/api/v1",
+		DurationPretty: "91ms",
+		Duration:       91350005,
+		UpstreamServices: []models.Service{
+			models.Service{
+				ServiceName:  "PostgresDataSource",
+				ServiceType:  "REQUIRED",
+				ServiceState: "online",
+				ServiceInstance: models.ServiceInstance{
+					InstanceID: "e3c16830-2c65-c6c8-68ab-30d728d6179e[9]",
+					Host:       "172.18.244.25",
+					Port:       5432,
+				},
+				Message:          "PostgresDataSource is online",
+				LastUpdated:      "2021-01-06T13:43:42.984Z",
+				DurationPretty:   "3ms",
+				Duration:         3631684,
+				UpstreamServices: []models.Service{},
+				DefaultCharset:   "UTF-8",
+			},
+		},
+		DefaultCharset: "UTF-8",
+	}
+	_ = utils.OKResponse(w, myService)
 	return
 }
 
