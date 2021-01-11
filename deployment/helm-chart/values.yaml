@@ -31,5 +31,5 @@ dbname: helloworld
 cluster:
   apiDomainName: int.dev-aws-useast1d.prod.eticloud.io
 docker:
-  GeneralFullImagePreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/apps/
+  GeneralFullImagePreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/
   HelmRegistryPreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/helm/
