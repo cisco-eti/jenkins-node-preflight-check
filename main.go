@@ -10,8 +10,8 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
@@ -27,16 +27,18 @@ const (
 // @version 1.0
 // @termsOfService http://swagger.io/terms/
 // @license.name Apache 2.0
-// @BasePath /v1
+// @BasePath /
 func main() {
 	logger = utils.LogInit()
 	logger.Info("Initializing helloworld Service")
 
-	pkgRouter := pkg.Router()
-	datastore.MigrateDB()
+	router := server.Router(
+		server.MetricMiddleware(),
+	)
 
+	datastore.MigrateDB()
 	srv := &http.Server{
-		Handler: pkgRouter,
+		Handler: router,
 		Addr:    srvAddr,
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
@@ -51,7 +53,6 @@ func main() {
 		}
 	}()
 
-	// Serve our metrics.
 	// Serve our metrics.
 	go func() {
 		logger.Info("metrics listening at %s", metricsAddr)

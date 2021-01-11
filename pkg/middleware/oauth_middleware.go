@@ -1,9 +1,10 @@
 package middleware
 
 import (
-	log "github.com/sirupsen/logrus"
 	"net/http"
 	"os"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func init() {
