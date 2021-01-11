@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
@@ -60,4 +61,17 @@ func DocsHandler(w http.ResponseWriter, r *http.Request) {
 
 	logger.Info("filePath: %s", filePath)
 	http.ServeFile(w, r, filePath)
+}
+
+// Get godoc
+// @Summary Get Prometheus Metrics
+// @Description get helloworld status
+// @Produce Yaml
+// @Success 200
+// @Router /metrics [get]
+func MetricsHandler(w http.ResponseWriter, r *http.Request) {
+	logger := utils.LogInit()
+	logger.Info("/metrics request received")
+
+	promhttp.Handler().ServeHTTP(w, r)
 }
