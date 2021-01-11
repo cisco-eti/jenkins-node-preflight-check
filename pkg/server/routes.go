@@ -14,6 +14,7 @@ import (
 	v1pet "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server/v1/pet"
 )
 
+// Router for helloworld server
 func Router(extraMiddleware ...func(http.Handler) http.Handler) *chi.Mux {
 	r := chi.NewRouter()
 
@@ -33,6 +34,7 @@ func Router(extraMiddleware ...func(http.Handler) http.Handler) *chi.Mux {
 	}
 
 	r.Method("GET", "/", http.HandlerFunc(RootHandler))
+	r.Method("GET", "/metrics", http.HandlerFunc(MetricsHandler))
 	r.Method("GET", "/ping", http.HandlerFunc(PingHandler))
 	r.Method("GET", "/docs", http.HandlerFunc(DocsHandler))
 
