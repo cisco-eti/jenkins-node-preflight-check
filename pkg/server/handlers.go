@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
@@ -32,9 +33,9 @@ func (s *Server) RootHandler(w http.ResponseWriter, _ *http.Request) {
 func (s *Server) PingHandler(w http.ResponseWriter, r *http.Request) {
 	s.log.Info("/ping request received")
 
-	pong := os.Getenv("HOSTNAME")
-	if pong == "" {
-		pong = "HOSTNAME env missing... pong!"
+	hostname := os.Getenv("HOSTNAME")
+	if hostname == "" {
+		hostname = "HOSTNAME env missing"
 	}
 
 	// Pure sample data, value need to be changed
@@ -44,17 +45,17 @@ func (s *Server) PingHandler(w http.ResponseWriter, r *http.Request) {
 		ServiceState: "online",
 		Message:      "Healthy",
 		ServiceInstance: models.ServiceInstance{
-			InstanceID: "725c367b-5ff1-436a-0b74-ba3108c52c4c[3]",
+			InstanceID: hostname,
 			Host:       "172.18.231.5",
 			Port:       21455,
 		},
 		LastUpdated:    "2020-10-20T08:42:07.290Z",
-		BaseURL:        "https://helloworld.com/api/v1",
+		BaseURL:        "http://helloworld.int.scratch-aws-1.prod.eticloud.io/",
 		DurationPretty: "91ms",
 		Duration:       91350005,
 		UpstreamServices: []models.Service{
-			models.Service{
-				ServiceName:  "PostgresDataSource",
+			{
+				ServiceName:  "Postgres",
 				ServiceType:  "REQUIRED",
 				ServiceState: "online",
 				ServiceInstance: models.ServiceInstance{
