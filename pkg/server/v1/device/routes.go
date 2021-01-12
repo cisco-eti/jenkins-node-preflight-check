@@ -6,10 +6,10 @@ import (
 	"github.com/go-chi/chi"
 )
 
-func Router() *chi.Mux {
+func (d *Device) Router() *chi.Mux {
 	r := chi.NewRouter()
 
-	r.Method("GET", "/{deviceID}", http.HandlerFunc(GetDeviceHandler))
+	r.Method("GET", "/{deviceID}", http.HandlerFunc(d.GetDeviceHandler))
 
 	return r
 }

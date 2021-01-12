@@ -10,12 +10,11 @@ import (
 	slokstd "github.com/slok/go-http-metrics/middleware/std"
 
 	etimiddleware "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/middleware"
-	v1device "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server/v1/device"
-	v1pet "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server/v1/pet"
 )
 
 // Router for helloworld server
-func Router(extraMiddleware ...func(http.Handler) http.Handler) *chi.Mux {
+func (s *Server) Router(
+	extraMiddleware ...func(http.Handler) http.Handler) *chi.Mux {
 	r := chi.NewRouter()
 
 	r.Use(cors.Handler(cors.Options{
@@ -33,15 +32,15 @@ func Router(extraMiddleware ...func(http.Handler) http.Handler) *chi.Mux {
 		r.Use(mw)
 	}
 
-	r.Method("GET", "/", http.HandlerFunc(RootHandler))
-	r.Method("GET", "/metrics", http.HandlerFunc(MetricsHandler))
-	r.Method("GET", "/ping", http.HandlerFunc(PingHandler))
-	r.Method("GET", "/docs", http.HandlerFunc(DocsHandler))
+	r.Method("GET", "/", http.HandlerFunc(s.RootHandler))
+	r.Method("GET", "/metrics", http.HandlerFunc(s.MetricsHandler))
+	r.Method("GET", "/ping", http.HandlerFunc(s.PingHandler))
+	r.Method("GET", "/docs", http.HandlerFunc(s.DocsHandler))
 
 	authedV1Router := chi.NewRouter()
-	authedV1Router.Use(etimiddleware.OAuthMiddleware)
-	authedV1Router.Mount("/device", v1device.Router())
-	authedV1Router.Mount("/pet", v1pet.Router())
+	authedV1Router.Use(etimiddleware.OAuthMiddleware(s.log))
+	authedV1Router.Mount("/device", s.v1device.Router())
+	authedV1Router.Mount("/pet", s.v1pet.Router())
 	r.Mount("/v1", authedV1Router)
 
 	return r

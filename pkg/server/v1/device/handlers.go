@@ -20,12 +20,11 @@ import (
 // @Success 200 {object} models.APIResponse
 // @Failure 404 {object} models.APIResponse
 // @Router /deviceZone/{deviceId} [get]
-func GetDeviceHandler(w http.ResponseWriter, r *http.Request) {
-	logger := utils.LogInit()
+func (d *Device) GetDeviceHandler(w http.ResponseWriter, r *http.Request) {
 
 	deviceID := chi.URLParam(r, "deviceID")
 
-	logger.Info("DeviceZoneHandler deviceId:" + deviceID)
+	d.log.Info("DeviceZoneHandler deviceId:" + deviceID)
 	metrics.DeviceCounter.WithLabelValues(deviceID).Add(1)
 
 	var err error
@@ -43,6 +42,6 @@ func GetDeviceHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err != nil {
-		logger.Warn("error: %s", err)
+		d.log.Warn("error: %s", err)
 	}
 }

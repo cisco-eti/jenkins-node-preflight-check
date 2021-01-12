@@ -1,36 +1,33 @@
 package datastore
 
 import (
-	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/plugin/prometheus"
+
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/config"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
-func DbConn() (db *gorm.DB, err error) {
-	dsn := config.ReadDBconfig()
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
-
+func OpenDB() (*gorm.DB, error) {
+	dsn, err := config.ReadDBconfig()
 	if err != nil {
-		fmt.Println(err.Error())
-		panic("failed to connect database")
+		return nil, err
 	}
 
-	db.Use(prometheus.New(prometheus.Config{
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+
+	err = db.Use(prometheus.New(prometheus.Config{
 		DBName:          utils.DatabaseName,
 		RefreshInterval: 15,
 		StartServer:     false,
 	}))
+	if err != nil {
+		return nil, err
+	}
 
-	return db, err
-}
-
-// our initial migration function
-func MigratePet() {
-	db, _ := DbConn()
-	// Migrate the schema
-	db.AutoMigrate(&models.Pet{})
+	return db, nil
 }
