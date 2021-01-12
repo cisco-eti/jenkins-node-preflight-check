@@ -1,9 +1,11 @@
 package middleware
 
 import (
-	log "github.com/sirupsen/logrus"
 	"net/http"
 	"os"
+
+	log "github.com/sirupsen/logrus"
+
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 )
 
@@ -27,10 +29,13 @@ func init() {
 // OAuthMiddleware adds Mux middleware operations to authenticate requests
 func SharedKeyMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		res := utils.HTTPResponse{ResponseWriter: w}
 		if r.Header.Get(SharedAccessKeyHeader) != sharedAccessKeySecret {
 			log.Info("Shared key not authorized")
-			res.UnauthorizedResponse()
+
+			err := utils.UnauthorizedResponse(w)
+			if err != nil {
+				log.Warn(err)
+			}
 			return
 		}
 		log.Info("Authorized request for " + r.RequestURI)

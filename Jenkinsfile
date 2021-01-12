@@ -1,7 +1,7 @@
 @Library(['srePipeline@master']) _
 
 // --------------------------------------------
-// see Nyota/pipeline/README.md file for all 
+// see Nyota/pipeline/README.md file for all
 // options used in mysettings
 // --------------------------------------------
 
@@ -9,6 +9,10 @@ def mysettings = [
   deploy: [
     [name: "sre-go-helloworld" ]
   ],
+  // TODO: Disable and fix after break
+  // sonarQube: [
+  //  [ name: "sonar-sjc" ]
+  // ],
   tagversion: "${env.BUILD_ID}",
   chart: "deployment/helm-chart",
   pipelineLibraryBranch: 'master',
@@ -19,6 +23,8 @@ def mysettings = [
   noPreE2E: 1,
   noPII: 1,
   noE2E: 1,
+  unittest: 1,
+  pushPublicRegistryOnTag: 1,
   // not yet experimental: 1,
   //goldenPromote: 1,
 

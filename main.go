@@ -1,13 +1,6 @@
 package main
 
 import (
-	cors "github.com/go-chi/cors"
-	"github.com/gorilla/mux"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
-	metrics "github.com/slok/go-http-metrics/metrics/prometheus"
-	"github.com/slok/go-http-metrics/middleware"
-	"github.com/slok/go-http-metrics/middleware/std"
-
 	"log"
 	"net/http"
 	"os"
@@ -15,11 +8,11 @@ import (
 	"syscall"
 	"time"
 
-	root "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
-	etimiddleware "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/middleware"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
-	v1 "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/v1"
 	etilog "wwwin-github.cisco.com/eti/sre-go-logger"
 )
 
@@ -34,29 +27,15 @@ const (
 // @version 1.0
 // @termsOfService http://swagger.io/terms/
 // @license.name Apache 2.0
-// @BasePath /v1
+// @BasePath /
 func main() {
 	logger = utils.LogInit()
 	logger.Info("Initializing helloworld Service")
 
-	// Create http metrics middleware.
-	mdlw := middleware.New(middleware.Config{
-		Recorder: metrics.NewRecorder(metrics.Config{}),
-	})
-	router := mux.NewRouter()
-	router.Use(cors.Handler(cors.Options{
-		AllowedOrigins: []string{"*"},
-		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders: []string{"Accept", "Authorization", "Content-Type",
-			"Content-Length", "Accept-Encoding", "X-CSRF-Token",
-			etimiddleware.SharedAccessKeyHeader},
-		ExposedHeaders:   []string{"Link"},
-		AllowCredentials: true,
-		MaxAge:           300, // Maximum value not ignored by any major browsers
-	}))
-	router.Use(std.HandlerProvider("", mdlw))
-	v1.AddRoutes(router)
-	root.AddRoutes(router)
+	router := server.Router(
+		server.MetricMiddleware(),
+	)
+
 	datastore.MigrateDB()
 	srv := &http.Server{
 		Handler: router,
@@ -74,7 +53,6 @@ func main() {
 		}
 	}()
 
-	// Serve our metrics.
 	// Serve our metrics.
 	go func() {
 		logger.Info("metrics listening at %s", metricsAddr)

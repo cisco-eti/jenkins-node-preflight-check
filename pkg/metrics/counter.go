@@ -30,3 +30,9 @@ var (
 		[]string{"pettype"},
 	)
 )
+
+func init() {
+	prometheus.MustRegister(DeviceCounter)
+	prometheus.MustRegister(PetFamilyCounter)
+	prometheus.MustRegister(PetTypeCounter)
+}
