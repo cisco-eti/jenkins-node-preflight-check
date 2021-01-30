@@ -2,39 +2,41 @@
 
 // --------------------------------------------
 // see Nyota/pipeline/README.md file for all
-// options used in mysettings
+// options used in pipelinesettings
 // --------------------------------------------
 
-def mysettings = [
+def pipelinesettings = [
   deploy: [
     [name: "sre-go-helloworld" ]
   ],
-  // TODO: Disable and fix after break
-  // sonarQube: [
-  //  [ name: "sonar-sjc" ]
-  // ],
   tagversion: "${env.BUILD_ID}",
   chart: "deployment/helm-chart",
-  pipelineLibraryBranch: 'master',
-  microK8sDeploymentsBranch: 'master',
-  kubeyaml: "deployment/staging/sre-go-helloworld-deploy.yaml",
   kubeverify: "sre-go-helloworld",
-  artifactory: 1,
-  noPreE2E: 1,
-  noPII: 1,
-  noE2E: 1,
-  unittest: 1,
-  pushPublicRegistryOnTag: 1,
-  // not yet experimental: 1,
-  //goldenPromote: 1,
-
-  //   sa: [
-  //     [lang: "go", find: "*.go"]
-  //   ],
-  // executeCC: 1,
   namespace: 'helloworld',
+
+  // Knobs to turn on pipeline stages
+  prepare: 1,
+  unittest: 1,
+  build: 1,
+  // TODO: Disable and fix after break
+  // blackduck:1,
+  // sonarQube: [[ name: "sonar-sjc" ]],
+  // sa: [[lang: "go", find: "*.go"]],
+  helm: 1,
+  // preDeployE2E: 1,
+  deploy: 1,
+  e2e: 1,
+  apiDocs: 1,
+
+  // use artifactory credentials for go modules
+  artifactory: 1,
+
+  // Push to ECR public repos on tags
+  pushPublicRegistryOnTag: 1,
+
+  // Code coverage threshold to fail builds
   stricterCCThreshold: 90.0,
   runPreE2EonMaster: 1
 ]
 
-srePipeline( mysettings )
+srePipeline( pipelinesettings )
