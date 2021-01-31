@@ -7,6 +7,7 @@
 
 // TODO: Enable after testing
 // blackduck: 1
+//  apiDocs: 1,
 // sonarQube: [ [ name: "sonar-sjc" ] ],
 // sa: [ [lang: "go", find: "*.go"] ],
 
@@ -30,7 +31,6 @@ def pipelinesettings = [
   pushPublicRegistryOnTag: 1,       // Publish container to Public ECR on tag
   publishHelm: 1,                   // Stage HELM CREATE
   deployHelm: 1,                    // Stage DEPLOY k8s
-  apiDocs: 1,                       // Stage PUBLISH API Docs
   artifactory: 1,                   // Use Artifactory creds
   stricterCCThreshold: 90.0,        // Fail builds for Code Coverage below 90%
 ]
