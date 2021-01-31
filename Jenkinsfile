@@ -1,40 +1,38 @@
 @Library(['srePipeline']) _
 
 // --------------------------------------------
-// see Nyota/pipeline/README.md file for all
-// options used in mysettings
+// Refer to Pipeline docs for options used in mysettings
+// https://wwwin-github.cisco.com/pages/eti/sre-pipeline-library
 // --------------------------------------------
 
-def mysettings = [
-  deploy: [
-    [name: "sre-go-helloworld" ]
-  ],
-  // TODO: Disable and fix after break
-  // sonarQube: [
-  //  [ name: "sonar-sjc" ]
-  // ],
-  tagversion: "${env.BUILD_ID}",
-  chart: "deployment/helm-chart",
-  pipelineLibraryBranch: 'master',
-  microK8sDeploymentsBranch: 'master',
-  kubeyaml: "deployment/staging/sre-go-helloworld-deploy.yaml",
-  kubeverify: "sre-go-helloworld",
-  artifactory: 1,
-  noPreE2E: 1,
-  noPII: 1,
-  noE2E: 1,
-  unittest: 1,
-  pushPublicRegistryOnTag: 1,
-  // not yet experimental: 1,
-  //goldenPromote: 1,
+// TODO: Enable after testing
+// blackduck: 1
+// sonarQube: [ [ name: "sonar-sjc" ] ],
+// sa: [ [lang: "go", find: "*.go"] ],
 
-  //   sa: [
-  //     [lang: "go", find: "*.go"]
-  //   ],
-  // executeCC: 1,
-  namespace: 'helloworld',
-  stricterCCThreshold: 90.0,
-  runPreE2EonMaster: 1
+def pipelinesettings = [
+  deploy: [
+    [name: "sre-go-helloworld" ]    // Containers to publish
+  ],
+
+  tagversion: "${env.BUILD_ID}",    // Docker tag version
+  chart: "deployment/helm-chart",   // Location of helm chart
+  kubeverify: "sre-go-helloworld",  // Deploy verification name
+  namespace: 'helloworld',          // k8s namespace
+
+  prepare: 1,                       // GIT Clone
+  unittest: 1,                      // Unit-test
+  build: 1,                         // Build container
+  publishContainer: 1,              // Publish container
+  ecr: 1,                           // Publish container to Private ECR
+  containersCisco: 1,               // Publish container to containers.cisco.com
+  dockerHub: 1,                     // Publish container to dockerhub.cisco.com
+  pushPublicRegistryOnTag: 1,       // Publish container to Public ECR on tag
+  publishHelm: 1,                   // Stage HELM CREATE
+  deployHelm: 1,                    // Stage DEPLOY k8s
+  apiDocs: 1,                       // Stage PUBLISH API Docs
+  artifactory: 1,                   // Use Artifactory creds
+  stricterCCThreshold: 90.0,        // Fail builds for Code Coverage below 90%
 ]
 
-srePipeline( mysettings )
+srePipeline( pipelinesettings )
