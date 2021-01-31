@@ -25,7 +25,7 @@ def pipelinesettings = [
   build: 1,                         // Build container
   publishContainer: 1,              // Publish container
   ecr: 1,                           // Publish container to Private ECR
-  containersCisco: 1,               // Publish container to containers.cisco.com
+  ciscoContainer: 1,                // Publish container to containers.cisco.com
   dockerHub: 1,                     // Publish container to dockerhub.cisco.com
   pushPublicRegistryOnTag: 1,       // Publish container to Public ECR on tag
   publishHelm: 1,                   // Stage HELM CREATE
