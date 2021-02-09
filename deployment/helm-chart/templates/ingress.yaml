@@ -13,6 +13,7 @@ spec:
     tls:
     - hosts:
       - "{{ .Values.domainPrefix }}.{{ .Values.cluster.apiDomainName }}"
+      - "{{ .Values.domainPrefix }}.{{ .Values.global.apiDomainName }}"
       secretName: "{{ .Release.Name }}-tls"
 
     rules:
