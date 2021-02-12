@@ -21,7 +21,6 @@ import (
 // @Failure 404 {object} models.APIResponse
 // @Router /deviceZone/{deviceId} [get]
 func (d *Device) GetDeviceHandler(w http.ResponseWriter, r *http.Request) {
-
 	deviceID := chi.URLParam(r, "deviceID")
 
 	d.log.Info("DeviceZoneHandler deviceId:" + deviceID)
