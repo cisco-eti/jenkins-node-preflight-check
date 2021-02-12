@@ -24,6 +24,7 @@ def pipelinesettings = [
   prepare: 1,                       // GIT Clone
   unittest: 1,                      // Unit-test
   build: 1,                         // Build container
+  lint: 1,                          // GO Lint
   publishContainer: 1,              // Publish container
   ecr: 1,                           // Publish container to Private ECR
   ciscoContainer: 1,                // Publish container to containers.cisco.com
@@ -36,3 +37,4 @@ def pipelinesettings = [
 ]
 
 srePipeline( pipelinesettings )
+ 
