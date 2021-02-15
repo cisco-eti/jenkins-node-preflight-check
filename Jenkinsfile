@@ -35,7 +35,6 @@ def pipelinesettings = [
   blackduck: [
     imgId: "73243",
     coronaRelease: "1.0.0",
-    options: "--logging.level.com.synopsys.integration=INFO",
     email: "sraradhy@cisco.com",
   ],                                // Blackduck Open Source Scan
   forceBlackduck: 1,                // Force Blackduck Scan on any branch
