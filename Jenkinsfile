@@ -32,6 +32,13 @@ def pipelinesettings = [
   ciscoContainer: 1,                // Publish container to containers.cisco.com
   dockerHub: 1,                     // Publish container to dockerhub.cisco.com
   pushPublicRegistryOnTag: 1,       // Publish container to Public ECR on tag
+  blackduck: [
+    imgId: "73243",
+    coronaRelease: "1.0.0",
+    options: "--logging.level.com.synopsys.integration=INFO",
+    email: "sraradhy@cisco.com",
+  ],                                // Blackduck Open Source Scan
+  forceBlackduck: 1,                // Force Blackduck Scan on any branch
   publishHelm: 1,                   // Stage HELM CREATE
   deployHelm: 1,                    // Stage DEPLOY k8s
   artifactory: 1,                   // Use Artifactory creds
@@ -39,4 +46,3 @@ def pipelinesettings = [
 ]
 
 srePipeline( pipelinesettings )
-
