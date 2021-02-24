@@ -36,6 +36,7 @@ func (s *Server) Router(
 	r.Method("GET", "/metrics", http.HandlerFunc(s.MetricsHandler))
 	r.Method("GET", "/ping", http.HandlerFunc(s.PingHandler))
 	r.Method("GET", "/docs", http.HandlerFunc(s.DocsHandler))
+	r.Mount("/auth", s.v1auth.Router())
 
 	authedV1Router := chi.NewRouter()
 	authedV1Router.Use(etimiddleware.OAuthMiddleware(s.log))
