@@ -24,6 +24,7 @@ def pipelinesettings = [
   prepare: 1,                       // GIT Clone
   unittest: 1,                      // Unit-test
   build: 1,                         // Build container
+  executeCC: 1,                     // Generate Code Coverage report
   lint: 1,                          // GO Lint
   sonarQube: 1,                     // SonarQube scan
   publishContainer: 1,              // Publish container
@@ -38,4 +39,4 @@ def pipelinesettings = [
 ]
 
 srePipeline( pipelinesettings )
- 
+
