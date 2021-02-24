@@ -15,6 +15,9 @@ test:
 	echo "Running tests"
 	go test -v --cover ./...
 
+sonar: test
+	sonar-scanner -Dsonar.projectVersion="$(version)"
+
 test_debug: debug_kill
 	@cd $(PROJECT_ROOT)
 	dlv test $(REPO_NAME) --headless --api-version=2 --listen "0.0.0.0:2345" --log=true
