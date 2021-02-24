@@ -46,7 +46,12 @@ func main() {
 	}
 
 	log.Info("initializing helloworld Service")
-	appServer := server.New(log, db)
+	appServer, err := server.New(log, db, http.DefaultClient)
+	if err != nil {
+		log.Fatal("configuring app server: %s", err)
+		return
+	}
+
 	router := appServer.Router(
 		server.MetricMiddleware(),
 	)

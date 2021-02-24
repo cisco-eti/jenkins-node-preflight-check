@@ -21,7 +21,9 @@ func getDeviceZone(t *testing.T, path string, want string, ret string) {
 		response := httptest.NewRecorder()
 		request.Header.Set("Authorization", "Bearer 123456")
 
-		s := New(etilogger.NewNop(), nil)
+		s, err := New(etilogger.NewNop(), nil, nil)
+		require.NoError(t, err)
+
 		router := s.Router()
 		router.ServeHTTP(response, request)
 
@@ -32,6 +34,7 @@ func getDeviceZone(t *testing.T, path string, want string, ret string) {
 		assert.Equal(t, want, apiRes.Data)
 	})
 }
+
 func TestRoutes_GetDeviceZones(t *testing.T) {
 	getDeviceZone(t, "A", "Plumbing", "returns Device_A zone")
 	getDeviceZone(t, "B", "Gardening", "returns Device_B zone")
