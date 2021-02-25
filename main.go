@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"net/http"
 	"os"
 	"os/signal"
@@ -9,6 +10,8 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
+	"wwwin-github.cisco.com/eti/idpadapter"
+	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/config"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
@@ -45,13 +48,32 @@ func main() {
 		return
 	}
 
-	log.Info("initializing helloworld Service")
-	appServer, err := server.New(log, db, http.DefaultClient)
+	idpConf, err := config.ReadIDPConfig()
 	if err != nil {
-		log.Fatal("configuring app server: %s", err)
+		log.Fatal("reading idp config: %s", err)
 		return
 	}
 
+	ipa, err := idpadapter.New(
+		context.Background(),
+		log,
+		http.DefaultClient,
+		idpConf.Label,
+		idpConf.ClientID,
+		idpConf.ClientSecret,
+		idpConf.Issuer,
+		idpConf.Audience,
+		idpConf.LoginCallback,
+		idpConf.SignupCallback,
+		idpConf.IssuerLogoutPath,
+	)
+	if err != nil {
+		log.Fatal("init idp adapter: %s", err)
+		return
+	}
+
+	log.Info("initializing helloworld Service")
+	appServer := server.New(log, db, ipa)
 	router := appServer.Router(
 		server.MetricMiddleware(),
 	)

@@ -21,9 +21,7 @@ func getDeviceZone(t *testing.T, path string, want string, ret string) {
 		response := httptest.NewRecorder()
 		request.Header.Set("Authorization", "Bearer 123456")
 
-		s, err := New(etilogger.NewNop(), nil, nil)
-		require.NoError(t, err)
-
+		s := New(etilogger.NewNop(), nil, nil)
 		router := s.Router()
 		router.ServeHTTP(response, request)
 
