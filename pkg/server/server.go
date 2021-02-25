@@ -1,10 +1,9 @@
 package server
 
 import (
-	"net/http"
-
 	"gorm.io/gorm"
 
+	"wwwin-github.cisco.com/eti/idpadapter"
 	v1auth "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server/v1/auth"
 	v1device "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server/v1/device"
 	v1pet "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server/v1/pet"
@@ -18,17 +17,12 @@ type Server struct {
 	v1pet    *v1pet.Pet
 }
 
-func New(l *etilogger.Logger, db *gorm.DB, httpClient *http.Client) (*Server,
-	error) {
-	a, err := v1auth.New(l, db, httpClient)
-	if err != nil {
-		return nil, err
-	}
-
+func New(l *etilogger.Logger, db *gorm.DB,
+	ipa *idpadapter.IdentityProviderAdapter) *Server {
 	return &Server{
 		log:      l,
-		v1auth:   a,
+		v1auth:   v1auth.New(l, db, ipa),
 		v1device: v1device.New(l, db),
 		v1pet:    v1pet.New(l, db),
-	}, nil
+	}
 }
