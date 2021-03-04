@@ -98,7 +98,7 @@ export GOPRIVATE="wwwin-github.cisco.com"
 export GONOPROXY="github.com,gopkg.in,go.uber.org"
 export GOPROXY=https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-maven-master.cisco.com/artifactory/api/go/nyota-go
 
-docker pull dockerhub.cisco.com/eti-sre-docker/sre-golang-docker:latest
+docker pull containers.cisco.com/eti-sre/sre-golang-docker:latest
 docker build --no-cache \
     -t ${BASE_DOCKER_IMAGE} \
     -f build/Dockerfile \
@@ -121,6 +121,8 @@ fi
 echo BUILDING DOCKER ${DOCKER_IMAGE}
 
 docker build --no-cache -t ${DOCKER_IMAGE} -f build/Imagefile .
+
+docker run -v $PWD:/opt/mount --rm --entrypoint cp ${BASE_DOCKER_IMAGE} /go/src/wwwin-github.cisco.com/eti/sre-go-helloworld/coverage.out /opt/mount/coverage.out
 
 # remove base image and its subordinate images
 docker image rmi ${BASE_DOCKER_IMAGE} || true

@@ -3,7 +3,7 @@ ARG GOPATH=/go
 ARG BINARY_NAME=sre-go-helloworld
 ARG SRC_DIR=$GOPATH/src/wwwin-github.cisco.com/eti/$BINARY_NAME
 ARG CODE_COVERAGE
-ARG COVER_OUT=c.out
+ARG COVER_OUT=coverage.out
 ARG HTML_OUT=coverage.html
 ARG STATIC_ANALYSIS
 ARG SA_OUT=staticanalysis.txt
