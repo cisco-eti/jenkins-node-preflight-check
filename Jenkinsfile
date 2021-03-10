@@ -1,4 +1,4 @@
-@Library(['srePipeline@blackduck']) _
+@Library(['srePipeline']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -42,7 +42,6 @@ def pipelinesettings = [
   deployHelm: 1,                    // Stage DEPLOY k8s
   artifactory: 1,                   // Use Artifactory creds
   stricterCCThreshold: 90.0,        // Fail builds for Code Coverage below 90%
-  noCleanWs:1,                      // Don't clean the workspace
 ]
 
 srePipeline( pipelinesettings )
