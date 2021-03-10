@@ -35,7 +35,7 @@ def pipelinesettings = [
   blackduck: [
     imgId: "73243",
     coronaRelease: "1.0.0",
-    email: "sraradhy@cisco.com",
+    email: "eti-sre-admins@cisco.com",
   ],                                // Blackduck Open Source Scan
   // forceBlackduck: 1,             // Force Blackduck Scan on any branch
   publishHelm: 1,                   // Stage HELM CREATE
