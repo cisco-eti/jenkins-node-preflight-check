@@ -37,7 +37,7 @@ def pipelinesettings = [
     coronaRelease: "1.0.0",
     email: "sraradhy@cisco.com",
   ],                                // Blackduck Open Source Scan
-  forceBlackduck: 1,                // Force Blackduck Scan on any branch
+  // forceBlackduck: 1,             // Force Blackduck Scan on any branch
   publishHelm: 1,                   // Stage HELM CREATE
   deployHelm: 1,                    // Stage DEPLOY k8s
   artifactory: 1,                   // Use Artifactory creds
