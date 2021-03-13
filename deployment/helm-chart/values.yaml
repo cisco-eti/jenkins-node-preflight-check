@@ -26,7 +26,7 @@ servicePort: "5000"
 metricsPort: "5001"
 domainPrefix: helloworld
 dbinfo: /etc/dbinfo/db.json
-dbname: helloworld
+dbname: helloworlddev
 cluster:
   apiDomainName: int.dev-aws-useast1d.prod.eticloud.io
 global:
