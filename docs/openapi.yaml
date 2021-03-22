@@ -41,7 +41,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Pet'
         '405':
-          description: Invalid input
+          description: Wrong input
       security:
         - petstore_auth:
             - 'write:pets'
@@ -67,7 +67,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Pet'
         '400':
-          description: Invalid ID supplied
+          description: Wrong ID supplied
         '404':
           description: Pet not found
         '405':
@@ -102,7 +102,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Pet'
         '400':
-          description: Invalid ID supplied
+          description: Wrong ID supplied
         '404':
           description: Pet not found
       security:
@@ -136,7 +136,7 @@ paths:
             type: string
       responses:
         '405':
-          description: Invalid input
+          description: Wrong input
       security:
         - petstore_auth:
             - 'write:pets'
@@ -163,7 +163,7 @@ paths:
             format: int64
       responses:
         '400':
-          description: Invalid pet value
+          description: Wrong pet value
       security:
         - petstore_auth:
             - 'write:pets'

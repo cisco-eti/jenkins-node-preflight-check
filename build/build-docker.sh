@@ -43,7 +43,7 @@ get_artifactory_credentials() {
 }
 
 code_coverage() {
-    # extract the H_OUT file from the docker image just created
+    # extract the H_OUT file from the docker image created
     id=$(docker create ${BASE_DOCKER_IMAGE})
     docker cp ${id}:/go/src/wwwin-github.cisco.com/eti/${PROJECT}/${H_OUT} .
     docker rm -v ${id}
@@ -53,7 +53,7 @@ code_coverage() {
 }
 
 static_analysis() {
-    # extract the S_OUT file from the docker image just created
+    # extract the S_OUT file from the docker image created
     id=$(docker create ${BASE_DOCKER_IMAGE})
     docker cp ${id}:/go/src/wwwin-github.cisco.com/eti/${PROJECT}/${S_OUT} .
     docker rm -v ${id}
