@@ -46,6 +46,7 @@ def pipelinesettings = [
   artifactory: 1,                               // Use Artifactory creds
   stricterCCThreshold: 90.0,                    // Fail builds for Code Coverage below 90%
   awsLoginType:  "dynamic",
+  secretsVaultAppname: "sre",
 ]
 
 srePipeline( pipelinesettings )
