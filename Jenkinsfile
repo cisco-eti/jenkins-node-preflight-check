@@ -44,6 +44,7 @@ def pipelinesettings = [
   deployHelm: 1,                                // Stage DEPLOY k8s
   artifactory: 1,                               // Use Artifactory creds
   stricterCCThreshold: 90.0,                    // Fail builds for Code Coverage below 90%
+  awsLoginType:  "dynamic",
 ]
 
 srePipeline( pipelinesettings )
