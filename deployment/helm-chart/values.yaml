@@ -28,9 +28,9 @@ domainPrefix: helloworld
 dbinfo: /etc/dbinfo/db.json
 dbname: helloworlddev
 cluster:
-  apiDomainName: int.dev-aws-useast1d.prod.eticloud.io
+  apiDomainName: some.cluster.domain
 global:
-  apiDomainName: prod.eticloud.io
+  apiDomainName: some.global.domain
 docker:
   GeneralFullImagePreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/
   HelmRegistryPreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/helm/

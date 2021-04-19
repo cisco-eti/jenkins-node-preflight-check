@@ -14,6 +14,7 @@ def pipelinesettings = [
   chart: "deployment/helm-chart",               // Location of helm chart
   kubeverify: "sre-go-helloworld",              // Deploy verification name
   namespace: 'helloworld',                      // k8s namespace
+  appname: 'sre-go-helloworld',                 // Deployment appname
 
   prepare: 1,                                   // GIT Clone
   unittest: 1,                                  // Unit-test
