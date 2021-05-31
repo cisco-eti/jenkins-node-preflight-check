@@ -24,7 +24,7 @@ def pipelinesettings = [
   sonarQube: 1,                                 // SonarQube scan
   publishContainer: 1,                          // Publish container
   ecr: 1,                                       // Publish container to Private ECR
-  ciscoContainer: 0,                            // Publish container to containers.cisco.com
+  ciscoContainer: 1,                            // Publish container to containers.cisco.com
   dockerHub: 1,                                 // Publish container to dockerhub.cisco.com
   pushPublicRegistryOnTag: 1,                   // Publish container to Public ECR on tag
   // forceCorona: 1,                            // Force Corona Scan on any branch
