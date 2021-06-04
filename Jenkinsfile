@@ -25,9 +25,9 @@ def pipelinesettings = [
   publishContainer: 1,                          // Publish container
   ecr: 1,                                       // Publish container to Private ECR
   ciscoContainer: 1,                            // Publish container to containers.cisco.com
-  privateEcr: 1,
-  publicEcr: 1,
-  dockerHub: 1,                                 // Publish container to dockerhub.cisco.com
+  privateEcr: 0,
+  publicEcr: 0,
+  dockerHub: 0,                                 // Publish container to dockerhub.cisco.com
   pushPublicRegistryOnTag: 1,                   // Publish container to Public ECR on tag
   // forceCorona: 1,                            // Force Corona Scan on any branch
   corona: [                                     // Corona paramters
