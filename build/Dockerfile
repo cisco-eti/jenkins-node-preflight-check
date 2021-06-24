@@ -1,4 +1,5 @@
-FROM dockerhub.cisco.com/eti-sre-docker/sre-golang-docker:latest
+FROM containers.cisco.com/eti-sre/sre-golang-docker:latest
+
 ARG GOPATH=/go
 ARG BINARY_NAME=sre-go-helloworld
 ARG SRC_DIR=$GOPATH/src/wwwin-github.cisco.com/eti/$BINARY_NAME
