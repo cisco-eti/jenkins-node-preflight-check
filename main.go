@@ -54,22 +54,28 @@ func main() {
 		return
 	}
 
-	ipa, err := idpadapter.New(
-		context.Background(),
-		log,
-		http.DefaultClient,
-		idpConf.Label,
-		idpConf.ClientID,
-		idpConf.ClientSecret,
-		idpConf.Issuer,
-		idpConf.Audience,
-		idpConf.LoginCallback,
-		idpConf.SignupCallback,
-		idpConf.IssuerLogoutPath,
-	)
-	if err != nil {
-		log.Fatal("init idp adapter: %s", err)
-		return
+	var ipa *idpadapter.IdentityProviderAdapter
+
+	if os.Getenv("DISABLE_IDP") != "disable" {
+		var err error
+
+		ipa, err = idpadapter.New(
+			context.Background(),
+			log,
+			http.DefaultClient,
+			idpConf.Label,
+			idpConf.ClientID,
+			idpConf.ClientSecret,
+			idpConf.Issuer,
+			idpConf.Audience,
+			idpConf.LoginCallback,
+			idpConf.SignupCallback,
+			idpConf.IssuerLogoutPath,
+		)
+		if err != nil {
+			log.Fatal("init idp adapter: %s", err)
+			return
+		}
 	}
 
 	log.Info("initializing helloworld Service")
