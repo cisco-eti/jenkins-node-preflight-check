@@ -29,14 +29,25 @@ type DBConfig struct {
 }
 
 func ReadDBconfig() (string, error) {
-	filename, exist := os.LookupEnv(DB_CONFIG_FILEPATH_ENV)
-	if !exist || filename == "" {
-		return "", missingEnvError(DB_CONFIG_FILEPATH_ENV)
+	if val, ok := os.LookupEnv("DB_DSN"); ok && val != "" {
+		return val, nil
 	}
 
-	file, err := ioutil.ReadFile(filename)
-	if err != nil {
-		return "", err
+	dbConfig := DBConfig{
+		Sslmode: "disable",
+	}
+
+	filename, ok := os.LookupEnv(DB_CONFIG_FILEPATH_ENV)
+	if ok {
+		file, err := ioutil.ReadFile(filename)
+		if err != nil {
+			return "", err
+		}
+
+		err = json.Unmarshal(file, &dbConfig)
+		if err != nil {
+			return "", err
+		}
 	}
 
 	dbname, exist := os.LookupEnv(DB_NAME_ENV)
@@ -44,20 +55,42 @@ func ReadDBconfig() (string, error) {
 		return "", missingEnvError(DB_NAME_ENV)
 	}
 
-	var dbConfig DBConfig
-	err = json.Unmarshal(file, &dbConfig)
-	if err != nil {
-		return "", err
+	if val, ok := os.LookupEnv("DB_USER"); ok {
+		dbConfig.User = val
 	}
 
-	connString := fmt.Sprintf("dbname=%s user=%s password=%s host=%s port=%s sslmode=%s TimeZone=%s",
+	if val, ok := os.LookupEnv("DB_PASSWORD"); ok {
+		dbConfig.Password = val
+	}
+
+	if val, ok := os.LookupEnv("DB_HOST"); ok {
+		dbConfig.Host = val
+	}
+
+	if val, ok := os.LookupEnv("DB_PORT"); ok {
+		dbConfig.Port = val
+	}
+
+	if val, ok := os.LookupEnv("DB_SSLMODE"); ok {
+		dbConfig.Sslmode = val
+	}
+
+	if val, ok := os.LookupEnv("DB_TIMEZONE"); ok {
+		dbConfig.Timezone = val
+	}
+
+	connString := fmt.Sprintf("dbname=%s user=%s password=%s host=%s port=%s sslmode=%s",
 		dbname,
 		dbConfig.User,
 		dbConfig.Password,
 		dbConfig.Host,
 		dbConfig.Port,
 		dbConfig.Sslmode,
-		dbConfig.Timezone)
+	)
+
+	if dbConfig.Timezone != "" {
+		connString = fmt.Sprintf("%s TimeZone=%s", connString, dbConfig.Timezone)
+	}
 
 	return connString, nil
 }

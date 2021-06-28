@@ -34,3 +34,5 @@ global:
 docker:
   GeneralFullImagePreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/
   HelmRegistryPreamble: 626007623524.dkr.ecr.us-east-2.amazonaws.com/helm/
+
+existingEnvSecret:

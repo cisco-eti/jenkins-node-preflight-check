@@ -29,11 +29,19 @@ spec:
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-configmap
+          {{- with .Values.existingEnvSecret }}
+          - secretRef:
+              name: {{ . }}
+          {{- end }}
+        {{- if .Values.credentials }}
         volumeMounts:
             - name: {{ .Release.Name }}-db-info
               readOnly: true
               mountPath: "/etc/dbinfo"
+        {{- end }}
+      {{- if .Values.credentials }}
       volumes:
         - name: {{ .Release.Name }}-db-info
           secret:
             secretName: {{ .Release.Name }}-db-info
+      {{- end }}

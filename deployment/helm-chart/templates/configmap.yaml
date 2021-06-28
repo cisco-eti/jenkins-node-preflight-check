@@ -4,8 +4,12 @@ metadata:
   name: {{ .Release.Name }}-configmap
   namespace: '{{ .Release.Namespace }}'
 data:
-  DB_CONNECTION_INFO: {{ .Values.dbinfo }}
-  DB_NAME: {{ .Values.dbname }}
+  {{- with .Values.dbinfo }}
+  DB_CONNECTION_INFO: {{ . }}
+  {{- end }}
+  {{- with .Values.dbname }}
+  DB_NAME: {{ . }}
+  {{- end }}
   IDP_LABEL: "okta"
   IDP_CLIENT_ID: "0oa91s018dBJZONqD5d6"
   IDP_ISSUER: "https://dev-75978588.okta.com/oauth2/aus91tuhgfSLmoQv65d6"
