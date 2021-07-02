@@ -39,6 +39,7 @@ def pipelinesettings = [
     engineeringContact: "sraradhy@cisco.com",   // Corona Engineering Contact
     imageAdmins: "sraradhy,jegarnie",           // Corona Image Admins
   ],
+  
   // forceBlackduck: 1,                         // Force Blackduck Scan on any branch
   blackduck: [
     email: "eti-sre-admins@cisco.com",
