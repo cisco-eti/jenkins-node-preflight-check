@@ -10,12 +10,6 @@ def pipelinesettings = [
     [name: "sre-go-helloworld" ]                // Containers to publish
   ],
 
-  tagversion: "${env.BUILD_ID}",                // Docker tag version
-  chart: "deployment/helm-chart",               // Location of helm chart
-  kubeverify: "sre-go-helloworld",              // Deploy verification name
-  namespace: 'helloworld',                      // k8s namespace
-  appname: 'sre-go-helloworld',                 // Deployment appname
-
   prepare: 1,                                   // GIT Clone
   unittest: 1,                                  // Unit-test
   build: 1,                                     // Build container
@@ -41,12 +35,13 @@ def pipelinesettings = [
   blackduck: [
     email: "eti-sre-admins@cisco.com",
   ],                                            // Blackduck Open Source Scan
-  publishHelm: 1,                               // Stage HELM CREATE
-  deployHelm: 1,                                // Stage DEPLOY k8s
+
+  chart: "deployment"                           // Use deployment folder
+  publishHelm: 1,                               // HELM CREATE
+  useMultipleHelm:1,                            // Publish Multiple Charts
+  chartMuseum: 1,                               // Publish Helm chart to ChartMuseum
   artifactory: 1,                               // Use Artifactory creds
   stricterCCThreshold: 90.0,                    // Fail builds for Code Coverage below 90%
-  awsLoginType:  "dynamic",
-  secretsVaultAppname: "sre",
 ]
 
 srePipeline( pipelinesettings )

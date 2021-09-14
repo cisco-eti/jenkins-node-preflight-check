@@ -1,0 +1,26 @@
+apiVersion: {{ .Values.ingress.apiVersion }}
+kind: Ingress
+metadata:
+    name: {{ .Release.Name }}
+    namespace: {{ .Values.namespace }}
+    {{- if .Values.ingress.annotations }}
+    annotations:
+      {{- range $key, $value := .Values.ingress.annotations }}
+      {{ $key }}: {{ tpl $value $ | quote }}
+      {{- end }}
+    {{- end }}
+spec:
+    tls:
+    - hosts:
+      - {{ .Values.domainPrefix }}.{{ .Values.domainName }}
+      - {{ .Values.domainPrefix }}-{{ .Values.deploymentColor }}.{{ .Values.domainName }}
+      - {{ .Values.domainPrefix }}-{{ .Values.deploymentColor }}-{{ .Values.deploymentEnv }}.{{ .Values.domainName }}
+      secretName: "{{ .Release.Name }}-tls"
+    rules:
+    - host: {{ .Values.domainPrefix }}-{{ .Values.deploymentColor }}-{{ .Values.deploymentEnv }}.{{ .Values.domainName }}
+      http:
+        paths:
+        - backend:
+            serviceName: {{ .Release.Name }}
+            servicePort: {{ .Values.servicePort }}
+          path: /

@@ -4,13 +4,13 @@ metadata:
   labels:
     app: {{ .Release.Name }}
   name: {{ .Release.Name }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   endpoints:
     - port: metrics
   namespaceSelector:
     matchNames:
-      - {{ .Release.Namespace }}
+      - {{ .Values.namespace }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Release.Name }}
