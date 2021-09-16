@@ -1,0 +1,18 @@
+# Default values for configserver-chart.
+# This is a YAML-formatted file.
+#
+# This file provides project specific variables and is joined with another value file
+# in MasterDeployments or MinikubeDeployment repos.
+#
+# When helm is launched it will be done so like this:
+#
+#  helm template -f <valuesfile> <chartlocation>  > outputfile
+#
+# and the output will be redirected to a yaml file which will then be manually kubectl applied
+
+# local variables for this deployment can go here
+
+grafana:
+  appInstance: one-eye-grafana-operator
+  appName: grafana-operator
+  ventureName: eti-sre
