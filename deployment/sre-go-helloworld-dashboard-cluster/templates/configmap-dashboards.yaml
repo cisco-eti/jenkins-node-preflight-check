@@ -8,7 +8,7 @@ items:
   kind: GrafanaDashboard
   metadata:
     name:  {{ $dashboardName | trunc 63 | trimSuffix "-" }}
-    namespace: "{{ .Values.namespace }}"
+    namespace: {{ $.Values.namespace }}
     labels:
       app.kubernetes.io/instance: {{ $.Values.grafana.appInstance }}
       app.kubernetes.io/managed-by: Helm
