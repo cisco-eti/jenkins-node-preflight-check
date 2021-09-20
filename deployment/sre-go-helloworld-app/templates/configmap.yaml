@@ -5,8 +5,8 @@ metadata:
   namespace: {{ .Values.namespace }}
 data:
   IDP_LABEL: "okta"
-  IDP_CLIENT_ID: "OIDC_CLIENT_ID"
-  IDP_ISSUER: "https://OIDC_ISSUSER_URL"
+  IDP_CLIENT_ID: {{ Values.oidc_client_id }} 
+  IDP_ISSUER: {{ Value.oidc_issuer_url }}
   IDP_AUDIENCE: "api://helloworld"
   IDP_LOGIN_CALLBACK: "https://helloworld.{{ .Values.domainName }}/auth/login/token"
   IDP_ISSUER_LOGOUT_PATH : "/v1/logout"

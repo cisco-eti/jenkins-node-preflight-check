@@ -20,14 +20,13 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt-staging
 
 dockerPreamable: 626007623524.dkr.ecr.us-east-2.amazonaws.com
-servicePort: "80"
 domainPrefix: helloworld-go
-
-dimage: sre-go-helloworld
 servicePort: "5000"
 metricsPort: "5001"
-
 dbname: helloworlddev
+
+oidc_client_id: SET_IN_DEPLOYMENT_REPO
+oidc_issuer_url: SET_IN_DEPLOYMENT_REPO
 
 # Environment-specific values
 namespace: SET_IN_DEPLOYMENT_REPO       # Overridden in deployment repo for env-specific namespace
