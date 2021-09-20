@@ -16,3 +16,9 @@ grafana:
   appInstance: one-eye-grafana-operator
   appName: grafana-operator
   ventureName: eti-sre
+
+# Environment-specific values
+namespace: SET_IN_DEPLOYMENT_REPO       # Overridden in deployment repo for env-specific namespace
+domainName: SET_IN_DEPLOYMENT_REPO      # Defer to deployment repo to capture appropriate domain name for dev/staging/prod
+replicas: 1                             # Default replica count; override in deployment repo for env-specific replica count
+deploymentEnv: SET_IN_SRE_CLUSTER_CONFIG_REPO # Defer to sre_cluster_config repo; Value of this param should not impact application
