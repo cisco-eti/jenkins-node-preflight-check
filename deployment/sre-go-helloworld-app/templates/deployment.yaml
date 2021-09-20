@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}
-        image: "{{ .Values.docker.GeneralFullImagePreamble }}{{ .Values.dimage }}:{{ .Values.tagversion }}"
+        image: "{{ .Values.dockerPreamable }}{{ .Values.dimage }}:{{ .Values.tagversion }}"
         ports:
         - containerPort: {{ .Values.servicePort }}
         envFrom:
