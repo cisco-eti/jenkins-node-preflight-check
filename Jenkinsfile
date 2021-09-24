@@ -1,4 +1,4 @@
-@Library(['srePipeline@']) _
+@Library(['srePipeline']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -42,7 +42,7 @@ def pipelinesettings = [
   chartMuseum: 1,                               // Publish Helm chart to ChartMuseum
   artifactory: 1,                               // Use Artifactory creds
   stricterCCThreshold: 90.0,                    // Fail builds for Code Coverage below 90%
-  cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-dev-deployment"
+  cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-dev-deployment",
 ]
 
 srePipeline( pipelinesettings )
