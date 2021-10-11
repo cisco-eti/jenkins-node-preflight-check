@@ -1,9 +1,7 @@
 openapi: 3.0.2
 servers:
-  - url: https://helloworld.int.scratch-aws-1.prod.eticloud.io/v1
-    description: Helloworld Scratch Environment
-  - url: https://helloworld.int.scratch-aws-1.prod.eticloud.io/
-    description: Helloworld Scratch Environment    
+  - url: https://helloworld-go-blue-a.dev.eticloud.io/v1
+    description: Helloworld Dev Environment
 info:
   description: |-
     ETI Go Helloworld Petstore - OpenAPI 3.0.
