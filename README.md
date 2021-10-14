@@ -11,7 +11,7 @@ for go microservice is a simple http server app.
 
 ## Jenkins Pipeline
 
-[Jenkins](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/pipeline/job/sre-go-helloworld/)
+[Jenkins](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/)
 
 ## Additional Setup Instructions for Lab VM before build
 
