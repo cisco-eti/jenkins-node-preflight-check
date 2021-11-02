@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 10617,
   "graphTooltip": 0,
-  "id": 67,
-  "iteration": 1625676002675,
+  "id": 36,
+  "iteration": 1635896837944,
   "links": [],
   "panels": [
     {
@@ -36,12 +36,9 @@
     },
     {
       "cacheTimeout": null,
-      "datasource": "$Source",
+      "datasource": "Thanos",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -79,12 +76,14 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "text": {}
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "targets": [
         {
-          "expr": "promhttp_metric_handler_requests_total{job=\"sre-go-helloworld\"}",
+          "exemplar": true,
+          "expr": "promhttp_metric_handler_requests_total{job='sre-go-helloworld', cluster=~\"$cluster\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -98,10 +97,9 @@
       "type": "gauge"
     },
     {
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -138,12 +136,14 @@
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "targets": [
         {
-          "expr": "http_response_size_bytes_sum{job=\"sre-go-helloworld\", code=\"200\"}",
+          "exemplar": true,
+          "expr": "sum(http_response_size_bytes_sum{job='sre-go-helloworld', cluster=~\"$cluster\"})",
           "interval": "",
           "intervalFactor": 4,
           "legendFormat": "",
@@ -157,12 +157,9 @@
     },
     {
       "cacheTimeout": null,
-      "datasource": "$Source",
+      "datasource": "Thanos",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -200,17 +197,21 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "text": {}
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "targets": [
         {
-          "expr": "avg(prometheus_http_request_duration_seconds_count)",
-          "format": "time_series",
+          "exemplar": true,
+          "expr": "rate(promhttp_metric_handler_requests_total{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "interval": "",
-          "intervalFactor": 2,
           "legendFormat": "",
           "refId": "A"
+        },
+        {
+          "hide": false,
+          "refId": "B"
         }
       ],
       "timeFrom": null,
@@ -223,25 +224,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "links": [],
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "links": []
         },
         "overrides": []
       },
@@ -271,7 +257,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -281,7 +267,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "gorm_dbstats_open_connections{job=\"sre-go-helloworld\", db_name=\"helloworld\"}",
+          "exemplar": true,
+          "expr": "gorm_dbstats_open_connections{job='sre-go-helloworld', cluster=~\"$cluster\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -333,10 +320,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "${datasource}",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -367,7 +353,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -377,7 +363,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "http_request_duration_seconds_sum",
+          "exemplar": true,
+          "expr": "http_request_duration_seconds_sum{job='sre-go-helloworld', cluster=~\"$cluster\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -431,10 +418,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -465,7 +451,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -475,7 +461,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "http_requests_inflight",
+          "exemplar": true,
+          "expr": "http_requests_inflight{job='sre-go-helloworld', cluster=~\"$cluster\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -543,12 +530,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -584,7 +570,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -599,7 +585,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "process_resident_memory_bytes",
+          "exemplar": true,
+          "expr": "process_resident_memory_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -609,7 +596,8 @@
           "step": 4
         },
         {
-          "expr": "process_virtual_memory_bytes",
+          "exemplar": true,
+          "expr": "process_virtual_memory_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -668,12 +656,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -708,7 +695,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -723,7 +710,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(process_resident_memory_bytes[$interval])",
+          "exemplar": true,
+          "expr": "rate(process_resident_memory_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -733,7 +721,8 @@
           "step": 4
         },
         {
-          "expr": "deriv(process_virtual_memory_bytes[$interval])",
+          "exemplar": true,
+          "expr": "deriv(process_virtual_memory_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -792,12 +781,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -832,7 +820,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -847,7 +835,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_memstats_alloc_bytes",
+          "exemplar": true,
+          "expr": "rate(go_memstats_alloc_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -857,7 +846,8 @@
           "step": 4
         },
         {
-          "expr": "rate(go_memstats_alloc_bytes_total[30s])",
+          "exemplar": true,
+          "expr": "rate(go_memstats_alloc_bytes_total{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -867,7 +857,8 @@
           "step": 4
         },
         {
-          "expr": "go_memstats_stack_inuse_bytes",
+          "exemplar": true,
+          "expr": "rate(go_memstats_stack_inuse_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -877,9 +868,11 @@
           "step": 4
         },
         {
-          "expr": "go_memstats_heap_inuse_bytes{namespace=~\"^($namespace)$\",pod=~\"^($pod)$\",job=~\"$job\"}",
+          "exemplar": true,
+          "expr": "rate(go_memstats_heap_inuse_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{pod}} - heap inuse",
           "metric": "go_memstats_heap_inuse_bytes",
@@ -936,12 +929,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -976,7 +968,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -991,7 +983,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "deriv(go_memstats_alloc_bytes[$interval])",
+          "exemplar": true,
+          "expr": "deriv(go_memstats_alloc_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1001,7 +994,8 @@
           "step": 4
         },
         {
-          "expr": "rate(go_memstats_alloc_bytes_total[$interval])",
+          "exemplar": true,
+          "expr": "rate(go_memstats_alloc_bytes_total{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1011,7 +1005,8 @@
           "step": 4
         },
         {
-          "expr": "deriv(go_memstats_stack_inuse_bytes[$interval])",
+          "exemplar": true,
+          "expr": "deriv(go_memstats_stack_inuse_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1021,9 +1016,11 @@
           "step": 4
         },
         {
-          "expr": "deriv(go_memstats_heap_inuse_bytes{namespace=~\"^($namespace)$\",pod=~\"^($pod)$\",job=~\"$job\"}[$interval])",
+          "exemplar": true,
+          "expr": "deriv(go_memstats_heap_inuse_bytes{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{pod}} - heap inuse",
           "metric": "go_memstats_heap_inuse_bytes",
@@ -1080,12 +1077,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -1120,7 +1116,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1130,7 +1126,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "process_open_fds",
+          "exemplar": true,
+          "expr": "rate(process_open_fds{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1189,12 +1186,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -1229,7 +1225,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1239,7 +1235,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "deriv(process_open_fds[$interval])",
+          "exemplar": true,
+          "expr": "deriv(process_open_fds{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1298,12 +1295,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -1338,7 +1334,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1348,7 +1344,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_goroutines",
+          "exemplar": true,
+          "expr": "rate(go_goroutines{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1405,12 +1402,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$Source",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -1445,7 +1441,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.5.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1455,7 +1451,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_gc_duration_seconds_sum",
+          "exemplar": true,
+          "expr": "rate(go_gc_duration_seconds_sum{job='sre-go-helloworld', cluster=~\"$cluster\"}[$interval])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1509,7 +1506,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 26,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1517,71 +1514,49 @@
       {
         "current": {
           "selected": false,
-          "text": "Prometheus",
-          "value": "Prometheus"
+          "text": "Thanos",
+          "value": "Thanos"
         },
+        "description": null,
         "error": null,
         "hide": 0,
         "includeAll": false,
         "label": null,
         "multi": false,
-        "name": "Source",
+        "name": "datasource",
         "options": [],
         "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
-        "regex": "",
+        "regex": "Thanos",
         "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "allValue": ".*",
+        "allValue": null,
         "current": {
           "selected": false,
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(go_memstats_alloc_bytes{job=~\"$job\"}, namespace)",
+        "datasource": "$datasource",
+        "definition": "label_values(node_cpu_seconds_total, cluster)",
+        "description": null,
         "error": null,
         "hide": 0,
         "includeAll": true,
-        "label": null,
+        "label": "cluster",
         "multi": true,
-        "name": "namespace",
+        "name": "cluster",
         "options": [],
-        "query": "label_values(go_memstats_alloc_bytes{job=~\"$job\"}, namespace)",
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": ".*",
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+        "query": {
+          "query": "label_values(node_cpu_seconds_total, cluster)",
+          "refId": "Prometheus-cluster-Variable-Query"
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(process_resident_memory_bytes{job=~\"$job\"}, pod)",
-        "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": null,
-        "multi": true,
-        "name": "pod",
-        "options": [],
-        "query": "label_values(process_resident_memory_bytes{job=~\"$job\"}, pod)",
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 2,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -1594,26 +1569,19 @@
         "auto_min": "10s",
         "current": {
           "selected": false,
-          "text": "5m",
-          "value": "5m"
+          "text": "1m",
+          "value": "1m"
         },
-        "datasource": null,
+        "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": false,
-        "label": "",
-        "multi": false,
+        "label": "interval",
         "name": "interval",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "1m",
             "value": "1m"
-          },
-          {
-            "selected": true,
-            "text": "5m",
-            "value": "5m"
           },
           {
             "selected": false,
@@ -1629,121 +1597,42 @@
             "selected": false,
             "text": "1h",
             "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
           }
         ],
-        "query": "1m,5m,10m,30m,1h",
+        "query": "1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
         "refresh": 2,
         "skipUrlSync": false,
         "type": "interval"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "isNone": true,
-          "selected": false,
-          "text": "None",
-          "value": ""
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(http_requests_request_duration, job)",
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Job",
-        "multi": false,
-        "name": "job",
-        "options": [],
-        "query": "label_values(http_requests_request_duration, job)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(http_requests_request_duration{job=~\"$job\"}, method)",
-        "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "Method",
-        "multi": true,
-        "name": "Method",
-        "options": [],
-        "query": "label_values(http_requests_request_duration{job=~\"$job\"}, method)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(http_requests_request_duration{job=~\"$job\"}, endpoint)",
-        "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "Endpoint",
-        "multi": true,
-        "name": "Endpoint",
-        "options": [],
-        "query": "label_values(http_requests_request_duration{job=~\"$job\"}, endpoint)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": ".*",
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(process_resident_memory_bytes{app=~\"$app\"}, app)",
-        "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": null,
-        "multi": true,
-        "name": "app",
-        "options": [],
-        "query": "label_values(process_resident_memory_bytes{app=~\"$app\"}, app)",
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
       }
     ]
   },
@@ -1778,5 +1667,5 @@
   "timezone": "browser",
   "title": "Hello World App",
   "uid": "ypFZFgvmz",
-  "version": 13
+  "version": 16
 }
