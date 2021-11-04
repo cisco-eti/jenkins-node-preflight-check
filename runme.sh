@@ -9,7 +9,7 @@ RANDOM_BRANCH=
 
 help() {
     echo """
-    > runme.sh [-d|--dryrun] [-h|--help] [-n|--notdemo]
+    > runme.sh [-d|--dryrun] [-h|--help]
     """
 }
 
@@ -171,8 +171,8 @@ fi
 step "Update template for $NEW_APP_NAME"
 find . -type f ! -name 'runme.sh' ! -name 'README.md' ! -path '*/.git/*' -exec gsed -i "s/sre-go-helloworld/${NEW_APP_NAME}/g" {} +
 find . -type f ! -name 'runme.sh' ! -name 'README.md' ! -path '*/.git/*' -exec gsed -i "s/helloworld/${NEW_APP_NAME}/g" {} +
-find . -type d -iname '*platform-demo*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${NEW_APP_NAME}'}"' -- '{}' ';'
-find . -type f -iname '*platform-demo*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${NEW_APP_NAME}'}"' -- '{}' ';'
+find . -type d -iname '*sre-go-helloworld*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${NEW_APP_NAME}'}"' -- '{}' ';'
+find . -type f -iname '*sre-go-helloworld*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${NEW_APP_NAME}'}"' -- '{}' ';'
 
 if [ -z $SKIP_GIT ]
 then

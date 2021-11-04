@@ -28,6 +28,12 @@ dbname: helloworlddev
 oidc_client_id: SET_IN_DEPLOYMENT_REPO
 oidc_issuer_url: SET_IN_DEPLOYMENT_REPO
 
+grafana:
+  folderName: eti-sre
+  ventureName: eti-sre
+  appInstance: one-eye-grafana-operator
+  appName: grafana-operator
+
 # Environment-specific values
 namespace: SET_IN_DEPLOYMENT_REPO       # Overridden in deployment repo for env-specific namespace
 tagversion: SET_IN_DEPLOYMENT_REPO      # Defer to deployment repo to capture appropriate version for target environment

@@ -1,4 +1,4 @@
-{{- $files := .Files.Glob "dashboards/*.json" }}
+{{- $files := .Files.Glob "dashboards/aggregate*.json" }}
 apiVersion: integreatly.org/v1alpha1
 kind: GrafanaDashboardList
 items:
