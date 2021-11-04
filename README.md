@@ -11,7 +11,9 @@ This is a "boilerplate" go microservice with following example showcase  feature
 - Go Private Modules
 - sre-go-logger
 - idpadapter
-## Quick Start: How to use sre-go-helloworld as a template
+## Quick Start
+
+## How to use sre-go-helloworld as a template
 
 1. Create a new repo from the template [sre-go-helloworld](https://wwwin-github.cisco.com/eti/sre-go-helloworld) repo by clicking on the `Use this template` button on the upper right.
     ![](docs/resources/use-as-template.png)
@@ -34,7 +36,7 @@ After the SRE creates the CI/CD pipeline and deploys your application, you can n
 
 See the [Troubleshooting](docs/troubleshooting.md) page if you run into any issues.
 
-## sre-go-helloworld development
+## sre-go-helloworld developer setup
 
 ### Local Development
 
