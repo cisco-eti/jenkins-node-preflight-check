@@ -1,6 +1,6 @@
 # ETI sre-go-helloworld
 
-[![Build Status](https://engci-private-sjc.cisco.com/jenkins/eti-sre/buildStatus/icon?job=SRE%2FProjects%2Fsre-go-helloworld%2Fbuild%2Fsre-go-helloworld%2Fmaster)](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/master/)
+[![Build Status](https://engci-private-sjc.cisco.com/jenkins/eti-sre/buildStatus/icon?job=SRE%2FProjects%2Fsre-go-helloworld%2Fbuild%2Fsre-go-helloworld%2Fmaster)](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/main/)
 
 This is a "boilerplate" go microservice with following example showcase  features:
 
