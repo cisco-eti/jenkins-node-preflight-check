@@ -1,15 +1,26 @@
 export PROJECT_ROOT=$(shell pwd)
 export GO111MODULE=on
+export GOPRIVATE="wwwin-github.cisco.com"
+export GONOPROXY="github.com,gopkg.in,go.uber.org"
+export GOPROXY=https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-maven-master.cisco.com/artifactory/api/go/nyota-go
 REPO_NAME = wwwin-github.cisco.com/eti/sre-go-helloworld
 
-all: build
+all: deps target
+
+target:
+	echo "Running build"
+	go build
 
 deps:
+	echo "Get Depedendent Modules"
+	go get ./...
 	go mod download
 	go mod tidy
 
 clean:
+	echo "Running build"
 	@rm -rf coverage coverage.html
+	@rm sre-go-helloworld
 
 test:
 	echo "Running tests"

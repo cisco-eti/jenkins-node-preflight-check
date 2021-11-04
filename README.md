@@ -2,16 +2,57 @@
 
 [![Build Status](https://engci-private-sjc.cisco.com/jenkins/eti-sre/buildStatus/icon?job=SRE%2FProjects%2Fsre-go-helloworld%2Fbuild%2Fsre-go-helloworld%2Fmaster)](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/master/)
 
-[API Try-out Swagger UI Docs](https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld)
+This is a "boilerplate" go microservice with following example showcase  features:
 
-Project layout based on this [link](https://github.com/golang-standards/project-layout)
+- CI/CD Setup
+- Config Management
+- Secrets Management
+- Database Access
+- Go Private Modules
+- sre-go-logger
+- idpadapter
+## Quick Start: How to use sre-go-helloworld as a template
 
-This repository provides a project structure for restful go based microservice. Example used
-for go microservice is a simple http server app.
+1. Create a new repo from the template [sre-go-helloworld](https://wwwin-github.cisco.com/eti/sre-go-helloworld) repo by clicking on the `Use this template` button on the upper right.
+    ![](docs/resources/use-as-template.png)
+    * Select `eti` as the Owner and choose a short unique name for the repo (e.g., `<CEC_ID>app`). This repo name will be used as the default name for your new application.
+    * Select `Public` visibility
+    ![](docs/resources/new_repo.png)
+1. Clone the new repo to your local development environment.
+    ```
+    git clone git@wwwin-github.cisco.com:eti/<YOUR_APP_NAME>.git
+    ```
+1. `cd` into the repo and run the `runme.sh` to reconfigure the repo for your new application.
+    ```shell
+    ./runme.sh
+    ```
+1. The previous step should have created a new branch (named `<your app name>-<random string>`). Create a PR from that branch and merge it.
+1. Reach out to SRE team in the [**Ask ET&I SRE**](https://eurl.io/#e7SKpvpKj) space to request a fully automated CI/CD pipeline for your new application
 
-## Jenkins Pipeline
+After the SRE creates the CI/CD pipeline and deploys your application, you can navigate to `https://<YOUR_APP_NAME>.int.dev.eticloud.io/` to see your deployed application.
 
-[Jenkins](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/)
+
+See the [Troubleshooting](docs/troubleshooting.md) page if you run into any issues.
+
+## sre-go-helloworld development
+
+### Local Development
+
+[How to retrieve artifactory encrypted password](#)
+
+```bash
+export ARTIFACTORY_USER=<YOUR USERNAME>
+export ARTIFACTORY_PASSWORD=<YOUR Encrypted Artifactory Password>
+make
+```
+## Build and Run Docker
+
+```bash
+./build-docker.sh
+
+docker run --name postgres -e POSTGRES_DB=helloworld -e POSTGRES_PASSWORD=strongpassword -d postgres
+docker run -it -p 5000:5000 -e DB_CONNECTION_INFO=/tmp/dbconfig.json -e DB_NAME=helloworld -v $PWD/build/:/tmp/  --link postgres:postgre sre-go-helloworld
+```
 
 ## Additional Setup Instructions for Lab VM before build
 
@@ -29,17 +70,20 @@ artifactory_password=yourPASSWORD
 and run after:
 
 ```bash
-chmod 400 /Users/jegarnie/.nyota/credentials
+chmod 400 ~/.nyota/credentials
 ```
 
-## Build and Run Docker
+## Quick links
 
-```bash
-./build-docker.sh
+- [CI Pipeline Jenkins](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/master/)
 
-docker run --name postgres -e POSTGRES_DB=helloworld -e POSTGRES_PASSWORD=strongpassword -d postgres
-docker run -it -p 5000:5000 -e DB_CONNECTION_INFO=/tmp/dbconfig.json -e DB_NAME=helloworld -v $PWD/build/:/tmp/  --link postgres:postgre sre-go-helloworld
-```
+- [CD Pipeline ArgoCD](https://argocd.int.ccprod02.prod.eticloud.io/applications/sre-go-helloworld-app-dev-projectapp?resource=)
+
+- [Try-out API Swagger UI](https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld)
+
+- [Project layout reference](https://github.com/golang-standards/project-layout)
+
+
 
 ## Instructions for Developers
 
@@ -51,7 +95,7 @@ From the main directory, run:
 ln -s $(pwd)/githooks/pre-commit .git/hooks/pre-commit`
 ```
 
-### Different directories
+## Source Code Structure
 
 ### /src/pkg
 
