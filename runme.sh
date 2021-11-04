@@ -3,7 +3,6 @@
 
 DRY_RUN=0
 STEP_COUNTER=1
-IS_DEMO=1
 NEW_APP_NAME=
 DEFAULT_APP_NAME=
 RANDOM_BRANCH=
@@ -115,10 +114,6 @@ do
     help
     exit 0
     ;;
-  -n|--notdemo)
-    IS_DEMO=0
-    shift
-    ;;
   -s|--skip-git)
     SKIP_GIT=1
     shift
@@ -173,18 +168,11 @@ step "Create a new git branch: $RANDOM_BRANCH"
 git checkout -b $RANDOM_BRANCH
 fi
 
-if [ "$IS_DEMO" = 1 ]
-then
-DEMO_PREFIX='demo-'
-else
-DEMO_PREFIX=''
-fi
-
 step "Update template for $NEW_APP_NAME"
-find . -type f ! -name 'runme.sh' ! -name 'README.md' ! -path '*/.git/*' -exec gsed -i "s/sre-go-helloworld/${DEMO_PREFIX}${NEW_APP_NAME}/g" {} +
+find . -type f ! -name 'runme.sh' ! -name 'README.md' ! -path '*/.git/*' -exec gsed -i "s/sre-go-helloworld/${NEW_APP_NAME}/g" {} +
 find . -type f ! -name 'runme.sh' ! -name 'README.md' ! -path '*/.git/*' -exec gsed -i "s/helloworld/${NEW_APP_NAME}/g" {} +
-find . -type d -iname '*platform-demo*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${DEMO_PREFIX}${NEW_APP_NAME}'}"' -- '{}' ';'
-find . -type f -iname '*platform-demo*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${DEMO_PREFIX}${NEW_APP_NAME}'}"' -- '{}' ';'
+find . -type d -iname '*platform-demo*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${NEW_APP_NAME}'}"' -- '{}' ';'
+find . -type f -iname '*platform-demo*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${NEW_APP_NAME}'}"' -- '{}' ';'
 
 if [ -z $SKIP_GIT ]
 then
