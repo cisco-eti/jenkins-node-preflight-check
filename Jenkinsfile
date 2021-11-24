@@ -36,7 +36,7 @@ def pipelinesettings = [
     email: "eti-sre-admins@cisco.com",
   ],                                            // Blackduck Open Source Scan
 
-  chart: "deployment",                          // Use deployment multi-helm chart folder
+  chart: "deploy/charts/sre-go-helloworld",                       // Use deployment multi-helm chart folder
   publishHelm: 1,                               // HELM CREATE
   useMultipleHelm:1,                            // Publish Multiple Charts
   chartMuseum: 1,                               // Publish Helm chart to ChartMuseum
