@@ -2,8 +2,6 @@ package server
 
 import (
 	"context"
-	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -160,10 +158,10 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 		s.log.Error(err.Error())
 	}
 	s.log.Info("current working directory: %s", wd)
-	files, err := ioutil.ReadDir("/")
-	if err != nil {
-		log.Fatal(err)
-	}
+	// files, err := ioutil.ReadDir("/")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	// s.log.Info("Printing files in '/'...")
 	// for _, file := range files {
