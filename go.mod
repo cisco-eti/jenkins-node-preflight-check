@@ -3,6 +3,7 @@ module wwwin-github.cisco.com/eti/sre-go-helloworld
 go 1.14
 
 require (
+	github.com/aws/aws-sdk-go v1.27.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-chi/cors v1.1.1
 	github.com/gofrs/uuid v4.0.0+incompatible // indirect
