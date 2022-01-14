@@ -2,9 +2,12 @@ package server
 
 import (
 	"context"
+	"fmt"
+	"html/template"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -113,6 +116,10 @@ func (s *Server) MetricsHandler(w http.ResponseWriter, r *http.Request) {
 	promhttp.Handler().ServeHTTP(w, r)
 }
 
+type S3PageData struct {
+	Message string
+}
+
 // Get godoc
 // @Summary Get S3
 // @Description get S3 objects
@@ -121,11 +128,11 @@ func (s *Server) MetricsHandler(w http.ResponseWriter, r *http.Request) {
 // @Router /s3 [get]
 func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 	s.log.Info("/s3 request received")
-
 	var (
-		bucket   string = "eks-sre-1-test"
-		key      string = "sre-go-helloworld"
-		filename string = "s3_object.txt"
+		bucket      string = os.Getenv("S3_BUCKET")
+		key         string = "sre-go-helloworld-s3-test-" + strconv.FormatInt(time.Now().Unix(), 10)
+		filename    string = "s3_object.txt"
+		web_message string = ""
 	)
 
 	// All clients require a Session. The Session provides the client with
@@ -153,27 +160,13 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 	if cancelFn != nil {
 		defer cancelFn()
 	}
-	wd, err := os.Getwd()
-	if err != nil {
-		s.log.Error(err.Error())
-	}
-	s.log.Info("current working directory: %s", wd)
-	// files, err := ioutil.ReadDir("/")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// s.log.Info("Printing files in '/'...")
-	// for _, file := range files {
-	// 	s.log.Info("Name: %s, IsDir: %t", file.Name(), file.IsDir())
-	// }
 
 	// Uploads the object to S3. The Context will interrupt the request if the
 	// timeout expires.
 	f, err := os.Open("/" + filename)
 	if err != nil {
 		s.log.Error("failed to open file %q, %v", filename, err)
-		return
+		web_message = "An error occurred while trying to open the file to upload. Check logs for details."
 	}
 	result, err := uploader.UploadWithContext(ctx, &s3manager.UploadInput{
 		Bucket: &bucket,
@@ -181,16 +174,18 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 		Body:   f,
 	})
 	if err != nil {
-		s.log.Error("failed to upload file, %v", err)
-		return
+		s.log.Error("failed to upload file to S3, %v", err)
+		web_message = "An error occurred while trying to upload to S3. Check logs for details."
 	}
-	s.log.Info("file uploaded to, %s\n", result.Location)
-	filePath, err := filepath.Abs("./web/s3.html")
-	if err != nil {
-		utils.ServerErrorResponse(w, err.Error())
-		return
-	}
+	s.log.Info("file successfully uploaded to: %s", result.Location)
 
-	s.log.Info("filePath: %s", filePath)
-	http.ServeFile(w, r, filePath)
+	if web_message == "" {
+		web_message = fmt.Sprintf("Successfully uploaded file to S3 at %s", result.Location)
+	}
+	s.log.Info("web_message: %s", web_message)
+	data := S3PageData{
+		Message: web_message,
+	}
+	tmpl := template.Must(template.ParseFiles("./web/s3.html"))
+	tmpl.Execute(w, data)
 }

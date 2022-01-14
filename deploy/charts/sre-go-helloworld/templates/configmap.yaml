@@ -10,3 +10,4 @@ data:
   IDP_AUDIENCE: "api://helloworld"
   IDP_LOGIN_CALLBACK: "https://helloworld.{{ .Values.domainName }}/auth/login/token"
   IDP_ISSUER_LOGOUT_PATH : "/v1/logout"
+  S3_BUCKET: {{ .Values.s3_bucket }} 
