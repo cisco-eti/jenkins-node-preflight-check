@@ -134,6 +134,14 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 		filename    string = "s3_object.txt"
 		web_message string = ""
 	)
+	renderTemplate := func(msg string) {
+		s.log.Info("web_message: %s", msg)
+		data := S3PageData{
+			Message: msg,
+		}
+		tmpl := template.Must(template.ParseFiles("./web/s3.html"))
+		tmpl.Execute(w, data)
+	}
 
 	// All clients require a Session. The Session provides the client with
 	// shared configuration such as region, endpoint, and credentials. A
@@ -167,6 +175,8 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		s.log.Error("failed to open file %q, %v", filename, err)
 		web_message = "An error occurred while trying to open the file to upload. Check logs for details."
+		renderTemplate(web_message)
+		return
 	}
 	result, err := uploader.UploadWithContext(ctx, &s3manager.UploadInput{
 		Bucket: &bucket,
@@ -176,16 +186,13 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		s.log.Error("failed to upload file to S3, %v", err)
 		web_message = "An error occurred while trying to upload to S3. Check logs for details."
+		renderTemplate(web_message)
+		return
 	}
 	s.log.Info("file successfully uploaded to: %s", result.Location)
 
 	if web_message == "" {
 		web_message = fmt.Sprintf("Successfully uploaded file to S3 at %s", result.Location)
 	}
-	s.log.Info("web_message: %s", web_message)
-	data := S3PageData{
-		Message: web_message,
-	}
-	tmpl := template.Must(template.ParseFiles("./web/s3.html"))
-	tmpl.Execute(w, data)
+	renderTemplate(web_message)
 }
