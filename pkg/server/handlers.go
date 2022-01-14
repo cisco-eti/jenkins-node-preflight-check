@@ -120,8 +120,8 @@ type S3PageData struct {
 }
 
 // Get godoc
-// @Summary Get S3
-// @Description get S3 objects
+// @Summary Get S3 Test result
+// @Description get S3 Test page
 // @Produce json
 // @Success 200
 // @Router /s3 [get]
