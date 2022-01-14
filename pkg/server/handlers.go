@@ -1,10 +1,17 @@
 package server
 
 import (
+	"context"
+	"fmt"
+	"html/template"
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
@@ -106,4 +113,85 @@ func (s *Server) MetricsHandler(w http.ResponseWriter, r *http.Request) {
 	s.log.Info("/metrics request received")
 
 	promhttp.Handler().ServeHTTP(w, r)
+}
+
+type S3PageData struct {
+	Message string
+}
+
+// Get godoc
+// @Summary Get S3 Test result
+// @Description get S3 Test page
+// @Produce json
+// @Success 200
+// @Router /s3 [get]
+func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
+	s.log.Info("/s3 request received")
+	var (
+		bucket      string = os.Getenv("S3_BUCKET")
+		key         string = "sre-go-helloworld-s3-test"
+		filename    string = "s3_object.txt"
+		web_message string = ""
+	)
+	renderTemplate := func(msg string) {
+		s.log.Info("web_message: %s", msg)
+		data := S3PageData{
+			Message: msg,
+		}
+		tmpl := template.Must(template.ParseFiles("./web/s3.html"))
+		tmpl.Execute(w, data)
+	}
+
+	// All clients require a Session. The Session provides the client with
+	// shared configuration such as region, endpoint, and credentials. A
+	// Session should be shared where possible to take advantage of
+	// configuration and credential caching. See the session package for
+	// more information.
+	sess := session.Must(session.NewSession(&aws.Config{
+		Region: aws.String("us-east-2"),
+	}))
+
+	// Create an uploader with the session and default options
+	uploader := s3manager.NewUploader(sess)
+
+	// Create a context with a timeout that will abort the upload if it takes
+	// more than the passed in timeout.
+	timeout, _ := time.ParseDuration("1m")
+	ctx := context.Background()
+	var cancelFn func()
+	if timeout > 0 {
+		ctx, cancelFn = context.WithTimeout(ctx, timeout)
+	}
+	// Ensure the context is canceled to prevent leaking.
+	// See context package for more information, https://golang.org/pkg/context/
+	if cancelFn != nil {
+		defer cancelFn()
+	}
+
+	// Uploads the object to S3. The Context will interrupt the request if the
+	// timeout expires.
+	f, err := os.Open("/" + filename)
+	if err != nil {
+		s.log.Error("failed to open file %q, %v", filename, err)
+		web_message = "An error occurred while trying to open the file to upload. Check logs for details."
+		renderTemplate(web_message)
+		return
+	}
+	result, err := uploader.UploadWithContext(ctx, &s3manager.UploadInput{
+		Bucket: &bucket,
+		Key:    &key,
+		Body:   f,
+	})
+	if err != nil {
+		s.log.Error("failed to upload file to S3, %v", err)
+		web_message = "An error occurred while trying to upload to S3. Check logs for details."
+		renderTemplate(web_message)
+		return
+	}
+	s.log.Info("file successfully uploaded to: %s", result.Location)
+
+	if web_message == "" {
+		web_message = fmt.Sprintf("Successfully uploaded file to S3 at %s", result.Location)
+	}
+	renderTemplate(web_message)
 }
