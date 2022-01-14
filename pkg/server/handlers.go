@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"strconv"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -130,7 +129,7 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 	s.log.Info("/s3 request received")
 	var (
 		bucket      string = os.Getenv("S3_BUCKET")
-		key         string = "sre-go-helloworld-s3-test-" + strconv.FormatInt(time.Now().Unix(), 10)
+		key         string = "sre-go-helloworld-s3-test"
 		filename    string = "s3_object.txt"
 		web_message string = ""
 	)
