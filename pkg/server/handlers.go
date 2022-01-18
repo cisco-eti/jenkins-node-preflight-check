@@ -148,7 +148,7 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 	// configuration and credential caching. See the session package for
 	// more information.
 	sess := session.Must(session.NewSession(&aws.Config{
-		Region: aws.String("us-east-2"),
+		Region: aws.String(os.Getenv("AWS_REGION_OVERRIDE")),
 	}))
 
 	// Create an uploader with the session and default options
