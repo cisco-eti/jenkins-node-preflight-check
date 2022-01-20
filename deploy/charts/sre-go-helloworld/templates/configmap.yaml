@@ -11,3 +11,4 @@ data:
   IDP_LOGIN_CALLBACK: "https://helloworld.{{ .Values.domainName }}/auth/login/token"
   IDP_ISSUER_LOGOUT_PATH : "/v1/logout"
   S3_BUCKET: {{ .Values.s3_bucket }} 
+  AWS_REGION_OVERRIDE: {{ .Values.awsRegionOverride }}
