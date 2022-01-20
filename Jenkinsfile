@@ -1,4 +1,4 @@
-@Library(['srePipeline@composable-pipeline']) _
+@Library(['srePipeline@petersz-test']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
