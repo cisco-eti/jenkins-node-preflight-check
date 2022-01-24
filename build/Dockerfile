@@ -1,4 +1,4 @@
-FROM containers.cisco.com/eti-sre/sre-golang-docker:latest
+FROM containers.cisco.com/eti-sre/sre-golang-docker:petersz
 
 ARG GOPATH=/go
 ARG BINARY_NAME=sre-go-helloworld
@@ -36,10 +36,11 @@ RUN sh $SRC_DIR/githooks/gofmt_checks
 RUN if [ "${STATIC_ANALYSIS}" = "sa" ] ; then \
       latest=$(curl -s https://api.github.com/repos/dominikh/go-tools/releases/latest) && \
       tagname=$(echo "$latest" | grep "tag_name" | cut -d':' -f2 | cut -d'"' -f2) && \
+      [ "$(uname -m)" = "aarch64" ] && arch="arm64" || arch="amd64" && \
       [ "$(uname)" = Darwin ] && system=darwin || system=linux && \
-      echo "tagname == $tagname system == $system" && \
-      curl -L https://github.com/dominikh/go-tools/releases/download/${tagname}/staticcheck_${system}_amd64.tar.gz > /tmp/staticcheck_${system}_amd64.tar.gz && \
-      tar xzf /tmp/staticcheck_${system}_amd64.tar.gz && \
+      echo "tagname == $tagname system == $system arch == $arch" && \
+      curl -L https://github.com/dominikh/go-tools/releases/download/${tagname}/staticcheck_${system}_${arch}.tar.gz > /tmp/staticcheck_${system}_${arch}.tar.gz && \
+      tar xzf /tmp/staticcheck_${system}_${arch}.tar.gz && \
       find . -name "*.go" -exec staticcheck/staticcheck -checks=inherit,-U1000,-U1001 --debug.no-compile-errors '{}' ';' > ${SRC_DIR}/${SA_OUT} && \
       rm -rf /tmp/staticcheck_* ; \
     fi
