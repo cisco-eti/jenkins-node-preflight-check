@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -10,8 +11,10 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
+	"github.com/aws/aws-sdk-go/service/sts"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
@@ -115,7 +118,7 @@ func (s *Server) MetricsHandler(w http.ResponseWriter, r *http.Request) {
 	promhttp.Handler().ServeHTTP(w, r)
 }
 
-type S3PageData struct {
+type PageData struct {
 	Message string
 }
 
@@ -135,7 +138,7 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 	)
 	renderTemplate := func(msg string) {
 		s.log.Info("web_message: %s", msg)
-		data := S3PageData{
+		data := PageData{
 			Message: msg,
 		}
 		tmpl := template.Must(template.ParseFiles("./web/s3.html"))
@@ -192,6 +195,55 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 
 	if web_message == "" {
 		web_message = fmt.Sprintf("Successfully uploaded file to S3 at %s", result.Location)
+	}
+	renderTemplate(web_message)
+}
+
+// Get godoc
+// @Summary GetCallerIdentity result
+// @Description get GetCallerIdentity page
+// @Produce html
+// @Success 200
+// @Router /gci [get]
+func (s *Server) GciHandler(w http.ResponseWriter, r *http.Request) {
+	s.log.Info("/gci request received")
+	var web_message string = ""
+	renderTemplate := func(msg string) {
+		s.log.Debug("web_message: %s", msg)
+		data := PageData{
+			Message: msg,
+		}
+		tmpl := template.Must(template.ParseFiles("./web/gci.html"))
+		tmpl.Execute(w, data)
+	}
+
+	mySession := session.Must(session.NewSession())
+	svc := sts.New(mySession)
+	input := &sts.GetCallerIdentityInput{}
+
+	result, err := svc.GetCallerIdentity(input)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				s.log.Error(aerr.Error())
+				web_message = fmt.Sprintf("Error: %s\n", aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			s.log.Error(err.Error())
+			web_message = fmt.Sprintf("Error: %s\n", err.Error())
+		}
+	} else {
+		s.log.Info("GetCallerIdentityOutput: %+v", result)
+		resultJSON, err := json.MarshalIndent(result, "", "    ")
+		if err != nil {
+			s.log.Error(err.Error())
+			web_message = fmt.Sprintf("%+v", result)
+		} else {
+			web_message = fmt.Sprint(string(resultJSON))
+		}
 	}
 	renderTemplate(web_message)
 }
