@@ -207,7 +207,7 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 // @Router /gci [get]
 func (s *Server) GciHandler(w http.ResponseWriter, r *http.Request) {
 	s.log.Info("/gci request received")
-	var web_message string = ""
+	var web_message string
 	renderTemplate := func(msg string) {
 		s.log.Debug("web_message: %s", msg)
 		data := PageData{
