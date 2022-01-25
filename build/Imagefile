@@ -1,6 +1,6 @@
-FROM sre-go-helloworld:base as base-build
+FROM sre-go-helloworld:petersz as base-build
 
-FROM containers.cisco.com/eti-sre/sre-golang-docker:latest
+FROM containers.cisco.com/eti-sre/sre-golang-docker:petersz
 
 COPY --from=base-build \
     /go/src/wwwin-github.cisco.com/eti/sre-go-helloworld/sre-go-helloworld \

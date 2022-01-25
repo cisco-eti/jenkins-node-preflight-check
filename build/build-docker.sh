@@ -3,7 +3,7 @@
 
 PROJECT=sre-go-helloworld
 DOCKER_IMAGE=${PROJECT}:latest
-BASE_DOCKER_IMAGE=${PROJECT}:base
+BASE_DOCKER_IMAGE=${PROJECT}:petersz
 H_OUT=index.html
 S_OUT=staticanalysis.txt
 
