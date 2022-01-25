@@ -43,10 +43,14 @@ replicas: 1                             # Default replica count; override in dep
 deploymentEnv: SET_IN_SRE_CLUSTER_CONFIG_REPO # Defer to sre_cluster_config repo; Value of this param should not impact application
 s3_bucket: SET_IN_DEPLOYMENT_REPO       # Defer to deployment repo to capture appropriate s3 bucket name for dev/staging/prod
 awsRegionOverride: SET_IN_DEPLOYMENT_REPO   # Defer to deployment repo to capture appropriate aws_region for dev/staging/prod
-serviceAccount:                         # Defer to deployment repo to capture appropriate IAM role arn for service account
-  annotations:
-    eks.amazonaws.com/role-arn: SET_IN_DEPLOYMENT_REPO
-
+serviceAccount:                         
+  # Specifies whether a service account should be created
+  create: false                         # Override in deployment repo to capture appropriate IAM role arn annotation
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
 externalSecrets:                        # Placeholder/example for specifying secrets retrieval
   secretStoreName: SET_IN_DEPLOYMENT_REPO
   secretStoreKind: SET_IN_DEPLOYMENT_REPO

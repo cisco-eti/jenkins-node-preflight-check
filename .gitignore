@@ -23,7 +23,6 @@ sre-go-helloworld
 
 # emacs buffer files
 *~
-deployment/helm-chart/data
 sre-go-helloworld
 db.json
 vendor
