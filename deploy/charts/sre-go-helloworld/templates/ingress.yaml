@@ -35,4 +35,4 @@ spec:
             servicePort: {{ .Values.servicePort }}
           path: /
         {{ end }}
-    {{- end }}
+   
