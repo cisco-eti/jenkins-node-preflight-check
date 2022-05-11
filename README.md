@@ -77,7 +77,7 @@ chmod 400 ~/.nyota/credentials
 
 ## Quick links
 
-- [CI Pipeline Jenkins](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/master/)
+- [CI Pipeline Jenkins](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/main/)
 
 - [CD Pipeline ArgoCD](https://argocd.int.ccprod02.prod.eticloud.io/applications/sre-go-helloworld-app-dev-projectapp?resource=)
 
