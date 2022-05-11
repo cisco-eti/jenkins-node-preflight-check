@@ -79,7 +79,7 @@ chmod 400 ~/.nyota/credentials
 
 - [CI Pipeline Jenkins](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/main/)
 
-- [CD Pipeline ArgoCD](https://argocd.int.ccprod02.prod.eticloud.io/applications/sre-go-helloworld-app-dev-projectapp?resource=)
+- [CD Pipeline ArgoCD](https://argocd.prod.eticloud.io/applications/sre-go-helloworld-app-dev-projectapp?resource=)
 
 - [Try-out API Swagger UI](https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld)
 
