@@ -224,11 +224,8 @@ func (s *Server) GciHandler(w http.ResponseWriter, r *http.Request) {
 	result, err := svc.GetCallerIdentity(input)
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
-			switch aerr.Code() {
-			default:
-				s.log.Error(aerr.Error())
-				web_message = fmt.Sprintf("Error: %s\n", aerr.Error())
-			}
+			s.log.Error(aerr.Error())
+			web_message = fmt.Sprintf("Error: %s\n", aerr.Error())
 		} else {
 			// Print the error, cast err to awserr.Error to get the Code and
 			// Message from an error.

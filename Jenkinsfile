@@ -15,7 +15,9 @@ def pipelinesettings = [
   build: 1,                                     // Build container
   executeCC: 1,                                 // Generate Code Coverage report
   lint: 1,                                      // GO Lint
-  sonarQube: 1,                                 // SonarQube scan
+  sonarQube: [                                     // Corona paramters
+    propertiesFile: "./build/sonar-project.properties"                 // SonarQube scan
+  ],                                
   publishContainer: 1,                          // Publish container
   registryOrgName: "eti-sre/",                  // Container image registry org name
   ecr: 1,                                       // Publish container to Private ECR
@@ -42,6 +44,7 @@ def pipelinesettings = [
   useMultipleHelm:1,                            // Publish Multiple Charts
   chartMuseum: 1,                               // Publish Helm chart to ChartMuseum
   artifactory: 1,                               // Use Artifactory creds
+
   stricterCCThreshold: 90.0,                    // Fail builds for Code Coverage below 90%
   cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-dev-deployment",
 ]
