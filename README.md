@@ -40,7 +40,7 @@ See the [Troubleshooting](docs/troubleshooting.md) page if you run into any issu
 
 ### Local Development
 
-[How to retrieve artifactory encrypted password](#)
+[How to retrieve artifactory encrypted password](https://wwwin-github.cisco.com/pages/eti/eti-platform-docs/services/iam/oncall/rotating-generic-users/eti-sre-cicd-gen-encrypted/#step-2-copy-new-encrypted-password-from-artifactory)
 
 ```bash
 export ARTIFACTORY_USER=<YOUR USERNAME>
