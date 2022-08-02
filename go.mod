@@ -23,6 +23,6 @@ require (
 	gorm.io/driver/postgres v1.0.6
 	gorm.io/gorm v1.20.11
 	gorm.io/plugin/prometheus v0.0.0-20210112035011-ae3013937adc
-	wwwin-github.cisco.com/eti/idpadapter v1.0.7
+	wwwin-github.cisco.com/eti/idpadapter v1.0.9
 	wwwin-github.cisco.com/eti/sre-go-logger v0.4.0
 )
