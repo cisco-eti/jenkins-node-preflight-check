@@ -7,12 +7,11 @@ pkgs.mkShell {
   ];
 
   GOPRIVATE = "wwwin-github.cisco.com";
-  GONOPROXY = "github.com,gopkg.in,go.uber.org";
 
   shellHook = ''
     echo -n Password:
     read -s pass
 
-    export GOPROXY="https://$(whoami):$pass@engci-maven-master.cisco.com/artifactory/api/go/nyota-go"
+    export GOPROXY="https://proxy.golang.org, https://$(whoami):$pass@engci-maven-master.cisco.com/artifactory/api/go/nyota-go, direct"
   '';
 }
