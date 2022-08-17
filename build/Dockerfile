@@ -14,7 +14,6 @@ ARG ARTIFACTORY_URL=https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-ma
 
 ENV GO111MODULE=on
 ENV GOPRIVATE="wwwin-github.cisco.com"
-ENV GONOPROXY="github.com,gopkg.in,go.uber.org"
 ENV GOPROXY="https://proxy.golang.org, ${ARTIFACTORY_URL}, direct"
 
 COPY . $SRC_DIR

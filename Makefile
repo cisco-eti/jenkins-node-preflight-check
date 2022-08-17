@@ -1,8 +1,7 @@
 export PROJECT_ROOT=$(shell pwd)
 export GO111MODULE=on
 export GOPRIVATE="wwwin-github.cisco.com"
-export GONOPROXY="github.com,gopkg.in,go.uber.org"
-export GOPROXY=https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-maven-master.cisco.com/artifactory/api/go/nyota-go
+export GOPROXY="https://proxy.golang.org, https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-maven-master.cisco.com/artifactory/api/go/nyota-go, direct"
 REPO_NAME = wwwin-github.cisco.com/eti/sre-go-helloworld
 
 all: deps target
