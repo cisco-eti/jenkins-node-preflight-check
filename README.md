@@ -1,6 +1,8 @@
 # ETI sre-go-helloworld
 
-[![Build Status](https://engci-private-sjc.cisco.com/jenkins/eti-sre/buildStatus/icon?job=SRE%2FProjects%2Fsre-go-helloworld%2Fbuild%2Fsre-go-helloworld%2Fmain)](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/main/)
+- Jenkins: [![Build Status](https://engci-private-sjc.cisco.com/jenkins/eti-sre/buildStatus/icon?job=SRE%2FProjects%2Fsre-go-helloworld%2Fbuild%2Fsre-go-helloworld%2Fmain)](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/main/)
+- ArgoCD: [![ArgoCD Status](https://argocd.prod.eticloud.io/api/badge?name=blue-b-sre-go-helloworld-app-dev-argoapp)](https://argocd.prod.eticloud.io/applications/blue-b-sre-go-helloworld-app-dev-argoapp?resource=)
+
 
 This is a "boilerplate" go microservice with following example showcase  features:
 
