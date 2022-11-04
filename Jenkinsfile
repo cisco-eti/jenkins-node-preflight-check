@@ -1,4 +1,4 @@
-@Library(['srePipeline']) _
+@Library(['srePipeline@replace-corona-sdk']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -24,7 +24,7 @@ def pipelinesettings = [
   ciscoContainer: 1,                            // Publish container to containers.cisco.com
   dockerHub: 1,                                 // Publish container to dockerhub.cisco.com
   pushPublicRegistryOnTag: 1,                   // Publish container to Public ECR on tag
-  // forceCorona: 1,                            // Force Corona Scan on any branch
+  forceCorona: 1,                            // Force Corona Scan on any branch
   corona: [                                     // Corona paramters
     imageName: "sre-go-helloworld",             // Corona Image Name
     releaseID: "73243",                         // Corona Release ID
@@ -47,6 +47,8 @@ def pipelinesettings = [
 
   stricterCCThreshold: 90.0,                    // Fail builds for Code Coverage below 90%
   cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-dev-deployment",
+
+  overridePipelineDockerVersion: 'corona-sdk',
 ]
 
 srePipeline( pipelinesettings )
