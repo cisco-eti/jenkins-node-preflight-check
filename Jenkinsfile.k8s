@@ -11,7 +11,7 @@ podTemplate(yaml: '''
         - 99d
 ''') {
 
-    node(POD_LABEL) {
+    node('jenkins-node') {
         stage('Test on Maven container') {
             container('maven') {
                 stage('simple echo') {
