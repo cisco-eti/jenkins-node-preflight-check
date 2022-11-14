@@ -5,7 +5,7 @@ podTemplate(yaml: '''
       containers:
       - name: sre-pipeline-docker
         image: containers.cisco.com/eti-sre/sre-pipeline-docker
-        command: /bin/sh
+        command: ["/bin/sh"]
         args: ["-u ubuntu"]
 ''') {
 
