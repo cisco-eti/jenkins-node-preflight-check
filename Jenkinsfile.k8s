@@ -13,10 +13,8 @@ podTemplate(yaml: '''
 
     node('jenkins-node') {
         stage('Test on Maven container') {
-            container('maven') {
                 stage('simple echo') {
                      sh 'echo hello world'
-                }
             }
         }
     }
