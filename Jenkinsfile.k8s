@@ -5,8 +5,10 @@ podTemplate(yaml: '''
       containers:
       - name: sre-pipeline-docker
         image: containers.cisco.com/eti-sre/sre-pipeline-docker
-        command: ["/bin/sh"]
+        command: ["cat"]
         args: ["-u ubuntu"]
+      imagePullSecrets:
+      - name: ciscocontainers-cred
 ''') {
 
     node('jenkins-node') {
