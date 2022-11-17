@@ -1,15 +1,4 @@
-podTemplate(yaml: '''
-    apiVersion: v1
-    kind: Pod
-    spec:
-      containers:
-      - name: sre-pipeline-docker
-        image: containers.cisco.com/eti-sre/sre-pipeline-docker
-        command: ["cat"]
-        args: ["-u ubuntu"]
-      imagePullSecrets:
-      - name: ciscocontainers-cred
-''') {
+podTemplate() {
 
     node('jenkins-node') {
       stage('simple echo') {
