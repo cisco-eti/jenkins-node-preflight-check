@@ -17,7 +17,12 @@ def pipelinesettings = [
   lint: 1,                                      // GO Lint
   sonarQube: [                                     // Corona paramters
     propertiesFile: "./build/sonar-project.properties"                 // SonarQube scan
-  ],                                
+  ],
+  panoptica: [                                                          // Panoptica Scan Parameters
+    productName: "securecn",                                            // The Product/Venture name 
+    imageName: "sre-go-helloworld",                                     // The image name + tag to scan
+    args: "--highest-severity-allowed HIGH --ignore-no-fix",  // Arguments passed to the Panoptica CLI
+  ],                  
   publishContainer: 1,                          // Publish container
   registryOrgName: "eti-sre/",                  // Container image registry org name
   ecr: 1,                                       // Publish container to Private ECR

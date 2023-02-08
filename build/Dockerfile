@@ -1,5 +1,7 @@
 FROM containers.cisco.com/eti-sre/sre-golang-docker:latest
 
+RUN apt-get update && apt-get upgrade -y
+
 ARG GOPATH=/go
 ARG BINARY_NAME=sre-go-helloworld
 ARG SRC_DIR=$GOPATH/src/wwwin-github.cisco.com/eti/$BINARY_NAME
@@ -42,6 +44,8 @@ RUN if [ "${STATIC_ANALYSIS}" = "sa" ] ; then \
       find . -name "*.go" -exec staticcheck/staticcheck -checks=inherit,-U1000,-U1001 --debug.no-compile-errors '{}' ';' > ${SRC_DIR}/${SA_OUT} && \
       rm -rf /tmp/staticcheck_* ; \
     fi
+
+RUN apt-get update && apt-get upgrade -y
 
 # Everything looks good so far, build the code
 RUN go build
