@@ -53,6 +53,7 @@ def pipelinesettings = [
   forceHelmPush:1,                                            // Force Helm Push
   garPublishHelm: 1,                                          // Publish Helm chart to GAR
   ecrPublishHelmPublic: 1,                                    // Publish Helm chart to public ECR
+  forceHelmPush:1,                                            // Force Helm Push
   chartMuseum: 1,                                             // Publish Helm chart to ChartMuseum
   artifactory: 1,                                             // Use Artifactory creds
 
