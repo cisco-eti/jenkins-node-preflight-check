@@ -1,4 +1,4 @@
-@Library(['srePipeline@revert-231-fix-multiple-helm-push']) _
+@Library(['srePipeline@master']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
