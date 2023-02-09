@@ -29,7 +29,7 @@ def pipelinesettings = [
   ciscoContainer: 1,                                          // Publish container to containers.cisco.com
   dockerHub: 1,                                               // Publish container to dockerhub.cisco.com
   pushPublicRegistryOnTag: 1,                                 // Publish container to Public ECR on tag
-  // forceCorona: 1,                                          // Force Corona Scan on any branch
+  forceCorona: 1,                                             // Force Corona Scan on any branch
   corona: [                                                   // Corona paramters
     imageName: "sre-go-helloworld",                           // Corona Image Name
     releaseID: "73243",                                       // Corona Release ID
@@ -39,7 +39,7 @@ def pipelinesettings = [
     engineeringContact: "sraradhy@cisco.com",                 // Corona Engineering Contact
     imageAdmins: "sraradhy,jegarnie",                         // Corona Image Admins
   ],
-  // forceBlackduck: 1,                                       // Force Blackduck Scan on any branch
+  forceBlackduck: 1,                                          // Force Blackduck Scan on any branch
   blackduck: [
     email: "eti-sre-admins@cisco.com",
   ],                                                          // Blackduck Open Source Scan
@@ -47,6 +47,7 @@ def pipelinesettings = [
   chart: "deploy/charts",                                     // Use deployment multi-helm chart folder
   publishHelm: 1,                                             // HELM CREATE
   useMultipleHelm:1,                                          // Publish Multiple Charts
+  forceHelmPush:1,                                            // Force Helm Push
   chartMuseum: 1,                                             // Publish Helm chart to ChartMuseum
   artifactory: 1,                                             // Use Artifactory creds
 
