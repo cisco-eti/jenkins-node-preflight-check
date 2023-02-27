@@ -1,4 +1,4 @@
-@Library(['srePipeline']) _
+@Library(['srePipelineLegacy@banzai-merge']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -6,6 +6,7 @@
 // --------------------------------------------
 
 def pipelinesettings = [
+  pipelineLibraryBranch: "banzai-merge",
   deploy: [
     [name: "sre-go-helloworld" ]                              // Containers to publish
   ],
