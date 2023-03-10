@@ -10,6 +10,7 @@ def pipelinesettings = [
     [name: "sre-go-helloworld" ]                              // Containers to publish
   ],
 
+  gitDefaultBranch: "main",
   prepare: 1,                                                 // GIT Clone
   unittest: 1,                                                // Unit-test
   build: 1,                                                   // Build container
