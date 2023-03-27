@@ -1,11 +1,11 @@
 package utils
 
-//gRPC constants
+// gRPC constants
 const (
 	DefaultGRPCPort = "9090"
 )
 
-//http constants
+// http constants
 const (
 	OrganizationIDPathPrefix   = "orgid"
 	RegionPathKey              = "regionID"
