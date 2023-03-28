@@ -10,7 +10,6 @@ def pipelinesettings = [
     [name: "sre-go-helloworld" ]                              // Containers to publish
   ],
 
-  overridePipelineDockerVersion: "2022.12.20-f5f786d-98",
   gitDefaultBranch: "main",
   prepare: 1,                                                 // GIT Clone
   unittest: 1,                                                // Unit-test
