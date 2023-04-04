@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 )
 
@@ -39,7 +38,7 @@ func ReadDBconfig() (string, error) {
 
 	filename, ok := os.LookupEnv(DB_CONFIG_FILEPATH_ENV)
 	if ok {
-		file, err := ioutil.ReadFile(filename)
+		file, err := os.ReadFile(filename)
 		if err != nil {
 			return "", err
 		}

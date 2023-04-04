@@ -8,12 +8,12 @@ import (
 	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 )
 
-//HTTPRequest struct
+// HTTPRequest struct
 type HTTPRequest struct {
 	*http.Request
 }
 
-//GetPaginationLinks is a utility that helps paginated apis to return next page, previous page and last page links
+// GetPaginationLinks is a utility that helps paginated apis to return next page, previous page and last page links
 func (req *HTTPRequest) GetPaginationLinks(responseSize int, limit int, offset int) models.Links {
 	if !isPaginationParamsProper(responseSize, limit, offset) {
 		return models.Links{}
