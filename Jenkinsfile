@@ -1,4 +1,4 @@
-@Library(['srePipeline']) _
+@Library(['srePipeline@SRE-4882']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -27,6 +27,7 @@ def pipelinesettings = [
   publishContainer: 1,                                        // Publish container
   registryOrgName: "eti-sre/",                                // Container image registry org name
   ecr: 1,                                                     // Publish container to Private ECR
+  garPublish: 1,
   ciscoContainer: 1,                                          // Publish container to containers.cisco.com
   dockerHub: 1,                                               // Publish container to dockerhub.cisco.com
   pushPublicRegistryOnTag: 1,                                 // Publish container to Public ECR on tag
