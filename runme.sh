@@ -174,6 +174,9 @@ find . -type f ! -name 'runme.sh' ! -name 'README.md' ! -path '*/.git/*' -exec g
 find . -type d -iname '*sre-go-helloworld*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${NEW_APP_NAME}'}"' -- '{}' ';'
 find . -type f -iname '*sre-go-helloworld*' ! -path '*/.git/*' -depth -exec bash -c 'mv "$1" "${1/sre-go-helloworld/'${NEW_APP_NAME}'}"' -- '{}' ';'
 
+step "Run gofmt"
+gofmt -s -w .
+
 if [ -z $SKIP_GIT ]
 then
 step "Commit changes to git"
