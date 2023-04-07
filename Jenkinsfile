@@ -52,7 +52,7 @@ def pipelinesettings = [
   artifactory: 1,                                             // Use Artifactory creds
 
   stricterCCThreshold: 90.0,                                  // Fail builds for Code Coverage below 90%
-  cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-dev-deployment",
+  cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-cd",
 ]
 
 srePipeline( pipelinesettings )
