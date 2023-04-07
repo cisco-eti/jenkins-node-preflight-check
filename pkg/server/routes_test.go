@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
 	etilogger "wwwin-github.cisco.com/eti/sre-go-logger"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/models"
 )
 
 func getDeviceZone(t *testing.T, path string, want string, ret string) {

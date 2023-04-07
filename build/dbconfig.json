@@ -1,7 +1,7 @@
 { 
     "host": "postgres",
     "port": "5432",
-    "dbname": "helloworld",
+    "dbname": "sre-go-helloworld.git",
     "user": "postgres",
     "password": "strongpassword",
     "sslmode": "disable",

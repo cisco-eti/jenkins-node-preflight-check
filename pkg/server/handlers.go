@@ -16,8 +16,8 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/aws/aws-sdk-go/service/sts"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/models"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/utils"
 )
 
 // Get godoc
@@ -36,7 +36,7 @@ func (s *Server) RootHandler(w http.ResponseWriter, _ *http.Request) {
 
 // Get godoc
 // @Summary Get Ping
-// @Description get helloworld status
+// @Description get sre-go-helloworld.git status
 // @Produce json
 // @Success 200 {object} models.PingResponse
 // @Router /ping [get]
@@ -60,7 +60,7 @@ func (s *Server) PingHandler(w http.ResponseWriter, r *http.Request) {
 			Port:       21455,
 		},
 		LastUpdated:    "2020-10-20T08:42:07.290Z",
-		BaseURL:        "http://helloworld.int.scratch-aws-1.prod.eticloud.io/",
+		BaseURL:        "http://sre-go-helloworld.git.int.scratch-aws-1.prod.eticloud.io/",
 		DurationPretty: "91ms",
 		Duration:       91350005,
 		UpstreamServices: []models.Service{
@@ -108,7 +108,7 @@ func (s *Server) DocsHandler(w http.ResponseWriter, r *http.Request) {
 
 // Get godoc
 // @Summary Get Prometheus Metrics
-// @Description get helloworld status
+// @Description get sre-go-helloworld.git status
 // @Produce Yaml
 // @Success 200
 // @Router /metrics [get]
@@ -132,7 +132,7 @@ func (s *Server) S3Handler(w http.ResponseWriter, r *http.Request) {
 	s.log.Info("/s3 request received")
 	var (
 		bucket      string = os.Getenv("S3_BUCKET")
-		key         string = "sre-go-helloworld-s3-test"
+		key         string = "sre-go-sre-go-helloworld.git.git-s3-test"
 		filename    string = "s3_object.txt"
 		web_message string = ""
 	)

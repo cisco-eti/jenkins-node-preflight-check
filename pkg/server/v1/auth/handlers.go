@@ -7,7 +7,7 @@ import (
 	"net/url"
 
 	"wwwin-github.cisco.com/eti/idpadapter"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/models"
 )
 
 const fakeState = "123" // this should be generated per request

@@ -3,8 +3,8 @@ package middleware
 import (
 	"net/http"
 
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
 	etilogger "wwwin-github.cisco.com/eti/sre-go-logger"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/utils"
 )
 
 const (

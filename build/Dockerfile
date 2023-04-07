@@ -3,7 +3,7 @@ FROM containers.cisco.com/eti-sre/sre-golang-docker:latest
 RUN apt-get update && apt-get upgrade -y
 
 ARG GOPATH=/go
-ARG BINARY_NAME=sre-go-helloworld
+ARG BINARY_NAME=sre-go-sre-go-helloworld.git.git
 ARG SRC_DIR=$GOPATH/src/wwwin-github.cisco.com/eti/$BINARY_NAME
 ARG CODE_COVERAGE
 ARG COVER_OUT=coverage.out

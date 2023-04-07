@@ -20,10 +20,10 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt-staging
 
 dockerPreamable: 626007623524.dkr.ecr.us-east-2.amazonaws.com/eti-sre
-domainPrefix: helloworld-go
+domainPrefix: sre-go-helloworld.git-go
 servicePort: "5000"
 metricsPort: "5001"
-dbname: helloworlddev
+dbname: sre-go-helloworld.gitdev
 
 oidc_client_id: SET_IN_DEPLOYMENT_REPO
 oidc_issuer_url: SET_IN_DEPLOYMENT_REPO

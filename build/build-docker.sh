@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # Syntax build-docker.sh [-i|--image imagename]
 
-PROJECT=sre-go-helloworld
+PROJECT=sre-go-sre-go-helloworld.git.git
 DOCKER_IMAGE=${PROJECT}:latest
 BASE_DOCKER_IMAGE=${PROJECT}:base
 H_OUT=index.html
@@ -121,7 +121,7 @@ echo BUILDING DOCKER ${DOCKER_IMAGE}
 
 docker build --no-cache -t ${DOCKER_IMAGE} -f build/Imagefile .
 
-docker run -v $PWD:/opt/mount --rm --entrypoint cp ${BASE_DOCKER_IMAGE} /go/src/wwwin-github.cisco.com/eti/sre-go-helloworld/coverage.out /opt/mount/coverage.out
+docker run -v $PWD:/opt/mount --rm --entrypoint cp ${BASE_DOCKER_IMAGE} /go/src/wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/coverage.out /opt/mount/coverage.out
 
 # remove base image and its subordinate images
 docker image rmi ${BASE_DOCKER_IMAGE} || true

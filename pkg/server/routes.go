@@ -9,10 +9,10 @@ import (
 	slokmiddleware "github.com/slok/go-http-metrics/middleware"
 	slokstd "github.com/slok/go-http-metrics/middleware/std"
 
-	etimiddleware "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/middleware"
+	etimiddleware "wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/middleware"
 )
 
-// Router for helloworld server
+// Router for sre-go-helloworld.git server
 func (s *Server) Router(
 	extraMiddleware ...func(http.Handler) http.Handler) *chi.Mux {
 	r := chi.NewRouter()

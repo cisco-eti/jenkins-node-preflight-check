@@ -1,4 +1,4 @@
-module wwwin-github.cisco.com/eti/sre-go-helloworld
+module wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git
 
 go 1.20
 

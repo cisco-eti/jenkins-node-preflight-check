@@ -1,5 +1,0 @@
-apiVersion: v1
-appVersion: "1.1.10"
-description: ETI helloworld
-name: sre-go-helloworld-app
-version: "1.1.10"

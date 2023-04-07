@@ -11,10 +11,10 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	"wwwin-github.cisco.com/eti/idpadapter"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/config"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/datastore"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/config"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/datastore"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/server"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/utils"
 )
 
 const (
@@ -78,7 +78,7 @@ func main() {
 		}
 	}
 
-	log.Info("initializing helloworld Service")
+	log.Info("initializing sre-go-helloworld.git Service")
 	appServer := server.New(log, db, ipa)
 	router := appServer.Router(
 		server.MetricMiddleware(),

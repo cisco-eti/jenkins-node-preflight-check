@@ -7,7 +7,7 @@
 
 def pipelinesettings = [
   deploy: [
-    [name: "sre-go-helloworld" ]                              // Containers to publish
+    [name: "sre-go-sre-go-helloworld.git.git" ]                              // Containers to publish
   ],
 
   gitDefaultBranch: "main",
@@ -21,7 +21,7 @@ def pipelinesettings = [
   ],
   panoptica: [                                                // Panoptica Scan Parameters
     productName: "securecn",                                  // The Product/Venture name
-    imageName: "sre-go-helloworld",                           // The image name + tag to scan
+    imageName: "sre-go-sre-go-helloworld.git.git",                           // The image name + tag to scan
     args: "--highest-severity-allowed HIGH --ignore-no-fix",  // Arguments passed to the Panoptica CLI
   ],
   publishContainer: 1,                                        // Publish container
@@ -32,7 +32,7 @@ def pipelinesettings = [
   pushPublicRegistryOnTag: 1,                                 // Publish container to Public ECR on tag
   // forceCorona: 1,                                          // Force Corona Scan on any branch
   corona: [                                                   // Corona paramters
-    imageName: "sre-go-helloworld",                           // Corona Image Name
+    imageName: "sre-go-sre-go-helloworld.git.git",                           // Corona Image Name
     releaseID: "73243",                                       // Corona Release ID
     productID: "6726",                                        // Corona Project ID
     csdlID: "84720",                                          // Corona CSDL ID
@@ -52,7 +52,7 @@ def pipelinesettings = [
   artifactory: 1,                                             // Use Artifactory creds
 
   stricterCCThreshold: 90.0,                                  // Fail builds for Code Coverage below 90%
-  cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-dev-deployment",
+  cdPromotionJobPath: "../../deploy/dev/sre-go-sre-go-helloworld.git.git-dev-deployment",
 ]
 
 srePipeline( pipelinesettings )

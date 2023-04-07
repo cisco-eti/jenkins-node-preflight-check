@@ -3,7 +3,7 @@ package datastore
 import (
 	"gorm.io/gorm"
 
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/models"
 )
 
 type migrateFunc func(db *gorm.DB) error

@@ -19,11 +19,11 @@ staticanalysis.txt
 *._DS_Store
 
 .idea/
-sre-go-helloworld
+sre-go-sre-go-helloworld.git.git
 
 # emacs buffer files
 *~
-sre-go-helloworld
+sre-go-sre-go-helloworld.git.git
 db.json
 vendor
 

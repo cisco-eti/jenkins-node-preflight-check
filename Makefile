@@ -2,7 +2,7 @@ export PROJECT_ROOT=$(shell pwd)
 export GO111MODULE=on
 export GOPRIVATE="wwwin-github.cisco.com"
 export GOPROXY="https://proxy.golang.org, https://${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}@engci-maven-master.cisco.com/artifactory/api/go/nyota-go, direct"
-REPO_NAME = wwwin-github.cisco.com/eti/sre-go-helloworld
+REPO_NAME = wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git
 
 all: deps target
 
@@ -19,7 +19,7 @@ deps:
 clean:
 	echo "Running build"
 	@rm -rf coverage coverage.html
-	@rm sre-go-helloworld
+	@rm sre-go-sre-go-helloworld.git.git
 
 test:
 	echo "Running tests"

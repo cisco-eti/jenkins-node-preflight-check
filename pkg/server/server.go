@@ -4,10 +4,10 @@ import (
 	"gorm.io/gorm"
 
 	"wwwin-github.cisco.com/eti/idpadapter"
-	v1auth "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server/v1/auth"
-	v1device "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server/v1/device"
-	v1pet "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/server/v1/pet"
 	etilogger "wwwin-github.cisco.com/eti/sre-go-logger"
+	v1auth "wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/server/v1/auth"
+	v1device "wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/server/v1/device"
+	v1pet "wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/server/v1/pet"
 )
 
 type Server struct {

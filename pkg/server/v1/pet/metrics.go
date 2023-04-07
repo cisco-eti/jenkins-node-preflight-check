@@ -1,6 +1,6 @@
 package pet
 
-import "wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/metrics"
+import "wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/metrics"
 
 func PetTypeCounter(PetType string) {
 	metrics.PetTypeCounter.WithLabelValues(PetType).Add(1)

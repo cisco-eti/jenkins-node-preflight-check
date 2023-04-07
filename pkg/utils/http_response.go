@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/models"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/models"
 )
 
 // OKResponse writes back data as json with a status of 200

@@ -3,11 +3,11 @@ servers:
   - url: /v1
 info:
   description: |-
-    ETI helloworld Petstore - OpenAPI 3.0.
+    ETI sre-go-helloworld.git Petstore - OpenAPI 3.0.
 
     Some useful links:
-    - [ETI helloworld Repo](https://wwwin-github.cisco.com/eti/sre-go-helloworld)
-    - [helloworld API docs](https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld)
+    - [ETI sre-go-helloworld.git Repo](https://wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git)
+    - [sre-go-helloworld.git API docs](https://wwwin-github.cisco.com/pages/eti/sre-go-sre-go-helloworld.git.git)
   version: 1.0
   title: ETI Helloworld Petstore - OpenAPI 3.0.
   contact:
@@ -17,14 +17,14 @@ tags:
     description: Everything about your Pets
     externalDocs:
       description: Find out more
-      url: 'http://wwwin-github.cisco.com/pages/eti/sre-go-helloworld'
+      url: 'http://wwwin-github.cisco.com/pages/eti/sre-go-sre-go-helloworld.git.git'
   - name: store
     description: Operations about user
   - name: user
     description: Access to Petstore orders
     externalDocs:
       description: Find out more about our store
-      url: 'http://wwwin-github.cisco.com/pages/eti/sre-go-helloworld'
+      url: 'http://wwwin-github.cisco.com/pages/eti/sre-go-sre-go-helloworld.git.git'
 paths:
   /pet:
     post:
@@ -170,7 +170,7 @@ paths:
             - 'read:pets'
 externalDocs:
   description: ETI hellworld API docs
-  url: 'https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld'
+  url: 'https://wwwin-github.cisco.com/pages/eti/sre-go-sre-go-helloworld.git.git'
 components:
   schemas:
     Order:

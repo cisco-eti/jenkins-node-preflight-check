@@ -5,8 +5,8 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/plugin/prometheus"
 
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/config"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/config"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/utils"
 )
 
 func OpenDB() (*gorm.DB, error) {

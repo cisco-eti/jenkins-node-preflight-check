@@ -5,8 +5,8 @@ import (
 
 	"github.com/go-chi/chi"
 
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/metrics"
-	"wwwin-github.cisco.com/eti/sre-go-helloworld/pkg/utils"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/metrics"
+	"wwwin-github.cisco.com/eti/sre-go-sre-go-helloworld.git.git/pkg/utils"
 )
 
 // Get godoc

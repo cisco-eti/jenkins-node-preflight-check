@@ -2,7 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
-// hw_ prefix for "helloworld" because there might be overlap with tables from
+// hw_ prefix for "sre-go-helloworld.git" because there might be overlap with tables from
 // other projects in shared db
 
 type User struct {

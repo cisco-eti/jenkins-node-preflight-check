@@ -5,6 +5,6 @@ metadata:
 {{- if  .Values.namespace }}
   name: {{ .Values.namespace }}
 {{- else }}
-  name: sre-go-helloworld
+  name: sre-go-sre-go-helloworld.git.git
 {{- end }}
 {{- end }}
