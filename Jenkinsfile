@@ -29,6 +29,7 @@ def pipelinesettings = [
   ecr: 1,                                                     // Publish container to Private ECR
   ciscoContainer: 1,                                          // Publish container to containers.cisco.com
   dockerHub: 1,                                               // Publish container to dockerhub.cisco.com
+  garPublish: 1,                                              // Publish container to google artifact registry
   pushPublicRegistryOnTag: 1,                                 // Publish container to Public ECR on tag
   // forceCorona: 1,                                          // Force Corona Scan on any branch
   corona: [                                                   // Corona paramters
@@ -48,6 +49,8 @@ def pipelinesettings = [
   chart: "deploy/charts",                                     // Use deployment multi-helm chart folder
   publishHelm: 1,                                             // HELM CREATE
   useMultipleHelm:1,                                          // Publish Multiple Charts
+  garPublishHelm: 1,                                          // Publish Helm chart to GAR
+  ecrPublishHelmPublic: 1,                                    // Publish Helm chart to public ECR
   chartMuseum: 1,                                             // Publish Helm chart to ChartMuseum
   artifactory: 1,                                             // Use Artifactory creds
 
