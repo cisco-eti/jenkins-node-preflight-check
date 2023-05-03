@@ -1,4 +1,4 @@
-@Library(['srePipeline@main']) _
+@Library(['srePipeline@SRE-4369-image-signing']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
