@@ -1,4 +1,4 @@
-@Library(['srePipeline']) _
+@Library(['srePipeline@SRE-4369-image-signing']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -45,6 +45,17 @@ def pipelinesettings = [
   blackduck: [
     email: "eti-sre-admins@cisco.com",
   ],                                                          // Blackduck Open Source Scan
+
+  signContainerImage: [                                       // Sign container image with SWIMS
+    productName: "IS_TestKey",                                // SWIMS product name
+    productPid: "testPid",                                    // Pid of the SWIMS product
+    keyName: "IS_ECC_256_KEY",                                // SWIMS product key name
+    keyType: "DEV",                                           // Key type DEV or RELEASE
+    signatureScheme: "ECDSA",                                 // ECDSA, or PKCSV15 (for RSA)
+    pushSignature: 1,                                         // The container signature will be pushed to the registry
+    verbose: 1,                                               // Enable verbouse output
+    dryRun: 1,                                                // Enable dry run
+  ],
 
   chart: "deploy/charts",                                     // Use deployment multi-helm chart folder
   publishHelm: 1,                                             // HELM CREATE
