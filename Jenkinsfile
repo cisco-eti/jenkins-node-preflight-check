@@ -1,4 +1,4 @@
-@Library(['srePipeline@add-build-options']) _
+@Library(['srePipeline@fix-public-ecr-publish']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
