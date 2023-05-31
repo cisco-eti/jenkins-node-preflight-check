@@ -1,4 +1,4 @@
-@Library(['srePipeline@devops-SRE-3236-2']) _
+@Library(['srePipeline']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -54,7 +54,7 @@ def pipelinesettings = [
   chartMuseum: 1,                                             // Publish Helm chart to ChartMuseum
   artifactory: 1,                                             // Use Artifactory creds
 
-  pipelineLibraryBranch: "devops-SRE-3236-2",                 // checkout branch for python lib testing
+  // pipelineLibraryBranch: "devops-SRE-3236-2",                 // checkout branch for python lib testing
 
   stricterCCThreshold: 90.0,                                  // Fail builds for Code Coverage below 90%
   cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-cd",
