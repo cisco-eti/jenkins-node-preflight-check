@@ -56,6 +56,8 @@ def pipelinesettings = [
 
   stricterCCThreshold: 90.0,                                  // Fail builds for Code Coverage below 90%
   cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-cd",
+
+  overridePipelineDockerVersion: "2023.06.05-4ab3f81-2",
 ]
 
 srePipeline( pipelinesettings )
