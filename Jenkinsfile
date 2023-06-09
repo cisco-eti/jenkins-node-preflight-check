@@ -1,4 +1,4 @@
-@Library(['srePipeline@SRE-5634']) _
+@Library(['srePipeline@fix-tests']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
