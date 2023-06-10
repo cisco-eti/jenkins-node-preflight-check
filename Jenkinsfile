@@ -1,4 +1,4 @@
-@Library(['srePipeline@SRE-5634-1']) _
+@Library(['srePipeline@awslogin']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
