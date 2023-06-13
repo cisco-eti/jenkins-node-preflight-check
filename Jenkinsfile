@@ -9,6 +9,7 @@ def pipelinesettings = [
   deploy: [
     [name: "sre-go-helloworld" ]                              // Containers to publish
   ],
+  serviceName: "sre-go-helloworld"                            // Name of service (for metrics attribution)
 
   gitDefaultBranch: "main",
   prepare: 1,                                                 // GIT Clone
