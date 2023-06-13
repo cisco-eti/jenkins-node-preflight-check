@@ -1,4 +1,4 @@
-@Library(['srePipeline@awslogin']) _
+@Library(['srePipeline@add-build-options']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
