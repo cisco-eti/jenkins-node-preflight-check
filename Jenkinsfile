@@ -1,4 +1,4 @@
-@Library(['srePipeline@guard-metric-attrs']) _
+@Library(['srePipeline@SRE-5611']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
