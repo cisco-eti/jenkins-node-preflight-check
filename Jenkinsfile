@@ -1,4 +1,4 @@
-@Library(['srePipeline@fix-getter']) _
+@Library(['srePipeline@logs_to_print']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
