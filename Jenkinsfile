@@ -1,4 +1,4 @@
-@Library(['srePipeline@fix_error_handling']) _
+@Library(['srePipeline@revert-288-SRE-5611']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
