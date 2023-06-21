@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: "1.1.10"
 description: ETI helloworld
 name: sre-go-helloworld
-version: "1.1.10"
+version: "1.1.11"
