@@ -1,4 +1,4 @@
-@Library(['srePipeline@add-build-options']) _
+@Library(['srePipeline@cluster_verify_container_versions']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
