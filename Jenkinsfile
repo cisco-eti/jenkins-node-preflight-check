@@ -1,4 +1,4 @@
-@Library(['srePipeline@main']) _
+@Library(['srePipeline@lfs-debug']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
