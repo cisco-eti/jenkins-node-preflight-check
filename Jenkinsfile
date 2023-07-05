@@ -1,4 +1,4 @@
-@Library(['srePipeline@ghcr-publish']) _
+@Library(['srePipeline@python-tool-container']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
