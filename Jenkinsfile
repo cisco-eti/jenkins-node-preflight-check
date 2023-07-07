@@ -30,6 +30,7 @@ def pipelinesettings = [
   ciscoContainer: 1,                                          // Publish container to containers.cisco.com
   dockerHub: 1,                                               // Publish container to dockerhub.cisco.com
   garPublish: 1,                                              // Publish container to google artifact registry
+  ghcrPublish: 1,
   pushPublicRegistryOnTag: 1,                                 // Publish container to Public ECR on tag
   // forceCorona: 1,                                          // Force Corona Scan on any branch
   corona: [                                                   // Corona paramters
