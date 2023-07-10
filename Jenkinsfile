@@ -1,4 +1,4 @@
-@Library(['srePipeline@fix_strip_to_replace']) _
+@Library(['srePipeline@main']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
