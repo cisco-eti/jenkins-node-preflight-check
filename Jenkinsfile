@@ -1,4 +1,4 @@
-@Library(['srePipeline']) _
+@Library(['srePipeline@multiple_cd_promotion_stages']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -56,7 +56,8 @@ def pipelinesettings = [
   artifactory: 1,                                             // Use Artifactory creds
 
   stricterCCThreshold: 90.0,                                  // Fail builds for Code Coverage below 90%
-  cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-cd",
+  cdPromotionJobPath: [ "../../deploy/dev/sre-go-helloworld-cd",
+                        "../../deploy/staging/sre-go-helloworld-cd" ]
 ]
 
 srePipeline( pipelinesettings )
