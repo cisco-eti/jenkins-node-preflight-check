@@ -25,6 +25,7 @@ def pipelinesettings = [
     args: "--highest-severity-allowed HIGH --ignore-no-fix",  // Arguments passed to the Panoptica CLI
   ],
   publishContainer: 1,                                        // Publish container
+  forcePublishContainer: 1,
   registryOrgName: "eti-sre/",                                // Container image registry org name
   ecr: 1,                                                     // Publish container to Private ECR
   ciscoContainer: 1,                                          // Publish container to containers.cisco.com
