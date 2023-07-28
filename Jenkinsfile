@@ -1,4 +1,4 @@
-@Library(['srePipeline@docker-metrics']) _
+@Library(['srePipeline@stagemetricsfix']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
