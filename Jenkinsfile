@@ -1,4 +1,4 @@
-@Library(['srePipeline@monorepo-support']) _
+@Library(['srePipeline@main']) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
