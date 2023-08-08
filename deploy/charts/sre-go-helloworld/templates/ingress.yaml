@@ -14,7 +14,7 @@ spec:
     tls:
     - hosts:
       - {{ .Values.domainPrefix }}.{{ .Values.domainName }}
-      - {{ .Values.domainPrefix }}--{{ .Values.deploymentEnv }}.{{ .Values.domainName }}
+      - {{ .Values.domainPrefix }}-{{ .Values.deploymentEnv }}.{{ .Values.domainName }}
       secretName: "{{ .Release.Name }}-tls"
     rules:
     - host: {{ .Values.domainPrefix }}-{{ .Values.deploymentEnv }}.{{ .Values.domainName }}
