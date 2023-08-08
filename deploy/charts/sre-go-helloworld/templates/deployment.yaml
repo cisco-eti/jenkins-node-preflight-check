@@ -17,7 +17,7 @@ spec:
         prometheus.io/port: "{{ .Values.metricsPort }}"
         prometheus.io/path: "/metrics"
     spec:
-      serviceAccountName: {{ include "sre-go-helloworld-app.serviceAccountName" . }}
+      serviceAccountName: {{ include "sre-go-helloworld.serviceAccountName" . }}
       containers:
       - name: {{ .Release.Name }}
         image: "{{ .Values.dockerPreamable }}/{{ .Values.dimage }}:{{ .Values.tagversion }}"

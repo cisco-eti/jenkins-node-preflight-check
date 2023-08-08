@@ -1,7 +1,7 @@
 # ETI sre-go-helloworld
 
 - Jenkins: [![Build Status](https://engci-private-sjc.cisco.com/jenkins/eti-sre/buildStatus/icon?job=SRE%2FProjects%2Fsre-go-helloworld%2Fbuild%2Fsre-go-helloworld%2Fmain)](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/main/)
-- ArgoCD: [![ArgoCD Status](https://argocd.prod.eticloud.io/api/badge?name=blue-b-sre-go-helloworld-app-dev-argoapp)](https://argocd.prod.eticloud.io/applications/blue-b-sre-go-helloworld-app-dev-argoapp?resource=)
+- ArgoCD: [![ArgoCD Status](https://argocd.prod.eticloud.io/api/badge?name=blue-b-sre-go-helloworld-dev-argoapp)](https://argocd.prod.eticloud.io/applications/blue-b-sre-go-helloworld-dev-argoapp?resource=)
 
 
 This is a "boilerplate" go microservice with following example showcase  features:
@@ -81,7 +81,7 @@ chmod 400 ~/.nyota/credentials
 
 - [CI Pipeline Jenkins](https://engci-private-sjc.cisco.com/jenkins/eti-sre/job/SRE/job/Projects/job/sre-go-helloworld/job/build/job/sre-go-helloworld/job/main/)
 
-- [CD Pipeline ArgoCD](https://argocd.prod.eticloud.io/applications/sre-go-helloworld-app-dev-projectapp?resource=)
+- [CD Pipeline ArgoCD](https://argocd.prod.eticloud.io/applications/sre-go-helloworld-dev-projectapp?resource=)
 
 - [Try-out API Swagger UI](https://wwwin-github.cisco.com/pages/eti/sre-go-helloworld)
 
