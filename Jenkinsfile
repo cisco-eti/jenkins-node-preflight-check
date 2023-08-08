@@ -6,7 +6,6 @@
 // --------------------------------------------
 
 def pipelinesettings = [
-  overrideDockerLabel: 'wip',
   deploy: [
     [name: "sre-go-helloworld" ]                              // Containers to publish
   ],
