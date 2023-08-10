@@ -1,4 +1,4 @@
-@Library(["srePipeline"]) _
+@Library(["srePipeline@SRE-4312"]) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -6,6 +6,7 @@
 // --------------------------------------------
 
 def pipelinesettings = [
+  overrideDockerLabel: 'wip',
   deploy: [
     [name: "sre-go-helloworld" ]                              // Containers to publish
   ],
