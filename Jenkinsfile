@@ -28,7 +28,7 @@ def pipelinesettings = [
   publishContainer: 1,                                        // Publish container
   registryOrgName: "eti-sre/",                                // Container image registry org name
   ecr: 1,                                                     // Publish container to Private ECR
-  ciscoContainer: 1,                                          // Publish container to containers.cisco.com
+  // ciscoContainer: 1,                                       // Publish container to containers.cisco.com
   dockerHub: 1,                                               // Publish container to dockerhub.cisco.com
   garPublish: 1,                                              // Publish container to google artifact registry
   ghcrPublish: 1,                                             // Publish container to github container registry
