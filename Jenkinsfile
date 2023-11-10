@@ -7,7 +7,7 @@
 
 def pipelinesettings = [
   overrideDockerLabel: 'wip',
-  overrideJenkinsRegistryCreds: 'jenkins-ghcr-push-pull',
+  overrideJenkinsRegistryCreds: 'eti-sre-cicd-external-github-token',
   overridePipelineDockerRegistry: 'https://ghcr.io',
   overridePipelineDockerImage: 'ghcr.io/cisco-eti/sre-pipeline-docker:2023.10.03-614cce7-37',
 
