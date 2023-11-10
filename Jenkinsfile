@@ -1,4 +1,4 @@
-@Library(["srePipeline@SRE-4312"]) _
+@Library(["srePipeline@configurable-pipeline-docker-registry"]) _
 
 // --------------------------------------------
 // Refer to Pipeline docs for options used in mysettings
@@ -7,6 +7,10 @@
 
 def pipelinesettings = [
   overrideDockerLabel: 'wip',
+  overrideJenkinsRegistryCreds: 'github-com-eti-sre-cicd',
+  overridePipelineDockerRegistry: 'https://ghcr.io',
+  overridePipelineDockerImage: 'ghcr.io/cisco-eti/sre-pipeline-docker:2023.10.03-614cce7-37',
+
   deploy: [
     [name: "sre-go-helloworld" ]                              // Containers to publish
   ],
@@ -60,5 +64,4 @@ def pipelinesettings = [
   cdPromotionJobPath: "../../deploy/dev/sre-go-helloworld-cd",
 ]
 
-srePipeline( pipelinesettings )
-
+srePipeline(pipelinesettings)
