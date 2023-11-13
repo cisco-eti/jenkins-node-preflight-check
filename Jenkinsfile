@@ -24,7 +24,7 @@ def pipelinesettings = [
   sonarQube: [                                                // Corona paramters
     propertiesFile: "./build/sonar-project.properties"        // SonarQube scan
   ],
-  disableInclusiveLint: 1
+  disableInclusiveLint: 1,
   panoptica: [                                                // Panoptica Scan Parameters
     productName: "securecn",                                  // The Product/Venture name
     imageName: "sre-go-helloworld",                           // The image name + tag to scan
