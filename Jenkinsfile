@@ -6,7 +6,7 @@
 // --------------------------------------------
 
 def pipelinesettings = [
-  overrideDockerLabel: 'wip',
+  overrideDockerLabel: 'preflight-check',
   overrideJenkinsRegistryCreds: 'jenkins-ghcr-push-pull-up',
   overridePipelineDockerRegistry: 'https://ghcr.io',
   overridePipelineDockerImage: 'ghcr.io/cisco-eti/sre-pipeline-docker:2023.10.03-614cce7-37',
